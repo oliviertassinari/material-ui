@@ -115,6 +115,28 @@ const pages = [
         children: [
           { pathname: '/components/about-the-lab' },
           { pathname: '/components/autocomplete' },
+          {
+            pathname: '/components',
+            subheader: '/components/data-grid',
+            children: [
+              {
+                pathname: '/components/data-grid',
+                title: 'Overview',
+              },
+              { pathname: '/components/data-grid/columns' },
+              { pathname: '/components/data-grid/rows' },
+              { pathname: '/components/data-grid/data' },
+              { pathname: '/components/data-grid/filtering' },
+              { pathname: '/components/data-grid/paging' },
+              { pathname: '/components/data-grid/editing' },
+              { pathname: '/components/data-grid/selection' },
+              { pathname: '/components/data-grid/export' },
+              { pathname: '/components/data-grid/localization' },
+              { pathname: '/components/data-grid/customization' },
+              { pathname: '/components/data-grid/group-pivot' },
+              { pathname: '/components/data-grid/accessibility' },
+            ],
+          },
           { pathname: '/components/rating' },
           { pathname: '/components/skeleton' },
           { pathname: '/components/speed-dial' },
