@@ -115,6 +115,7 @@ const pages = [
         children: [
           { pathname: '/components/about-the-lab' },
           { pathname: '/components/autocomplete' },
+          { pathname: '/components/data-grid' },
           { pathname: '/components/rating' },
           { pathname: '/components/skeleton' },
           { pathname: '/components/speed-dial' },
