@@ -9,10 +9,6 @@ components: DataGrid
 
 {{"demo": "pages/components/data-grid/paging/PagingGrid.js", "bg": "inline"}}
 
-## Default Pagination
-
-{{"demo": "pages/components/data-grid/paging/DefaultPagination.js", "bg": "inline"}}
-
 ## Benchmark
 
 - https://ej2.syncfusion.com/react/demos/#/material/grid/paging
