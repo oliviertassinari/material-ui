@@ -24,6 +24,8 @@ components: DataGrid
 
 {{"demo": "pages/components/data-grid/columns/ColumnSizing.js", "bg": "inline"}}
 
+### Benchmark
+
 - https://ag-grid.com/javascript-grid-resizing/
 - https://demos.telerik.com/kendo-ui/grid/column-resizing
 - https://www.telerik.com/kendo-react-ui/components/grid/columns/resizing/
