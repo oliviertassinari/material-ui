@@ -9,9 +9,68 @@ components: DataGrid
 
 ## Row sorting
 
+### Enable sorting
+
+You can enable sorting by setting the `sortable` option.
+Then sort a column by clicking on the column header.
+
+```jsx
+<DataGrid
+  columns={[
+    { field: 'name', sortable: true },
+    { field: 'phone' },
+  ]}
+/>
+```
+
+To enable sorting for all columns, set `sorting` in the default column definition.
+
+```jsx
+<DataGrid
+  columns={[
+    { field: 'name' },
+    { field: 'phone' },
+  ]}
+  defaultColumnOptions={{ sortable: true }}
+/>
+```
+
 {{"demo": "pages/components/data-grid/rows/RowSorting.js", "bg": "inline"}}
 
-+Multi-sorting
+### Multi-column sorting
+
+You can sort multiple by columns at the same time. Hold the `Shift` key down while clicking the column header.
+
+### Custom sorting
+
+You can customize the comparison function with the `sortingCompartor` option.
+For instance, a column might have date strings as the row data.
+
+{{"demo": "pages/components/data-grid/rows/CustomSorting.js", "bg": "inline"}}
+
+### Sorting order
+
+By default, the sorting order loops between these tree different modes:
+
+```js
+const sortingOrder = ['asc', 'desc', null];
+```
+
+In practice, when you click a column that is not sorted, it will sort ascending (`asc`).
+The next click will make it sort descending (`desc`).
+Another click will remove the sort (`null`).
+
+You can provide a custom `sortingOrder` value to customize this behavior.
+
+### Controllable sort
+
+You can control the sort from the outside. The component supports tree props to do so:
+
+- `defaultSorting`: the default sorting state (uncontrolled).
+- `sorting`: the sorting state (controlled).
+- `onSortingChange`: a callback fired when the user change the column sort.
+
+### Benchmark
 
 - https://ag-grid.com/javascript-grid-sorting/
 - https://vuetifyjs.com/en/components/data-tables#external-sorting
