@@ -12,7 +12,7 @@ const data = Array.from(new Array(100)).map(() => ({
   rating: chance.integer({ min: 1, max: 5 }),
 }));
 
-export default function Simple() {
+export default function DemoGrid() {
   return (
     <DataGrid
       style={{ maxHeight: 300, width: '100%' }}
@@ -24,6 +24,7 @@ export default function Simple() {
         { field: 'country', label: 'Country' },
       ]}
       rowsData={data}
+      defaultColumnOptions={{ sortable: true, resizable: true }}
     />
   );
 }

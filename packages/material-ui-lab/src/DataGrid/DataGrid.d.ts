@@ -2,8 +2,9 @@ import * as React from 'react';
 import { StandardProps } from '@material-ui/core';
 
 export interface ColumnOptionType {
-  sortable?: boolean;
   resizable?: boolean;
+  sortable?: boolean;
+  sortingComparator?: (rowA: any, rowB: any, sort: 'asc' | 'desc') => number;
   sortingOrder?: Array<'asc' | 'desc' | null>;
 }
 
@@ -18,8 +19,20 @@ export type SortingType = Array<{
   field: string;
 }>;
 
+export interface DataProviderGetListParams {
+  sorting: SortingType;
+}
+
+export interface DataProviderType {
+  getList: (params: DataProviderGetListParams) => Promise<any[]>;
+}
+
 export interface DataGridProps
   extends StandardProps<React.HTMLAttributes<HTMLDivElement>, DataGridClassKey> {
+  /**
+   * Manage the communication with the data store.
+   */
+  dataProvider?: DataProviderType;
   /**
    * The default options that get applied to each column.
    */

@@ -76,28 +76,82 @@ function keyBy(array, comp) {
 }
 
 const defaultColumnOptionsDefault = {
-  resizable: true,
-  sortable: true,
+  resizable: false,
+  sortable: false,
   sortingOrder: ['asc', 'desc', null],
 };
+
+const defaultDataProviderFactory = ({ rowsData, defaultColumnOptions, columnsKeyBy }) => ({
+  getList: params => {
+    const newRowsData = [...rowsData];
+
+    if (params.sorting.length > 0) {
+      // TODO we might need to use a stable sort logic.
+      newRowsData.sort((rowA, rowB) => {
+        return params.sorting.reduce((acc, sortingItem) => {
+          if (acc !== null) {
+            return acc;
+          }
+
+          const field = sortingItem.field;
+          const sortingComparator =
+            columnsKeyBy[field].sortingComparator || defaultColumnOptions.sortingComparator;
+
+          if (sortingComparator) {
+            return sortingComparator(rowA, rowB, sortingItem.sort);
+          }
+
+          if (rowA[field] < rowB[field]) {
+            return -1 * (sortingItem.sort === 'asc' ? 1 : -1);
+          }
+
+          if (rowA[field] > rowB[field]) {
+            return 1 * (sortingItem.sort === 'asc' ? 1 : -1);
+          }
+
+          return null;
+        }, null);
+      });
+    }
+
+    return newRowsData;
+  },
+});
 
 const DataGrid = React.forwardRef(function DataGrid(props, ref) {
   const {
     classes,
     className,
     columns = [],
+    dataProvider: dataProviderProp,
     defaultColumnOptions: defaultColumnOptionsProp = defaultColumnOptionsDefault,
     defaultSorting = [],
-    sorting: sortingProp,
     onSortingChange,
     rowsData = [],
+    sorting: sortingProp,
     ...other
   } = props;
 
-  const defaultColumnOptions = {
-    ...defaultColumnOptionsDefault,
-    ...defaultColumnOptionsProp,
-  };
+  const defaultColumnOptions = React.useMemo(
+    () => ({
+      ...defaultColumnOptionsDefault,
+      ...defaultColumnOptionsProp,
+    }),
+    [defaultColumnOptionsProp],
+  );
+
+  const columnsKeyBy = React.useMemo(() => keyBy(columns, item => item.field), [columns]);
+
+  const dataProvider = React.useMemo(
+    () =>
+      dataProviderProp ||
+      defaultDataProviderFactory({
+        rowsData,
+        defaultColumnOptions,
+        columnsKeyBy,
+      }),
+    [dataProviderProp, rowsData, defaultColumnOptions, columnsKeyBy],
+  );
 
   const rootRef = React.useRef();
   const handleRef = useForkRef(ref, rootRef);
@@ -240,6 +294,16 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
 
   const sortingKeyBy = keyBy(sorting, item => item.field);
 
+  const [data, setData] = React.useState([]);
+
+  React.useEffect(() => {
+    const newData = dataProvider.getList({
+      sorting,
+    });
+
+    setData(newData);
+  }, [dataProvider, sorting]);
+
   return (
     <div className={clsx(classes.root, className)} ref={handleRef} {...other}>
       <table>
@@ -271,6 +335,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
                     ) : (
                       label
                     )}
+
                     <div
                       aria-hidden
                       onMouseDown={handleResizeMouseDown}
@@ -287,7 +352,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
       <div className={classes.bodyContainer}>
         <List
           height={300}
-          itemCount={rowsData.length}
+          itemCount={data.length}
           outerElementType="div"
           innerElementType="div"
           overscanCount={10}
@@ -299,24 +364,24 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
           {({ index, style }) => (
             <div key={index} style={style}>
               {columns.map(column => (
-                <span key={column.field}>{rowsData[index][column.field]}</span>
+                <span key={column.field}>{data[index][column.field]}</span>
               ))}
             </div>
           )}
         </List>
         {/*
-           -        <table>
-           -          <tbody>
-           -            {rowsData.map((row, index) => (
-           -              <tr key={index}>
-           -                {columns.map(column => (
-           -                  <td key={column.field}>{row[column.field]}</td>
-           -                ))}
-           -              </tr>
-           -            ))}
-           -          </tbody>
-           -        </table>
-           */}
+               -        <table>
+               -          <tbody>
+               -            {rowsData.map((row, index) => (
+               -              <tr key={index}>
+               -                {columns.map(column => (
+               -                  <td key={column.field}>{row[column.field]}</td>
+               -                ))}
+               -              </tr>
+               -            ))}
+               -          </tbody>
+               -        </table>
+               */}
       </div>
       <table>
         <tfoot>
@@ -362,15 +427,23 @@ DataGrid.propTypes = {
       label: PropTypes.string,
       resizable: PropTypes.bool,
       sortable: PropTypes.bool,
+      sortingComparator: PropTypes.func,
       sortingOrder: PropTypes.arrayOf(PropTypes.oneOf(['asc', 'desc', null])),
     }),
   ),
+  /**
+   * Manage the communication with the data store.
+   */
+  dataProvider: PropTypes.shape({
+    getList: PropTypes.func.isRequired,
+  }),
   /**
    * The default options that get applied to each column.
    */
   defaultColumnOptions: PropTypes.shape({
     resizable: PropTypes.bool,
     sortable: PropTypes.bool,
+    sortingComparator: PropTypes.func,
     sortingOrder: PropTypes.arrayOf(PropTypes.oneOf(['asc', 'desc', null])),
   }),
   /**

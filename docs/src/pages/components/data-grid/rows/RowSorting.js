@@ -4,33 +4,25 @@ import DataGrid from '@material-ui/lab/DataGrid';
 
 const chance = new Chance();
 
-const data = Array.from(new Array(200)).map(() => ({
-  Country: chance.country(),
-  Area: chance.integer({ min: 10e3, max: 10e6 }),
-  GDP_Total: chance.integer({ min: 10e3, max: 10e6 }),
-  Population_Urban: chance.floating({ min: 0, max: 1 }),
-  Population_Total: chance.integer({ min: 10e3, max: 10e6 }),
-  GDP_Agriculture: chance.floating({ min: 0, max: 1 }),
-  GDP_Industry: chance.floating({ min: 0, max: 1 }),
-  GDP_Services: chance.floating({ min: 0, max: 1 }),
+const data = Array.from(new Array(100)).map(() => ({
+  name: chance.name(),
+  phone: chance.phone(),
+  address: chance.address(),
+  country: chance.country(),
+  rating: chance.integer({ min: 1, max: 5 }),
 }));
 
-const columns = [
-  { field: 'Country', label: 'Country' },
-  { field: 'Area', label: 'Area, sq. km.' },
-  { field: 'Population_Total', label: 'Population Total' },
-  { field: 'Population_Urban', label: 'Population Urban' },
-  { field: 'GDP_Total', label: 'GDP Total' },
-  { field: 'GDP_Agriculture', label: 'GDP Agriculture' },
-  { field: 'GDP_Industry', label: 'GDP Industry' },
-  { field: 'GDP_Services', label: 'GDP Services' },
-];
-
-export default function ColumnGroups() {
+export default function RowSorting() {
   return (
     <DataGrid
       style={{ maxHeight: 300, width: '100%' }}
-      columns={columns}
+      columns={[
+        { field: 'name', label: 'Name' },
+        { field: 'rating', label: 'Rating' },
+        { field: 'address', label: 'Address' },
+        { field: 'phone', label: 'Phone' },
+        { field: 'country', label: 'Country' },
+      ]}
       rowsData={data}
       defaultColumnOptions={{ sortable: true }}
     />
