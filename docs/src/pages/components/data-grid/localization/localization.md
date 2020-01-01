@@ -5,7 +5,7 @@ components: DataGrid
 
 # Data Grid - Localization
 
-<p class="description">A fast and extendable data table and data grid for React. It's a feature-rich compoent available in MIT or Enterprise versions.</p>
+<p class="description">The Date Grid supports users from different locale, with formating, RTL, and localized strings.</p>
 
 - https://demos.telerik.com/kendo-ui/grid/localization
 - https://material-table.com/#/docs/features/localization
