@@ -81,6 +81,12 @@ const defaultColumnOptionsDefault = {
   sortingOrder: ['asc', 'desc', null],
 };
 
+const defaultPagingOptionsDefault = {
+  page: 0,
+  pageSize: 25,
+  pageSizeOptions: [10, 25, 50, 100]
+};
+
 const defaultDataProviderFactory = ({ rowsData, defaultColumnOptions, columnsKeyBy }) => ({
   getList: params => {
     const newRowsData = [...rowsData];
@@ -114,7 +120,7 @@ const defaultDataProviderFactory = ({ rowsData, defaultColumnOptions, columnsKey
       });
     }
 
-    return newRowsData;
+    return newRowsData.splice(params.pagination.page * params.pagination.pageSize, params.pagination.pageSize);
   },
 });
 
@@ -127,6 +133,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
     defaultColumnOptions: defaultColumnOptionsProp = defaultColumnOptionsDefault,
     defaultSorting = [],
     onSortingChange,
+    pagingOptions: defaultpagingOptionsProp = defaultPagingOptionsDefault,
     rowsData = [],
     sorting: sortingProp,
     ...other
@@ -140,6 +147,14 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
     [defaultColumnOptionsProp],
   );
 
+  const defaultPagingOptions = React.useMemo(
+    () => ({
+      ...defaultPagingOptionsDefault,
+      ...defaultpagingOptionsProp,
+    }),
+    [defaultpagingOptionsProp],
+  );
+
   const columnsKeyBy = React.useMemo(() => keyBy(columns, item => item.field), [columns]);
 
   const dataProvider = React.useMemo(
@@ -148,7 +163,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
       defaultDataProviderFactory({
         rowsData,
         defaultColumnOptions,
-        columnsKeyBy,
+        columnsKeyBy
       }),
     [dataProviderProp, rowsData, defaultColumnOptions, columnsKeyBy],
   );
@@ -158,7 +173,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
 
   const rowsHeader = [columns];
 
-  const handleResizeMouseMove = useEventCallback(event => {});
+  const handleResizeMouseMove = useEventCallback(event => { });
 
   const handleResizeMouseUp = useEventCallback(event => {
     const doc = ownerDocument(rootRef.current);
@@ -197,11 +212,11 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
         console.error(
           [
             `Material-UI: A component is changing ${
-              isSortingControlled ? 'a ' : 'an un'
+            isSortingControlled ? 'a ' : 'an un'
             }controlled DataGrid sorting prop to be ${isSortingControlled ? 'un' : ''}controlled.`,
             'Elements should not switch from uncontrolled to controlled (or vice versa).',
             'Decide between using a controlled or uncontrolled DataGrid ' +
-              'element for the lifetime of the component.',
+            'element for the lifetime of the component.',
             'More info: https://fb.me/react-controlled-components',
           ].join('\n'),
         );
@@ -296,13 +311,20 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
 
   const [data, setData] = React.useState([]);
 
+  const [pagination, setPagination] = React.useState(defaultPagingOptions);
+
+  const handlePageChange = (event, newPage) => setPagination(prevPagination => ({ ...prevPagination, page: newPage }));
+
+  const handlePagsizeChange = event => setPagination(prevPagination => ({ ...prevPagination, pageSize: event.target.value }));
+
   React.useEffect(() => {
     const newData = dataProvider.getList({
       sorting,
+      pagination
     });
 
     setData(newData);
-  }, [dataProvider, sorting]);
+  }, [dataProvider, sorting, pagination]);
 
   return (
     <div className={clsx(classes.root, className)} ref={handleRef} {...other}>
@@ -333,8 +355,8 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
                         {label}
                       </TableSortLabel>
                     ) : (
-                      label
-                    )}
+                        label
+                      )}
 
                     <div
                       aria-hidden
@@ -388,9 +410,11 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
           <tr>
             <TablePagination
               count={rowsData.length}
-              onChangePage={() => {}}
-              page={0}
-              rowsPerPage={25}
+              onChangePage={handlePageChange}
+              onChangeRowsPerPage={handlePagsizeChange}
+              page={pagination.page}
+              rowsPerPage={pagination.pageSize}
+              rowsPerPageOptions={defaultPagingOptions.pageSizeOptions}
             />
           </tr>
         </tfoot>
@@ -455,6 +479,14 @@ DataGrid.propTypes = {
       sort: PropTypes.oneOf(['asc', 'desc']).isRequired,
     }),
   ),
+  /**
+   * The paging options
+   */
+  pagingOptions: PropTypes.shape({
+    page: PropTypes.number,
+    pageSize: PropTypes.number,
+    pageSizeOptions: PropTypes.arrayOf(PropTypes.number)
+  }),
   /**
    * Callback fired when the user change the column sort.
    *

@@ -27,6 +27,12 @@ export interface DataProviderType {
   getList: (params: DataProviderGetListParams) => Promise<any[]>;
 }
 
+export type PagingOptions = {
+  page: number;
+  pageSize: number;
+  pageSizeOptions: number[];
+}
+
 export interface DataGridProps
   extends StandardProps<React.HTMLAttributes<HTMLDivElement>, DataGridClassKey> {
   /**
@@ -45,6 +51,10 @@ export interface DataGridProps
    * The default sorting state. (Uncontrolled)
    */
   defaultSorting?: SortingType;
+  /**
+   * 
+   */
+  pagingOptions?: PagingOptions;
   /**
    * Sorting state. (Controlled)
    */
