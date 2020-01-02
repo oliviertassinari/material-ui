@@ -12,10 +12,13 @@ const data = Array.from(new Array(100)).map(() => ({
   rating: chance.integer({ min: 1, max: 5 }),
 }));
 
-export default function ColumnSizing() {
+export default function DefaultPagination() {
   return (
     <DataGrid
-      pagingOptions={{ pageSizeOptions: [1, 2, 5, 10], pageSize: 5, page: 3 }}
+      pagination={true}
+      paginationPage={3}
+      paginationPageSize={10}
+      paginationRowsPerPageOptions={[1, 2, 5, 10, 500]}
       style={{ maxHeight: 300, width: '100%' }}
       columns={
         [
@@ -26,7 +29,7 @@ export default function ColumnSizing() {
           { field: 'country', label: 'Country' },
         ]}
       rowsData={data}
-      defaultColumnOptions={{ sizing: true }}
+      defaultColumnOptions={{ resizable: true }}
     />
   );
 }

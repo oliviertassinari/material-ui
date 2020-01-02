@@ -21,20 +21,24 @@ export type SortingType = Array<{
 
 export interface DataProviderGetListParams {
   sorting: SortingType;
+  pagination: PagingOptions;
 }
 
 export interface DataProviderType {
   getList: (params: DataProviderGetListParams) => Promise<any[]>;
+  loadMoreRows?: (paginationKey: string) => Promise<string>;
 }
 
 export type PagingOptions = {
-  page: number;
-  pageSize: number;
-  pageSizeOptions: number[];
+  pagination: boolean;
+  paginationPage: number;
+  paginationPageSize: 10 | 25 | 50 | 100 | 250 | 500 | number;
+  paginationRowsPerPageOptions: number[];
+  paginationKey: string;
 }
 
 export interface DataGridProps
-  extends StandardProps<React.HTMLAttributes<HTMLDivElement>, DataGridClassKey> {
+  extends StandardProps<React.HTMLAttributes<HTMLDivElement>, DataGridClassKey>, Partial<PagingOptions> {
   /**
    * Manage the communication with the data store.
    */
@@ -52,10 +56,6 @@ export interface DataGridProps
    */
   defaultSorting?: SortingType;
   /**
-   * 
-   */
-  pagingOptions?: PagingOptions;
-  /**
    * If `true`, the loading state is displayed.
    */
   loading?: boolean;
@@ -71,9 +71,23 @@ export interface DataGridProps
    * Callback fired when the user change the column sort.
    *
    * @param {object} event The event source of the callback.
-   * @param {string} value The new sorting value.
+   * @param {SortingType} value The new sorting value.
    */
   onSortingChange?: (event: React.ChangeEvent<{}>, value: SortingType) => void;
+  /**
+   * Callback fired when the user change the rows per page.
+   *
+   * @param {object} event The event source of the callback.
+   * @param {number} value The new rows per page value.
+   */
+  onRowsPerPageChange?: (event: React.ChangeEvent<{}>, value: number) => void;
+  /**
+   * Callback fired when the user change the rows per page.
+   *
+   * @param {object} event The event source of the callback.
+   * @param {number} page The new page.
+   */
+  onPageChange?: (event: React.ChangeEvent<{}>, page: number) => void;
   /**
    * The data record array to be rendered.
    */
