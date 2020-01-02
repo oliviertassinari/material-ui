@@ -38,7 +38,6 @@ export default function CustomSorting() {
         { field: 'birthday', label: 'Birthday', sortingComparator },
       ]}
       rowsData={data}
-      pagingOptions={{ pageSize: 20 }}
       defaultColumnOptions={{ sortable: true }}
     />
   );
