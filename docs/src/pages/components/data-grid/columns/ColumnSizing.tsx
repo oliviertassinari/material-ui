@@ -24,7 +24,7 @@ export default function ColumnSizing() {
         { field: 'country', label: 'Country' },
       ]}
       rowsData={data}
-      defaultColumnOptions={{ sizing: true }}
+      defaultColumnOptions={{ resizable: true }}
     />
   );
 }

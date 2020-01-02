@@ -5,7 +5,7 @@ components: DataGrid
 
 # Data Grid - Editing
 
-<p class="description">A fast and extendable data table and data grid for React. It's a feature-rich compoent available in MIT or Enterprise versions.</p>
+<p class="description">Data Grid provides full support to create, read, update, and delete operations (CRUD).</p>
 
 ## Editable cell
 

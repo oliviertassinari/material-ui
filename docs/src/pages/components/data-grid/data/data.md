@@ -9,12 +9,16 @@ components: DataGrid
 
 ## Client side operations
 
+### Benchmark
+
 - https://www.ag-grid.com/javascript-grid-client-side-model/
 - https://demos.telerik.com/kendo-ui/grid/local-data-binding
 - https://www.telerik.com/kendo-react-ui/components/grid/data-operations/local-operations/
 - https://ej2.syncfusion.com/react/demos/#/material/grid/local-binding
 
 ## Server side operations <img src="/static/images/logos/enterprise.svg" width="24" height="24" alt="enterprise feature" loading="lazy" />
+
+### Benchmark
 
 - https://demos.telerik.com/kendo-ui/grid/remote-data-binding
 - https://www.ag-grid.com/javascript-grid-row-models/
@@ -24,3 +28,10 @@ components: DataGrid
 - https://devexpress.github.io/devextreme-reactive/react/grid/docs/guides/lazy-loading/
 - https://ej2.syncfusion.com/react/demos/#/material/grid/remote-data
 - https://ej2.syncfusion.com/react/demos/#/material/grid/custom-binding
+
+### Loading
+
+You can use the `loading` prop to indicate that data in the table is currently loading.
+If there is no data in the table, a loading message will also be displayed.
+
+{{"demo": "pages/components/data-grid/data/LoadingGrid.js", "bg": "inline"}}
