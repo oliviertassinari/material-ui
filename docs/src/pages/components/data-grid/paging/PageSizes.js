@@ -15,7 +15,7 @@ const data = Array.from(new Array(100)).map(() => ({
 export default function ColumnSizing() {
   return (
     <DataGrid
-      pagingOptions={{ pageSizeOptions: [1, 2, 5, 10], pageSize: 5 }}
+      pagingOptions={{ pageSizeOptions: [1, 2, 5, 10], pageSize: 5, page: 3 }}
       style={{ maxHeight: 300, width: '100%' }}
       columns={
         [
