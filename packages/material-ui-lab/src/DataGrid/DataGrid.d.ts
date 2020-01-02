@@ -56,9 +56,17 @@ export interface DataGridProps
    */
   pagingOptions?: PagingOptions;
   /**
+   * If `true`, the loading state is displayed.
+   */
+  loading?: boolean;
+  /**
    * Sorting state. (Controlled)
    */
   sorting?: SortingType;
+  /**
+   * The localization strings.
+   */
+  text?: any;
   /**
    * Callback fired when the user change the column sort.
    *

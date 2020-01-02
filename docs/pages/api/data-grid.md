@@ -30,9 +30,11 @@ You can learn more about the difference by [reading this guide](/guides/minimizi
 | <span class="prop-name">dataProvider</span> | <span class="prop-type">{ getList: func }</span> |  | Manage the communication with the data store. |
 | <span class="prop-name">defaultColumnOptions</span> | <span class="prop-type">{ resizable?: bool, sortable?: bool, sortingComparator?: func, sortingOrder?: Array&lt;'asc'<br>&#124;&nbsp;'desc'<br>&#124;&nbsp;null&gt; }</span> | <span class="prop-default">{  resizable: false,  sortable: false,  sortingOrder: ['asc', 'desc', null],}</span> | The default options that get applied to each column. |
 | <span class="prop-name">defaultSorting</span> | <span class="prop-type">Array&lt;{ field: string, sort: 'asc'<br>&#124;&nbsp;'desc' }&gt;</span> | <span class="prop-default">[]</span> | The default sorting state. (Uncontrolled) |
+| <span class="prop-name">loading</span> | <span class="prop-type">bool</span> | <span class="prop-default">false</span> | If `true`, the loading state is displayed. |
 | <span class="prop-name">onSortingChange</span> | <span class="prop-type">func</span> |  | Callback fired when the user change the column sort.<br><br>**Signature:**<br>`function(event: object, value: string) => void`<br>*event:* The event source of the callback.<br>*value:* The new sorting value. |
 | <span class="prop-name">rowsData</span> | <span class="prop-type">array</span> | <span class="prop-default">[]</span> | The data record array to be rendered. |
 | <span class="prop-name">sorting</span> | <span class="prop-type">Array&lt;{ field: string, sort: 'asc'<br>&#124;&nbsp;'desc' }&gt;</span> |  | Sorting state. (Controlled) |
+| <span class="prop-name">text</span> | <span class="prop-type">any</span> | <span class="prop-default">{  loading: 'Loading',}</span> | The localization strings. |
 
 The `ref` is forwarded to the root element.
 

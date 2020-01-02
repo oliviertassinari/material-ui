@@ -5,12 +5,15 @@ components: DataGrid
 
 # Data Grid - Export
 
-<p class="description">A fast and extendable data table and data grid for React. It's a feature-rich compoent available in MIT or Enterprise versions.</p>
+<p class="description">Easily export the rows in various file formats such as CSV, Excel, or PDF.</p>
 
 ## CSV
 
+{{"demo": "pages/components/data-grid/export/CsvGrid.js", "bg": "inline"}}
+
 - https://ag-grid.com/javascript-grid-export/#export
 - https://material-table.com/#/docs/features/export
+- https://www.zinggrid.com/docs/features/exporting-data
 
 ## Print
 

@@ -5,6 +5,7 @@ import { VariableSizeList as List } from 'react-window';
 import { withStyles } from '@material-ui/core/styles';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
+import TableLoading from './TableLoading';
 import { ownerDocument, useEventCallback, useForkRef } from '@material-ui/core/utils';
 
 export const styles = () => ({
@@ -12,6 +13,7 @@ export const styles = () => ({
   root: {
     // overflow: 'auto',
     display: 'flex',
+    position: 'relative',
     flexDirection: 'column',
     '& table': {
       // width: '100%',
@@ -52,6 +54,50 @@ export const styles = () => ({
     right: -6,
   },
 });
+
+/**
+ * Related resources.
+ *
+ * https://github.com/eligrey/FileSaver.js
+ * https://blog.logrocket.com/programmatic-file-downloads-in-the-browser-9a5186298d5c/
+ * https://github.com/mbrn/filefy/blob/ec4ed0b7415d93be7158c23029f2ea1fa0b8e2d9/src/core/BaseBuilder.ts
+ * https://unpkg.com/browse/@progress/kendo-file-saver@1.0.7/dist/es/save-as.js
+ * https://github.com/ag-grid/ag-grid/blob/9565c219b6210aa85fa833c929d0728f9d163a91/community-modules/csv-export/src/csvExport/downloader.ts
+ */
+export function saveAs({ blob, filename = document.title, extension = 'txt' }) {
+  const fullName = `${filename}.${extension}`;
+
+  // Test download attribute first
+  // https://github.com/eligrey/FileSaver.js/issues/193
+  if ('download' in HTMLAnchorElement.prototype) {
+    // Create an object URL for the blob object
+    const url = URL.createObjectURL(blob);
+
+    // Create a new anchor element
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fullName;
+
+    // Programmatically trigger a click on the anchor element
+    // Useful if you want the download to happen automatically
+    // Without attaching the anchor element to the DOM
+    a.click();
+
+    // https://github.com/eligrey/FileSaver.js/issues/205
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+    });
+    return;
+  }
+
+  // IE 11 support
+  if (window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveOrOpenBlob(blob, fullName);
+    return;
+  }
+
+  throw new Error('saveAs not supported');
+}
 
 // To replace with .findIndex() once we stop IE 11 support.
 function findIndex(array, comp) {
@@ -124,18 +170,24 @@ const defaultDataProviderFactory = ({ rowsData, defaultColumnOptions, columnsKey
   },
 });
 
+const emptyArray = [];
+
 const DataGrid = React.forwardRef(function DataGrid(props, ref) {
   const {
     classes,
     className,
-    columns = [],
+    columns = emptyArray,
     dataProvider: dataProviderProp,
     defaultColumnOptions: defaultColumnOptionsProp = defaultColumnOptionsDefault,
     defaultSorting = [],
+    loading = false,
     onSortingChange,
     pagingOptions: defaultpagingOptionsProp = defaultPagingOptionsDefault,
-    rowsData = [],
+    rowsData = emptyArray,
     sorting: sortingProp,
+    text = {
+      loading: 'Loading',
+    },
     ...other
   } = props;
 
@@ -163,7 +215,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
       defaultDataProviderFactory({
         rowsData,
         defaultColumnOptions,
-        columnsKeyBy
+        columnsKeyBy,
       }),
     [dataProviderProp, rowsData, defaultColumnOptions, columnsKeyBy],
   );
@@ -173,7 +225,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
 
   const rowsHeader = [columns];
 
-  const handleResizeMouseMove = useEventCallback(event => { });
+  const handleResizeMouseMove = useEventCallback(event => {});
 
   const handleResizeMouseUp = useEventCallback(event => {
     const doc = ownerDocument(rootRef.current);
@@ -204,6 +256,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
   const { current: isSortingControlled } = React.useRef(sortingProp !== undefined);
   const [sortingState, setSortingState] = React.useState(defaultSorting);
   const sorting = isSortingControlled ? sortingProp : sortingState;
+  const sortingKeyBy = keyBy(sorting, item => item.field);
 
   if (process.env.NODE_ENV !== 'production') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -212,11 +265,11 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
         console.error(
           [
             `Material-UI: A component is changing ${
-            isSortingControlled ? 'a ' : 'an un'
+              isSortingControlled ? 'a ' : 'an un'
             }controlled DataGrid sorting prop to be ${isSortingControlled ? 'un' : ''}controlled.`,
             'Elements should not switch from uncontrolled to controlled (or vice versa).',
             'Decide between using a controlled or uncontrolled DataGrid ' +
-            'element for the lifetime of the component.',
+              'element for the lifetime of the component.',
             'More info: https://fb.me/react-controlled-components',
           ].join('\n'),
         );
@@ -229,6 +282,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
   React.useEffect(() => {
     const validKeys = ['Shift'];
     const handleKeyDown = event => {
+      // TODO we might want to use event.keyCode to support IE 11
       if (validKeys.indexOf(event.key) !== -1) {
         activeKeys.current.push(event.key);
       }
@@ -307,8 +361,6 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
     }
   };
 
-  const sortingKeyBy = keyBy(sorting, item => item.field);
-
   const [data, setData] = React.useState([]);
 
   const [pagination, setPagination] = React.useState(defaultPagingOptions);
@@ -325,7 +377,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
 
     setData(newData);
   }, [dataProvider, sorting, pagination]);
-
+  
   return (
     <div className={clsx(classes.root, className)} ref={handleRef} {...other}>
       <table>
@@ -348,6 +400,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
                   <th key={column.field} rowSpan={null} colSpan={null}>
                     {column.sortable || defaultColumnOptions.sortable ? (
                       <TableSortLabel
+                        data-mui-test="TableSortLabel"
                         active={sortingActive}
                         direction={sortingColumn ? sortingColumn.sort : 'asc'}
                         onClick={handleSortClick(column)}
@@ -355,15 +408,17 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
                         {label}
                       </TableSortLabel>
                     ) : (
-                        label
-                      )}
+                      label
+                    )}
 
-                    <div
-                      aria-hidden
-                      onMouseDown={handleResizeMouseDown}
-                      onDoubleClick={handleResizeDoubleClick}
-                      className={classes.resize}
-                    />
+                    {column.resizable || defaultColumnOptions.resizable ? (
+                      <div
+                        aria-hidden
+                        onMouseDown={handleResizeMouseDown}
+                        onDoubleClick={handleResizeDoubleClick}
+                        className={classes.resize}
+                      />
+                    ) : null}
                   </th>
                 );
               })}
@@ -371,6 +426,8 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
           ))}
         </thead>
       </table>
+      <TableLoading loading={loading} />
+      {loading && data.length === 0 ? text.loading : null}
       <div className={classes.bodyContainer}>
         <List
           height={300}
@@ -384,7 +441,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
           width={600}
         >
           {({ index, style }) => (
-            <div key={index} style={style}>
+            <div key={index} style={style} role="row">
               {columns.map(column => (
                 <span key={column.field}>{data[index][column.field]}</span>
               ))}
@@ -392,18 +449,18 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
           )}
         </List>
         {/*
-               -        <table>
-               -          <tbody>
-               -            {rowsData.map((row, index) => (
-               -              <tr key={index}>
-               -                {columns.map(column => (
-               -                  <td key={column.field}>{row[column.field]}</td>
-               -                ))}
-               -              </tr>
-               -            ))}
-               -          </tbody>
-               -        </table>
-               */}
+                 -        <table>
+                 -          <tbody>
+                 -            {rowsData.map((row, index) => (
+                 -              <tr key={index}>
+                 -                {columns.map(column => (
+                 -                  <td key={column.field}>{row[column.field]}</td>
+                 -                ))}
+                 -              </tr>
+                 -            ))}
+                 -          </tbody>
+                 -        </table>
+                 */}
       </div>
       <table>
         <tfoot>
@@ -480,13 +537,9 @@ DataGrid.propTypes = {
     }),
   ),
   /**
-   * The paging options
+   * If `true`, the loading state is displayed.
    */
-  pagingOptions: PropTypes.shape({
-    page: PropTypes.number,
-    pageSize: PropTypes.number,
-    pageSizeOptions: PropTypes.arrayOf(PropTypes.number)
-  }),
+  loading: PropTypes.bool,
   /**
    * Callback fired when the user change the column sort.
    *
@@ -507,6 +560,10 @@ DataGrid.propTypes = {
       sort: PropTypes.oneOf(['asc', 'desc']).isRequired,
     }),
   ),
+  /**
+   * The localization strings.
+   */
+  text: PropTypes.any,
 };
 
 export default withStyles(styles, { name: 'MuiDataGrid' })(DataGrid);

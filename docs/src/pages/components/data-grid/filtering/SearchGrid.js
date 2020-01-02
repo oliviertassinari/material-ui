@@ -12,21 +12,18 @@ const data = Array.from(new Array(100)).map(() => ({
   rating: chance.integer({ min: 1, max: 5 }),
 }));
 
-export default function ColumnSizing() {
+export default function SearchGrid() {
   return (
     <DataGrid
-      pagingOptions={{ page: 3 }}
       style={{ maxHeight: 300, width: '100%' }}
-      columns={
-        [
-          { field: 'name', label: 'Name' },
-          { field: 'rating', label: 'Rating' },
-          { field: 'address', label: 'Address' },
-          { field: 'phone', label: 'Phone' },
-          { field: 'country', label: 'Country' },
-        ]}
+      columns={[
+        { field: 'name', label: 'Name' },
+        { field: 'rating', label: 'Rating' },
+        { field: 'address', label: 'Address' },
+        { field: 'phone', label: 'Phone' },
+        { field: 'country', label: 'Country' },
+      ]}
       rowsData={data}
-      defaultColumnOptions={{ sizing: true }}
     />
   );
 }

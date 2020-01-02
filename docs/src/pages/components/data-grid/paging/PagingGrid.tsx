@@ -12,11 +12,10 @@ const data = Array.from(new Array(100)).map(() => ({
   rating: chance.integer({ min: 1, max: 5 }),
 }));
 
-export default function ColumnSizing() {
+export default function PagingGrid() {
   return (
     <DataGrid
-      pagingOptions={{ pageSizeOptions: [1, 2, 5, 10], pageSize: 5, page: 3 }}
-      style={{ maxHeight: 300, width: '100%' }}
+      style={{ maxHeight: 500, width: '100%' }}
       columns={[
         { field: 'name', label: 'Name' },
         { field: 'rating', label: 'Rating' },
@@ -25,7 +24,6 @@ export default function ColumnSizing() {
         { field: 'country', label: 'Country' },
       ]}
       rowsData={data}
-      defaultColumnOptions={{ sizing: true }}
     />
   );
 }
