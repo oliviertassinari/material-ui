@@ -201,6 +201,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
     () => ({
       ...defaultColumnOptionsDefault,
       ...defaultColumnOptionsProp,
+    }),
     [defaultColumnOptionsProp],
   );
 
