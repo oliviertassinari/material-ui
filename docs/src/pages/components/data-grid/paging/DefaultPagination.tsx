@@ -15,10 +15,7 @@ const data = Array.from(new Array(100)).map(() => ({
 export default function DefaultPagination() {
   return (
     <DataGrid
-      pagination={true}
-      paginationPage={3}
-      paginationPageSize={10}
-      paginationRowsPerPageOptions={[1, 2, 5, 10, 500]}
+      pagination
       style={{ maxHeight: 300, width: '100%' }}
       columns={
         [
@@ -29,7 +26,6 @@ export default function DefaultPagination() {
           { field: 'country', label: 'Country' },
         ]}
       rowsData={data}
-      defaultColumnOptions={{ resizable: true }}
     />
   );
 }

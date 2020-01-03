@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { StandardProps } from '@material-ui/core';
 
-export interface ColumnOptionType {
+export interface ColumnOptionType<RowData extends object> {
   resizable?: boolean;
   sortable?: boolean;
-  sortingComparator?: (rowA: any, rowB: any, sort: 'asc' | 'desc') => number;
+  sortingComparator?: (rowA: RowData, rowB: RowData, sort: 'asc' | 'desc') => number;
   sortingOrder?: Array<'asc' | 'desc' | null>;
 }
 
-export interface ColumnsType extends ColumnOptionType {
+export interface ColumnsType<RowData extends object> extends ColumnOptionType<RowData> {
   field: string;
   label?: string;
-  children?: ColumnsType[];
+  children?: ColumnsType<RowData>[];
 }
 
 export type SortingType = Array<{
@@ -24,8 +24,8 @@ export interface DataProviderGetListParams {
   pagination: PagingOptions;
 }
 
-export interface DataProviderType {
-  getList: (params: DataProviderGetListParams) => Promise<any[]>;
+export interface DataProviderType<RowData extends object> {
+  getList: (params: DataProviderGetListParams) => Promise<RowData[]>;
   loadMoreRows?: (paginationKey: string) => Promise<string>;
 }
 
@@ -37,20 +37,20 @@ export type PagingOptions = {
   paginationKey: string;
 }
 
-export interface DataGridProps
+export interface DataGridProps<RowData extends object>
   extends StandardProps<React.HTMLAttributes<HTMLDivElement>, DataGridClassKey>, Partial<PagingOptions> {
   /**
    * Manage the communication with the data store.
    */
-  dataProvider?: DataProviderType;
+  dataProvider?: DataProviderType<RowData>;
   /**
    * The default options that get applied to each column.
    */
-  defaultColumnOptions?: ColumnOptionType;
+  defaultColumnOptions?: ColumnOptionType<RowData>;
   /**
    * The columns configuration.
    */
-  columns?: ColumnsType[];
+  columns?: ColumnsType<RowData>[];
   /**
    * The default sorting state. (Uncontrolled)
    */
@@ -67,6 +67,22 @@ export interface DataGridProps
    * The localization strings.
    */
   text?: any;
+  /**
+   * If `true`, the pagination is displayed. Defaults to false.
+   */
+  pagination?: boolean;
+  /**
+   * The initial page to be displayed. Defaults to 0.
+   */
+  paginationPage?: number;
+  /**
+   * The initial rows per page size. Defaults to 50. Must be one of the paginationPageSize options.
+   */
+  paginationPageSize?: 10 | 25 | 50 | 100 | 250 | 500 | number;
+  /**
+   * The possible pagination size options to be selected by the user. Defaults to [10, 25, 50, 100, 250, 500].
+   */
+  paginationRowsPerPageOptions?: number[];
   /**
    * Callback fired when the user change the column sort.
    *
@@ -91,9 +107,9 @@ export interface DataGridProps
   /**
    * The data record array to be rendered.
    */
-  rowsData?: any[];
+  rowsData?: RowData[];
 }
 
 export type DataGridClassKey = 'root';
 
-export default function DataGrid(props: DataGridProps): JSX.Element;
+export default function DataGrid<RowData extends object>(props: DataGridProps<RowData>): JSX.Element;

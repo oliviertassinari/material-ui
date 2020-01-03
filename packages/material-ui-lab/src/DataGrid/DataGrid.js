@@ -181,7 +181,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
     defaultSorting = [],
     loading = false,
     onSortingChange,
-    pagination = true,
+    pagination = false,
     paginationPage = 0,
     paginationPageSize = 50,
     paginationRowsPerPageOptions = defaultPaginationRowsPerPageOptions,
@@ -361,39 +361,29 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
 
   const [isLoading, setLoading] = React.useState(loading);
 
-  React.useEffect(() => {
-    setLoading(loading);
-  }), [loading];
-
   const [data, setData] = React.useState([]);
 
   const [paginationState, setPaginationState] = React.useState({
-    pagination,
     paginationPage,
     paginationPageSize,
-    paginationRowsPerPageOptions,
-    paginationKey
+    paginationRowsPerPageOptions
   });
 
   React.useEffect(() => {
     setPaginationState({
-      pagination,
       paginationPage,
       paginationPageSize,
-      paginationRowsPerPageOptions,
-      paginationKey
+      paginationRowsPerPageOptions
     });
 
-  }, [pagination, paginationPage, paginationPageSize, paginationRowsPerPageOptions, paginationKey]);
+  }, [paginationPage, paginationPageSize, paginationRowsPerPageOptions]);
 
   const loadAdditionalData = async () => {
-    const nextPaginationKey = await dataProvider.loadMoreRows(pagination.paginationKey);
-
-    setPaginationState(prevPagination => ({ ...prevPagination, paginationKey: nextPaginationKey }));
+    // Load more Data
   }
 
   React.useEffect(() => { // Loads new Data, if the last page is reached and it is not already loading
-    if ((paginationState.paginationPage + 1) * paginationState.paginationPageSize >= rowsData.length && dataProvider.loadMoreRows && !isLoading) {
+    if ((paginationState.paginationPage + 1) * paginationState.paginationPageSize >= rowsData.length && pagination && !isLoading) {
       loadAdditionalData();
     }
   }, [paginationState, rowsData, dataProvider, isLoading]);
@@ -423,19 +413,21 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
 
   React.useEffect(() => {
 
-    const getNewData = async () => {
+    const loadingTimer = setTimeout(() => setLoading(true), 500);
 
-      const loadingTimer = setTimeout(() => setLoading(true), 500);
+    const getNewData = async () => {
 
       const newData = await dataProvider.getList({
         sorting,
         pagination: paginationState
       });
+
       setData(newData);
       clearTimeout(loadingTimer);
       setLoading(loading)
     };
     getNewData();
+    return () => clearTimeout(loadingTimer);
   }, [dataProvider, sorting, paginationState]);
 
   return (
@@ -522,7 +514,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
                  -        </table>
                  */}
       </div>
-      {paginationState.pagination && <table>
+      {pagination && <table>
         <tfoot>
           <tr>
             <TablePagination
