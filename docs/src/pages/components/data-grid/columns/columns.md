@@ -19,6 +19,7 @@ components: DataGrid
 - https://devexpress.github.io/devextreme-reactive/react/grid/docs/guides/banded-columns/
 - http://schrodinger.github.io/fixed-data-table-2/example-column-groups.html
 - https://ej2.syncfusion.com/react/demos/#/material/grid/stacked-header
+- http://tabulator.info/examples/4.5#column-groups
 
 ## Column sizing
 
@@ -33,6 +34,8 @@ components: DataGrid
 - https://devexpress.github.io/devextreme-reactive/react/grid/docs/guides/column-resizing/
 - http://schrodinger.github.io/fixed-data-table-2/example-resize.html
 - https://ej2.syncfusion.com/react/demos/#/material/grid/column-resizing
+- https://js.devexpress.com/Demos/WidgetsGallery/Demo/DataGrid/ColumnResizing/React/Light/
+- https://www.jqwidgets.com/react/react-grid/#https://www.jqwidgets.com/react/react-grid/react-grid-columnsresize.htm
 
 ## Column reorder
 
@@ -42,6 +45,9 @@ components: DataGrid
 - https://devexpress.github.io/devextreme-reactive/react/grid/docs/guides/column-reordering/
 - http://schrodinger.github.io/fixed-data-table-2/example-reorder.html
 - https://ej2.syncfusion.com/react/demos/#/material/grid/reorder
+- http://tabulator.info/docs/4.5/move
+- https://www.jqwidgets.com/react/react-grid/#https://www.jqwidgets.com/react/react-grid/react-grid-columnsreorder.htm
+- https://js.devexpress.com/Demos/WidgetsGallery/Demo/DataGrid/LocalReordering/React/Light/
 
 ## Column sticky
 
@@ -54,6 +60,8 @@ components: DataGrid
 - https://devexpress.github.io/devextreme-reactive/react/grid/docs/guides/fixed-columns/
 - http://schrodinger.github.io/fixed-data-table-2/fixed-right-columns.html
 - https://ej2.syncfusion.com/react/demos/#/material/grid/frozen-rows
+- http://tabulator.info/docs/4.5/layout#frozen
+- https://www.jqwidgets.com/react/react-grid/#https://www.jqwidgets.com/react/react-grid/react-grid-pinnedfrozencolumns.htm
 
 ## Column spanning
 

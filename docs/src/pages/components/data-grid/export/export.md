@@ -14,6 +14,9 @@ components: DataGrid
 - https://ag-grid.com/javascript-grid-export/#export
 - https://material-table.com/#/docs/features/export
 - https://www.zinggrid.com/docs/features/exporting-data
+- http://tabulator.info/docs/4.5/download#example-table-download
+- https://js.devexpress.com/Demos/WidgetsGallery/Demo/DataGrid/ExportToExcel/React/Light/
+- https://www.jqwidgets.com/react/react-grid/#https://www.jqwidgets.com/react/react-grid/react-grid-dataexport.htm
 
 ## Print
 

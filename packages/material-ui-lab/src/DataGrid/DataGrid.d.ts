@@ -21,20 +21,15 @@ export type SortingType = Array<{
 
 export interface DataProviderGetListParams {
   sorting: SortingType;
-  pagination: PagingOptions;
+  pagination: {
+    paginationPage: number;
+    paginationPageSize: number;
+  };
 }
 
 export interface DataProviderType<RowData extends object> {
   getList: (params: DataProviderGetListParams) => Promise<RowData[]>;
   loadMoreRows?: (paginationKey: string) => Promise<string>;
-}
-
-export type PagingOptions = {
-  pagination: boolean;
-  paginationPage: number;
-  paginationPageSize: 10 | 25 | 50 | 100 | 250 | 500 | number;
-  paginationRowsPerPageOptions: number[];
-  paginationKey: string;
 }
 
 export interface DataGridProps<RowData extends object>

@@ -56,9 +56,10 @@ export const styles = () => ({
 });
 
 /**
- * Related resources.
+ * I have hesitate to use https://github.com/eligrey/FileSaver.js.
+ * If we get bug reports that this project solves, we should consider using it.
  *
- * https://github.com/eligrey/FileSaver.js
+ * Related resources.
  * https://blog.logrocket.com/programmatic-file-downloads-in-the-browser-9a5186298d5c/
  * https://github.com/mbrn/filefy/blob/ec4ed0b7415d93be7158c23029f2ea1fa0b8e2d9/src/core/BaseBuilder.ts
  * https://unpkg.com/browse/@progress/kendo-file-saver@1.0.7/dist/es/save-as.js
@@ -200,9 +201,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
     () => ({
       ...defaultColumnOptionsDefault,
       ...defaultColumnOptionsProp,
-
-    }),
-    [defaultColumnOptionsProp]
+    [defaultColumnOptionsProp],
   );
 
   const columnsKeyBy = React.useMemo(() => keyBy(columns, item => item.field), [columns]);
@@ -223,7 +222,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
 
   const rowsHeader = [columns];
 
-  const handleResizeMouseMove = useEventCallback(event => { });
+  const handleResizeMouseMove = useEventCallback(event => {});
 
   const handleResizeMouseUp = useEventCallback(event => {
     const doc = ownerDocument(rootRef.current);
@@ -263,11 +262,11 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
         console.error(
           [
             `Material-UI: A component is changing ${
-            isSortingControlled ? 'a ' : 'an un'
+              isSortingControlled ? 'a ' : 'an un'
             }controlled DataGrid sorting prop to be ${isSortingControlled ? 'un' : ''}controlled.`,
             'Elements should not switch from uncontrolled to controlled (or vice versa).',
             'Decide between using a controlled or uncontrolled DataGrid ' +
-            'element for the lifetime of the component.',
+              'element for the lifetime of the component.',
             'More info: https://fb.me/react-controlled-components',
           ].join('\n'),
         );
@@ -460,8 +459,8 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
                         {label}
                       </TableSortLabel>
                     ) : (
-                        label
-                      )}
+                      label
+                    )}
 
                     {column.resizable || defaultColumnOptions.resizable ? (
                       <div
@@ -478,8 +477,8 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
           ))}
         </thead>
       </table>
-      <TableLoading loading={isLoading} />
-      {isLoading && data.length === 0 ? text.loading : null}
+      <TableLoading loading={loading} />
+      {loading && data.length === 0 ? text.loading : null}
       <div className={classes.bodyContainer}>
         <List
           height={300}

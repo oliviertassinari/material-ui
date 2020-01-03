@@ -17,6 +17,9 @@ components: DataGrid
 - https://demos.telerik.com/kendo-ui/grid/filter-row
 - https://www.telerik.com/kendo-react-ui/components/grid/filtering/
 - https://ej2.syncfusion.com/react/demos/#/material/grid/filter-menu
+- https://js.devexpress.com/Demos/WidgetsGallery/Demo/DataGrid/Filtering/React/Light/
+- https://www.jqwidgets.com/react/react-grid/#https://www.jqwidgets.com/react/react-grid/react-grid-filtering.htm
+- http://tabulator.info/docs/4.5/filter
 
 ## Search
 
