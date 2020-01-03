@@ -14,3 +14,4 @@ components: DataGrid
 - https://demos.telerik.com/kendo-ui/grid/keyboard-navigation
 - https://www.telerik.com/kendo-react-ui/components/grid/accessibility/
 - https://ej2.syncfusion.com/react/documentation/grid/accessibility/
+- https://js.devexpress.com/Demos/WidgetsGallery/Demo/DataGrid/KeyboardNavigation/React/Light/

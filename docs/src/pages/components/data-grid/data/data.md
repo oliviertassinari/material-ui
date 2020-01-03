@@ -15,6 +15,8 @@ components: DataGrid
 - https://demos.telerik.com/kendo-ui/grid/local-data-binding
 - https://www.telerik.com/kendo-react-ui/components/grid/data-operations/local-operations/
 - https://ej2.syncfusion.com/react/demos/#/material/grid/local-binding
+- https://js.devexpress.com/Demos/WidgetsGallery/Demo/DataGrid/SimpleArray/React/Light/
+- https://www.jqwidgets.com/react/react-grid/#https://www.jqwidgets.com/react/react-grid/react-grid-bindingtoarray.htm
 
 ## Server side operations <img src="/static/images/logos/enterprise.svg" width="24" height="24" alt="enterprise feature" loading="lazy" />
 

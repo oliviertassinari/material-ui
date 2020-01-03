@@ -16,3 +16,6 @@ components: DataGrid
 - https://www.telerik.com/kendo-react-ui/components/grid/paging/
 - https://ag-grid.com/javascript-grid-pagination/
 - https://github.com/tannerlinsley/react-table/blob/master/docs/api/usePagination.md
+- https://www.jqwidgets.com/react/react-grid/#https://www.jqwidgets.com/react/react-grid/react-grid-paging.htm
+- https://js.devexpress.com/Demos/WidgetsGallery/Demo/DataGrid/RecordPaging/React/Light/
+- http://tabulator.info/docs/4.5/page
