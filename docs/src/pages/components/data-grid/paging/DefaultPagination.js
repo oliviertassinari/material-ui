@@ -16,7 +16,8 @@ export default function DefaultPagination() {
   return (
     <DataGrid
       pagination
-      style={{ maxHeight: 300, width: '100%' }}
+      paginationPageSize={10}
+      style={{ width: '100%' }}
       columns={
         [
           { field: 'name', label: 'Name' },

@@ -21,9 +21,9 @@ export type SortingType = Array<{
 
 export interface DataProviderGetListParams {
   sorting: SortingType;
-  pagination: {
-    paginationPage: number;
-    paginationPageSize: number;
+  pagination?: {
+    currentPage: number;
+    currentPageSize: number;
   };
 }
 

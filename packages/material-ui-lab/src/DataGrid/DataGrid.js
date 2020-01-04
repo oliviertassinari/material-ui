@@ -128,6 +128,8 @@ const defaultColumnOptionsDefault = {
   sortingOrder: ['asc', 'desc', null],
 };
 
+const RowSize = 28
+
 const defaultDataProviderFactory = ({ rowsData, defaultColumnOptions, columnsKeyBy }) => ({
   getList: params => new Promise(resolve => {
     const newRowsData = [...rowsData];
@@ -160,7 +162,11 @@ const defaultDataProviderFactory = ({ rowsData, defaultColumnOptions, columnsKey
         }, null);
       });
     }
-    resolve(newRowsData.splice(params.pagination.paginationPage * params.pagination.paginationPageSize, params.pagination.paginationPageSize));
+
+    if (params.pagination) {
+      newRowsData = newRowsData.splice(params.pagination.currentPage * params.pagination.currentPageSize, params.pagination.currentPageSize)
+    }
+    resolve(newRowsData);
   })
 });
 
@@ -224,6 +230,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
   const rowsHeader = [columns];
 
   const handleResizeMouseMove = useEventCallback(event => {});
+  const handleResizeMouseMove = useEventCallback(event => { });
 
   const handleResizeMouseUp = useEventCallback(event => {
     const doc = ownerDocument(rootRef.current);
@@ -263,11 +270,11 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
         console.error(
           [
             `Material-UI: A component is changing ${
-              isSortingControlled ? 'a ' : 'an un'
+            isSortingControlled ? 'a ' : 'an un'
             }controlled DataGrid sorting prop to be ${isSortingControlled ? 'un' : ''}controlled.`,
             'Elements should not switch from uncontrolled to controlled (or vice versa).',
             'Decide between using a controlled or uncontrolled DataGrid ' +
-              'element for the lifetime of the component.',
+            'element for the lifetime of the component.',
             'More info: https://fb.me/react-controlled-components',
           ].join('\n'),
         );
@@ -361,36 +368,30 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
 
   const [isLoading, setLoading] = React.useState(loading);
 
+  React.useEffect(() => {
+    setLoading(loading);
+  }, [loading]);
+
   const [data, setData] = React.useState([]);
 
   const [paginationState, setPaginationState] = React.useState({
-    paginationPage,
-    paginationPageSize,
-    paginationRowsPerPageOptions
+    page: paginationPage,
+    pageSize: paginationPageSize,
+    rowsPerPageOptions: paginationRowsPerPageOptions
   });
 
   React.useEffect(() => {
     setPaginationState({
-      paginationPage,
-      paginationPageSize,
-      paginationRowsPerPageOptions
+      page: paginationPage,
+      pageSize: paginationPageSize,
+      rowsPerPageOptions: paginationRowsPerPageOptions
     });
 
   }, [paginationPage, paginationPageSize, paginationRowsPerPageOptions]);
 
-  const loadAdditionalData = async () => {
-    // Load more Data
-  }
-
-  React.useEffect(() => { // Loads new Data, if the last page is reached and it is not already loading
-    if ((paginationState.paginationPage + 1) * paginationState.paginationPageSize >= rowsData.length && pagination && !isLoading) {
-      loadAdditionalData();
-    }
-  }, [paginationState, rowsData, dataProvider, isLoading]);
-
   const handlePageChange = (event, page) => {
 
-    setPaginationState(prevPagination => ({ ...prevPagination, paginationPage: page }));
+    setPaginationState(prevPagination => ({ ...prevPagination, page }));
 
     if (onPageChange) {
       onPageChange(event, page);
@@ -399,13 +400,13 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
 
   const handlePagsizeChange = event => {
     const pageSize = event.target.value;
-    let page = paginationState.paginationPage;
+    let page = paginationState.page;
     if (rowsData.length < pageSize * page) {
       // Tries to show the same rows as before with then new page size
       page = rowsData.length === pageSize ? 0 : Math.ceil(rowsData.length / pageSize) - 1;
       handlePageChange(event, page);
     }
-    setPaginationState(prevPagination => ({ ...prevPagination, paginationPageSize: pageSize, paginationPage: page }));
+    setPaginationState(prevPagination => ({ ...prevPagination, pageSize, page }));
     if (onRowsPerPageChange) {
       onRowsPerPageChange(event, pageSize);
     }
@@ -417,9 +418,12 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
 
     const getNewData = async () => {
 
-      const newData = await dataProvider.getList({
+      let newData = await dataProvider.getList({
         sorting,
-        pagination: paginationState
+        pagination: pagination ? {
+          currentPage: paginationState.page,
+          currentPageSize: paginationState.pageSize
+        } : undefined
       });
 
       setData(newData);
@@ -460,8 +464,8 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
                         {label}
                       </TableSortLabel>
                     ) : (
-                      label
-                    )}
+                        label
+                      )}
 
                     {column.resizable || defaultColumnOptions.resizable ? (
                       <div
@@ -482,14 +486,12 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
       {loading && data.length === 0 ? text.loading : null}
       <div className={classes.bodyContainer}>
         <List
-          height={300}
+          height={pagination ? RowSize * paginationState.pageSize : 300} // Show the whole current page, if pagiantion is turned on
           itemCount={data.length}
           outerElementType="div"
           innerElementType="div"
           overscanCount={10}
-          itemSize={() => {
-            return 28;
-          }}
+          itemSize={() => RowSize}
           width={600}
         >
           {({ index, style }) => (
@@ -514,21 +516,21 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
                  -        </table>
                  */}
       </div>
-      {pagination && <table>
+      {pagination ? <table>
         <tfoot>
           <tr>
             <TablePagination
               count={rowsData.length}
               onChangePage={handlePageChange}
               onChangeRowsPerPage={handlePagsizeChange}
-              page={paginationState.paginationPage}
+              page={paginationState.page}
               labelDisplayedRows={dataProvider.loadMoreRows ? getKeyBasedPaginationText : undefined}
-              rowsPerPage={paginationState.paginationPageSize}
-              rowsPerPageOptions={paginationState.paginationRowsPerPageOptions}
+              rowsPerPage={paginationState.pageSize}
+              rowsPerPageOptions={paginationState.rowsPerPageOptions}
             />
           </tr>
         </tfoot>
-      </table>}
+      </table> : null}
     </div>
   );
 });
