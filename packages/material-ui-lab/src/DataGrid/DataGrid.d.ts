@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { StandardProps } from '@material-ui/core';
 
-export interface ColumnOptionType<RowData extends object> {
+export interface ColumnOptionType {
   resizable?: boolean;
   sortable?: boolean;
-  sortingComparator?: (rowA: RowData, rowB: RowData, sort: 'asc' | 'desc') => number;
+  sortingComparator?: (rowA: any, rowB: any, sort: 'asc' | 'desc') => number;
   sortingOrder?: Array<'asc' | 'desc' | null>;
 }
 
-export interface ColumnsType<RowData extends object> extends ColumnOptionType<RowData> {
+export interface ColumnsType extends ColumnOptionType {
   field: string;
   label?: string;
-  children?: ColumnsType<RowData>[];
+  children?: ColumnsType[];
 }
 
 export type SortingType = Array<{
@@ -21,31 +21,26 @@ export type SortingType = Array<{
 
 export interface DataProviderGetListParams {
   sorting: SortingType;
-  pagination?: {
-    currentPage: number;
-    currentPageSize: number;
-  };
 }
 
-export interface DataProviderType<RowData extends object> {
-  getList: (params: DataProviderGetListParams) => Promise<RowData[]>;
-  loadMoreRows?: (paginationKey: string) => Promise<string>;
+export interface DataProviderType {
+  getList: (params: DataProviderGetListParams) => Promise<any[]>;
 }
 
-export interface DataGridProps<RowData extends object>
-  extends StandardProps<React.HTMLAttributes<HTMLDivElement>, DataGridClassKey>, Partial<PagingOptions> {
+export interface DataGridProps
+  extends StandardProps<React.HTMLAttributes<HTMLDivElement>, DataGridClassKey> {
   /**
    * Manage the communication with the data store.
    */
-  dataProvider?: DataProviderType<RowData>;
+  dataProvider?: DataProviderType;
   /**
    * The default options that get applied to each column.
    */
-  defaultColumnOptions?: ColumnOptionType<RowData>;
+  defaultColumnOptions?: ColumnOptionType;
   /**
    * The columns configuration.
    */
-  columns?: ColumnsType<RowData>[];
+  columns?: ColumnsType[];
   /**
    * The default sorting state. (Uncontrolled)
    */
@@ -102,9 +97,9 @@ export interface DataGridProps<RowData extends object>
   /**
    * The data record array to be rendered.
    */
-  rowsData?: RowData[];
+  rowsData?: any[];
 }
 
 export type DataGridClassKey = 'root';
 
-export default function DataGrid<RowData extends object>(props: DataGridProps<RowData>): JSX.Element;
+export default function DataGrid(props: DataGridProps): JSX.Element;

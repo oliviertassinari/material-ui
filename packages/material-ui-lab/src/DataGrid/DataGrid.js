@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { VariableSizeList as List } from 'react-window';
@@ -131,8 +131,8 @@ const defaultColumnOptionsDefault = {
 const RowSize = 28
 
 const defaultDataProviderFactory = ({ rowsData, defaultColumnOptions, columnsKeyBy }) => ({
-  getList: params => new Promise(resolve => {
-    let newRowsData = [...rowsData];
+  getList: params => {
+    const newRowsData = [...rowsData];
 
     if (params.sorting.length > 0) {
       // TODO we might need to use a stable sort logic.
@@ -230,7 +230,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
 
   const rowsHeader = [columns];
 
-  const handleResizeMouseMove = useEventCallback(event => { });
+  const handleResizeMouseMove = useEventCallback(event => {});
 
   const handleResizeMouseUp = useEventCallback(event => {
     const doc = ownerDocument(rootRef.current);
@@ -270,11 +270,11 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
         console.error(
           [
             `Material-UI: A component is changing ${
-            isSortingControlled ? 'a ' : 'an un'
+              isSortingControlled ? 'a ' : 'an un'
             }controlled DataGrid sorting prop to be ${isSortingControlled ? 'un' : ''}controlled.`,
             'Elements should not switch from uncontrolled to controlled (or vice versa).',
             'Decide between using a controlled or uncontrolled DataGrid ' +
-            'element for the lifetime of the component.',
+              'element for the lifetime of the component.',
             'More info: https://fb.me/react-controlled-components',
           ].join('\n'),
         );
@@ -482,8 +482,8 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
                         {label}
                       </TableSortLabel>
                     ) : (
-                        label
-                      )}
+                      label
+                    )}
 
                     {column.resizable || defaultColumnOptions.resizable ? (
                       <div
