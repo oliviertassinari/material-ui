@@ -132,8 +132,8 @@ const defaultColumnOptionsDefault = {
 const RowSize = 28
 
 const defaultDataProviderFactory = ({ rowsData, defaultColumnOptions, columnsKeyBy }) => ({
-  getList: params => new Promise(resolve => {
-    let newRowsData = [...rowsData];
+  getList: params => {
+    const newRowsData = [...rowsData];
 
     if (params.sorting.length > 0) {
       // TODO we might need to use a stable sort logic.
@@ -468,8 +468,8 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
                         {label}
                       </TableSortLabel>
                     ) : (
-                        label
-                      )}
+                      label
+                    )}
 
                     {column.resizable || defaultColumnOptions.resizable ? (
                       <div
