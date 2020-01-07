@@ -26,6 +26,10 @@ export type PaginationIndicator = {
 
 export interface DataProviderGetListParams {
   sorting: SortingType;
+  pagination: {
+    startIndicator: PaginationIndicator;
+    endIndicator: PaginationIndicator;
+  };
 }
 
 export interface DataProviderType {

@@ -7,6 +7,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import TableLoading from './TableLoading';
 import { ownerDocument, useEventCallback, useForkRef } from '@material-ui/core/utils';
+import { Button } from '@material-ui/core';
 
 export const styles = () => ({
   /* Styles applied to the root element. */
@@ -162,23 +163,16 @@ const defaultDataProviderFactory = ({ rowsData, defaultColumnOptions, columnsKey
         }, null);
       });
     }
-
     if (params.pagination) {
-      newRowsData = newRowsData.splice(params.pagination.currentPage * params.pagination.currentPageSize, params.pagination.currentPageSize)
+      newRowsData = newRowsData.slice(params.pagination.startIndicator.index, params.pagination.endIndicator.index)
     }
     resolve(newRowsData);
-  })
+  }
 });
 
 const emptyArray = [];
 
 const defaultPaginationRowsPerPageOptions = [10, 25, 50, 100, 250, 500];
-
-const defaultPaginationProps = {
-  page: 0,
-  pageSize: 50,
-  rowsPerPageOptions: defaultPaginationRowsPerPageOptions
-}
 
 const DataGrid = React.forwardRef(function DataGrid(props, ref) {
   const {
@@ -191,15 +185,14 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
     loading: loadingProp = false,
     onSortingChange,
     pagination = false,
-    paginationPage,
-    paginationPageSize,
-    paginationRowsPerPageOptions,
-    onRowsPerPageChange,
-    onPageChange,
+    defaultPage = 0,
+    defaultRowsPerPage = 50,
+    paginationRowsPerPageOptions: rowsPerPageOptions = defaultPaginationRowsPerPageOptions,
     rowsData = emptyArray,
     sorting: sortingProp,
     text = {
       loading: 'Loading',
+      reload: 'Reload'
     },
     ...other
   } = props;
@@ -366,84 +359,72 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
     }
   };
 
-  const [loading, setLoading] = React.useState(loadingProp);
+  const [loadingState, setLoading] = React.useState(loadingProp);
 
-  React.useEffect(() => {
-    setLoading(loadingProp);
-  }, [loadingProp]);
+  const loading = loadingState || loadingProp;
+
+  const [errorMessage, setErrorMessage] = React.useState('');
 
   const [data, setData] = React.useState([]);
 
-  const lastShownIndex = React.useRef(0);
-
   const [paginationState, setPaginationState] = React.useState({
-    page: paginationPage || defaultPaginationProps.page,
-    pageSize: paginationPageSize || defaultPaginationProps.pageSize,
-    rowsPerPageOptions: paginationRowsPerPageOptions || defaultPaginationProps.rowsPerPageOptions
+    page: defaultPage,
+    rowsPerPage: defaultRowsPerPage
   });
 
   React.useEffect(() => {
     setPaginationState({
-      page: paginationPage || defaultPaginationProps.page,
-      pageSize: paginationPageSize || defaultPaginationProps.pageSize,
-      rowsPerPageOptions: paginationRowsPerPageOptions || defaultPaginationProps.rowsPerPageOptions
+      page: defaultPage,
+      rowsPerPage: defaultRowsPerPage
     });
 
-  }, [paginationPage, paginationPageSize, paginationRowsPerPageOptions]);
+  }, [defaultPage, defaultRowsPerPage]);
 
   const handlePageChange = (event, page) => {
-
     setPaginationState(prevPagination => ({ ...prevPagination, page }));
-
-    if (onPageChange) {
-      onPageChange(event, page);
-    }
-    lastShownIndex.current = (page + 1) * paginationState.pageSize;
   };
 
   const handlePagsizeChange = event => {
-    const pageSize = event.target.value;
+    const rowsPerPage = event.target.value;
     let page = paginationState.page;
-    if (rowsData.length < pageSize * page) {
+    if (rowsData.length < rowsPerPage * page) {
       // Tries to show the same rows as before with then new page size
-      page = rowsData.length === pageSize ? 0 : Math.ceil(rowsData.length / pageSize) - 1;
+      page = rowsData.length === rowsPerPage ? 0 : Math.ceil(rowsData.length / rowsPerPage) - 1;
       handlePageChange(event, page);
     }
-    setPaginationState(prevPagination => ({ ...prevPagination, pageSize, page }));
-    lastShownIndex.current = (page + 1) * pageSize;
+    setPaginationState(prevPagination => ({ ...prevPagination, rowsPerPage, page }));
 
-    if (onRowsPerPageChange) {
-      onRowsPerPageChange(event, pageSize);
-    }
   };
 
   const updateData = () => {
-    const loadingTimer = setTimeout(() => setLoading(true), 500);
+    // Shows the loading state, if the delay is longer than 500ms to reduce user interruption
+    const loadingTimer = setTimeout(() => { setLoading(true), 500 });
 
     dataProvider.getList({
       sorting,
       pagination: pagination ? {
-        currentPage: paginationState.page,
-        currentPageSize: paginationState.pageSize
-      } : undefined,
-      lastShownItem: lastShownIndex.current
+        startIndicator: {
+          index: paginationState.page * paginationState.rowsPerPage,
+          rowsData: rowsData[paginationState.page * paginationState.rowsPerPage]
+        },
+        endIndicator: {
+          index: (paginationState.page + 1) * paginationState.rowsPerPage,
+          rowsData: rowsData[(paginationState.page + 1) * paginationState.rowsPerPage - 1]
+        },
+      } : undefined
     }).then(newData => {
       setData(newData);
+    })
+    .catch(reason => {
+      setErrorMessage(`Could not load data: ${reason}`);
+    })
+    .finally(() => {
       clearTimeout(loadingTimer);
-      setLoading(loadingProp)
+      setLoading(loadingProp);
     });
 
-    return () => clearTimeout(loadingTimer);
+    return () => { clearTimeout(loadingTimer) };
   }
-
-  const handleInfiniteScroll = useCallback(async ({ overscanStopIndex }) => {
-
-    lastShownIndex.current = overscanStopIndex;
-
-    if (!loading && lastShownIndex.current >= data.length - 1) {
-      updateData();
-    }
-  }, [data]);
 
   React.useEffect(() => {
 
@@ -451,6 +432,11 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
 
     return clearTimer;
   }, [dataProvider, sorting, paginationState]);
+
+  const retryLoading = () => {
+    setErrorMessage('');
+    updateData();
+  }
 
   return (
     <div className={clsx(classes.root, className)} ref={handleRef} {...other}>
@@ -500,15 +486,14 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
           ))}
         </thead>
       </table>
-      <TableLoading loading={loading} />
-      {loading && data.length === 0 ? text.loading : null}
+      <TableLoading loading={(loading)} />
+      {loading ? text.loading : null}
       <div className={classes.bodyContainer}>
         <List
-          height={pagination ? RowSize * paginationState.pageSize : 300} // Show the whole current page, if pagiantion is turned on
+          height={pagination ? RowSize * paginationState.rowsPerPage : 300} // Show the whole current page, if pagiantion is turned on
           itemCount={data.length}
           outerElementType="div"
           innerElementType="div"
-          onItemsRendered={handleInfiniteScroll}
           overscanCount={10}
           itemSize={() => RowSize}
           width={600}
@@ -543,12 +528,15 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
               onChangePage={handlePageChange}
               onChangeRowsPerPage={handlePagsizeChange}
               page={paginationState.page}
-              rowsPerPage={paginationState.pageSize}
-              rowsPerPageOptions={paginationState.rowsPerPageOptions}
+              rowsPerPage={paginationState.rowsPerPage}
+              rowsPerPageOptions={rowsPerPageOptions}
             />
           </tr>
         </tfoot>
       </table> : null}
+      {
+        errorMessage && <div><span>{errorMessage}</span><Button onClick={retryLoading} color="secondary">{text.reload}</Button></div>
+      }
     </div>
   );
 });
