@@ -22,7 +22,7 @@ export type SortingType = Array<{
 export type PaginationIndicator = {
   index: number;
   rowData: any;
-}
+};
 
 export interface DataProviderGetListParams {
   sorting: SortingType;

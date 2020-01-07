@@ -129,45 +129,49 @@ const defaultColumnOptionsDefault = {
   sortingOrder: ['asc', 'desc', null],
 };
 
-const RowSize = 28
+const RowSize = 28;
 
 const defaultDataProviderFactory = ({ rowsData, defaultColumnOptions, columnsKeyBy }) => ({
-  getList: params => new Promise(resolve => {
-    let newRowsData = [...rowsData];
+  getList: params =>
+    new Promise(resolve => {
+      let newRowsData = [...rowsData];
 
-    if (params.sorting.length > 0) {
-      // TODO we might need to use a stable sort logic.
-      newRowsData.sort((rowA, rowB) => {
-        return params.sorting.reduce((acc, sortingItem) => {
-          if (acc !== null) {
-            return acc;
-          }
+      if (params.sorting.length > 0) {
+        // TODO we might need to use a stable sort logic.
+        newRowsData.sort((rowA, rowB) => {
+          return params.sorting.reduce((acc, sortingItem) => {
+            if (acc !== null) {
+              return acc;
+            }
 
-          const field = sortingItem.field;
-          const sortingComparator =
-            columnsKeyBy[field].sortingComparator || defaultColumnOptions.sortingComparator;
+            const field = sortingItem.field;
+            const sortingComparator =
+              columnsKeyBy[field].sortingComparator || defaultColumnOptions.sortingComparator;
 
-          if (sortingComparator) {
-            return sortingComparator(rowA, rowB, sortingItem.sort);
-          }
+            if (sortingComparator) {
+              return sortingComparator(rowA, rowB, sortingItem.sort);
+            }
 
-          if (rowA[field] < rowB[field]) {
-            return -1 * (sortingItem.sort === 'asc' ? 1 : -1);
-          }
+            if (rowA[field] < rowB[field]) {
+              return -1 * (sortingItem.sort === 'asc' ? 1 : -1);
+            }
 
-          if (rowA[field] > rowB[field]) {
-            return 1 * (sortingItem.sort === 'asc' ? 1 : -1);
-          }
+            if (rowA[field] > rowB[field]) {
+              return 1 * (sortingItem.sort === 'asc' ? 1 : -1);
+            }
 
-          return null;
-        }, null);
-      });
-    }
-    if (params.pagination) {
-      newRowsData = newRowsData.slice(params.pagination.startIndicator.index, params.pagination.endIndicator.index)
-    }
-    resolve(newRowsData);
-  })
+            return null;
+          }, null);
+        });
+      }
+      if (params.pagination) {
+        newRowsData = newRowsData.slice(
+          params.pagination.startIndicator.index,
+          params.pagination.endIndicator.index,
+        );
+      }
+      resolve(newRowsData);
+    }),
 });
 
 const emptyArray = [];
@@ -192,7 +196,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
     sorting: sortingProp,
     text = {
       loading: 'Loading',
-      reload: 'Reload'
+      reload: 'Reload',
     },
     ...other
   } = props;
@@ -369,15 +373,14 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
 
   const [paginationState, setPaginationState] = React.useState({
     page: defaultPage,
-    rowsPerPage: defaultRowsPerPage
+    rowsPerPage: defaultRowsPerPage,
   });
 
   React.useEffect(() => {
     setPaginationState({
       page: defaultPage,
-      rowsPerPage: defaultRowsPerPage
+      rowsPerPage: defaultRowsPerPage,
     });
-
   }, [defaultPage, defaultRowsPerPage]);
 
   const handlePageChange = (event, page) => {
@@ -393,28 +396,33 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
       handlePageChange(event, page);
     }
     setPaginationState(prevPagination => ({ ...prevPagination, rowsPerPage, page }));
-
   };
 
   const updateData = () => {
     // Shows the loading state, if the delay is longer than 500ms to reduce user interruption
-    const loadingTimer = setTimeout(() => { setLoading(true), 500 });
+    const loadingTimer = setTimeout(() => {
+      setLoading(true), 500;
+    });
 
-    dataProvider.getList({
-      sorting,
-      pagination: pagination ? {
-        startIndicator: {
-          index: paginationState.page * paginationState.rowsPerPage,
-          rowsData: rowsData[paginationState.page * paginationState.rowsPerPage]
-        },
-        endIndicator: {
-          index: (paginationState.page + 1) * paginationState.rowsPerPage,
-          rowsData: rowsData[(paginationState.page + 1) * paginationState.rowsPerPage - 1]
-        },
-      } : undefined
-    }).then(newData => {
-      setData(newData);
-    })
+    dataProvider
+      .getList({
+        sorting,
+        pagination: pagination
+          ? {
+              startIndicator: {
+                index: paginationState.page * paginationState.rowsPerPage,
+                rowsData: rowsData[paginationState.page * paginationState.rowsPerPage],
+              },
+              endIndicator: {
+                index: (paginationState.page + 1) * paginationState.rowsPerPage,
+                rowsData: rowsData[(paginationState.page + 1) * paginationState.rowsPerPage - 1],
+              },
+            }
+          : undefined,
+      })
+      .then(newData => {
+        setData(newData);
+      })
       .catch(reason => {
         setErrorMessage(`Could not load data: ${reason}`);
       })
@@ -423,11 +431,12 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
         setLoading(loadingProp);
       });
 
-    return () => { clearTimeout(loadingTimer) };
-  }
+    return () => {
+      clearTimeout(loadingTimer);
+    };
+  };
 
   React.useEffect(() => {
-
     const clearTimer = updateData();
 
     return clearTimer;
@@ -436,7 +445,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
   const retryLoading = () => {
     setErrorMessage('');
     updateData();
-  }
+  };
 
   return (
     <div className={clsx(classes.root, className)} ref={handleRef} {...other}>
@@ -486,7 +495,7 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
           ))}
         </thead>
       </table>
-      <TableLoading loading={(loading)} />
+      <TableLoading loading={loading} />
       {loading ? text.loading : null}
       <div className={classes.bodyContainer}>
         <List
@@ -520,23 +529,30 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
                  -        </table>
                  */}
       </div>
-      {pagination ? <table>
-        <tfoot>
-          <tr>
-            <TablePagination
-              count={rowsData.length}
-              onChangePage={handlePageChange}
-              onChangeRowsPerPage={handlePagsizeChange}
-              page={paginationState.page}
-              rowsPerPage={paginationState.rowsPerPage}
-              rowsPerPageOptions={rowsPerPageOptions}
-            />
-          </tr>
-        </tfoot>
-      </table> : null}
-      {
-        errorMessage && <div><span>{errorMessage}</span><Button onClick={retryLoading} color="secondary">{text.reload}</Button></div>
-      }
+      {pagination ? (
+        <table>
+          <tfoot>
+            <tr>
+              <TablePagination
+                count={rowsData.length}
+                onChangePage={handlePageChange}
+                onChangeRowsPerPage={handlePagsizeChange}
+                page={paginationState.page}
+                rowsPerPage={paginationState.rowsPerPage}
+                rowsPerPageOptions={rowsPerPageOptions}
+              />
+            </tr>
+          </tfoot>
+        </table>
+      ) : null}
+      {errorMessage && (
+        <div>
+          <span>{errorMessage}</span>
+          <Button onClick={retryLoading} color="secondary">
+            {text.reload}
+          </Button>
+        </div>
+      )}
     </div>
   );
 });
