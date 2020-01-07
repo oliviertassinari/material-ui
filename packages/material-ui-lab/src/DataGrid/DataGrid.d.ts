@@ -19,16 +19,11 @@ export type SortingType = Array<{
   field: string;
 }>;
 
-export type PaginationIndicator = {
-  index: number;
-  rowData: any;
-};
-
 export interface DataProviderGetListParams {
   sorting: SortingType;
   pagination: {
-    startIndicator: PaginationIndicator;
-    endIndicator: PaginationIndicator;
+    start: number;
+    end: number;
   };
 }
 
@@ -56,7 +51,7 @@ export interface DataGridProps
   defaultSorting?: SortingType;
   /**
    * If `true`, the loading state is displayed.
-   * If false and a custom dataProvider is supplied, the component shows the loading state, while it waits for new data being loaded.
+   * If `false` the component shows the loading state, while it waits for new data being loaded.
    */
   loading?: boolean;
   /**
@@ -76,11 +71,11 @@ export interface DataGridProps
    */
   defaultPage?: number;
   /**
-   * The initial rows per page size. Defaults to 50. Must be one of the paginationPageSize options.
+   * The initial rows per page size. Must be one of the paginationPageSize options.
    */
   defaultRowsPerPage?: 10 | 25 | 50 | 100 | 250 | 500 | number;
   /**
-   * The possible pagination size options to be selected by the user. Defaults to [10, 25, 50, 100, 250, 500].
+   * The possible pagination size options to be selected by the user.
    */
   paginationRowsPerPageOptions?: Array<number | { value: number; label: string }>;
   /**
