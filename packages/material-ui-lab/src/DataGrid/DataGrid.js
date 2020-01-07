@@ -132,8 +132,8 @@ const defaultColumnOptionsDefault = {
 const RowSize = 28
 
 const defaultDataProviderFactory = ({ rowsData, defaultColumnOptions, columnsKeyBy }) => ({
-  getList: params => {
-    const newRowsData = [...rowsData];
+  getList: params => new Promise(resolve => {
+    let newRowsData = [...rowsData];
 
     if (params.sorting.length > 0) {
       // TODO we might need to use a stable sort logic.
@@ -167,7 +167,7 @@ const defaultDataProviderFactory = ({ rowsData, defaultColumnOptions, columnsKey
       newRowsData = newRowsData.slice(params.pagination.startIndicator.index, params.pagination.endIndicator.index)
     }
     resolve(newRowsData);
-  }
+  })
 });
 
 const emptyArray = [];
@@ -415,13 +415,13 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
     }).then(newData => {
       setData(newData);
     })
-    .catch(reason => {
-      setErrorMessage(`Could not load data: ${reason}`);
-    })
-    .finally(() => {
-      clearTimeout(loadingTimer);
-      setLoading(loadingProp);
-    });
+      .catch(reason => {
+        setErrorMessage(`Could not load data: ${reason}`);
+      })
+      .finally(() => {
+        clearTimeout(loadingTimer);
+        setLoading(loadingProp);
+      });
 
     return () => { clearTimeout(loadingTimer) };
   }
