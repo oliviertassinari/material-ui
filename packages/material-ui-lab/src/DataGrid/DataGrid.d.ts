@@ -89,6 +89,18 @@ export interface DataGridProps
    * The data record array to be rendered.
    */
   rowsData?: any[];
+  /**
+   * The type of selection for the rows.
+   *
+   */
+  selection?: "row" | "checkbox" | "multiple, row" | "multiple, checkbox";
+  /**
+   * Callback fired when the user change the row selection.
+   *
+   * @param {object} event The event source of the callback.
+   * @param {number[]} value The new selected rows.
+   */
+  onSelectionChange?: (event: React.ChangeEvent<{}>, selectedRows: any[]) => void;
 }
 
 export type DataGridClassKey = 'root';

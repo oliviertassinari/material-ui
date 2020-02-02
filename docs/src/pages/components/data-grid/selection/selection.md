@@ -18,11 +18,16 @@ components: DataGrid
 - https://www.jqwidgets.com/react/react-grid/#https://www.jqwidgets.com/react/react-grid/react-grid-rowselection.htm
 - http://tabulator.info/docs/4.5/select#setup-range
 
+
+{{"demo": "pages/components/data-grid/selection/RowSelection.js", "bg": "inline"}}
+
 ## Checkbox selection
 
 - https://devexpress.github.io/devextreme-reactive/react/grid/docs/guides/selection/
 - https://ej2.syncfusion.com/react/demos/#/material/grid/checkbox-selection
 - https://demos.telerik.com/kendo-ui/grid/checkbox-selection
+
+{{"demo": "pages/components/data-grid/selection/CheckboxSelection.js", "bg": "inline"}}
 
 ## Range selection <img src="/static/images/logos/enterprise.svg" width="24" height="24" alt="enterprise feature" loading="lazy" />
 

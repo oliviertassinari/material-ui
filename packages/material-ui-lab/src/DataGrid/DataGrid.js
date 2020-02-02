@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { VariableSizeList as List } from 'react-window';
 import { withStyles } from '@material-ui/core/styles';
+import Checkbox from '@material-ui/core/Checkbox';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import TableLoading from './TableLoading';
@@ -54,6 +55,20 @@ export const styles = () => ({
     zIndex: 1, // Leak on the next cell
     width: 9,
     right: -6,
+  },
+  selectedRow: {
+    background: 'lightgrey',
+    cursor: 'pointer',
+  },
+  selectionRow: {
+    cursor: 'pointer',
+    '&:hover': {
+      background: '#eee',
+    },
+  },
+  actionHeader: {
+    width: '1%',
+    whiteSpace: 'nowrap',
   },
 });
 
@@ -194,6 +209,8 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
     onSortingChange,
     pagination = false,
     defaultPage = 0,
+    selection,
+    onSelectionChange,
     defaultRowsPerPage = 50,
     paginationRowsPerPageOptions: rowsPerPageOptions = defaultPaginationRowsPerPageOptions,
     rowsData = emptyArray,
@@ -377,6 +394,37 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
 
   const [data, setData] = React.useState({ rows: [], total: 0 });
 
+  const [selectedRows, setSelectedRows] = React.useState([]);
+
+  const handleSelectionChange = row => e => {
+    let updatedSelection = [];
+    if (selection === 'row' || selection === 'checkbox') {
+      updatedSelection.push(row);
+    } else {
+      const addedIndex = selectedRows.indexOf(row);
+      if (addedIndex === -1) {
+        updatedSelection = [...selectedRows, row];
+      } else {
+        updatedSelection = selectedRows.filter(x => x !== row);
+      }
+    }
+    setSelectedRows(updatedSelection);
+    if (onSelectionChange) {
+      onSelectionChange(e, updatedSelection);
+    }
+  };
+
+  const onSelectAll = e => {
+    let updatedSelection = [];
+    if (selectedRows.length !== data.rows.length) {
+      updatedSelection = [...data.rows];
+    }
+    setSelectedRows(updatedSelection);
+    if (onSelectionChange) {
+      onSelectionChange(e, updatedSelection);
+    }
+  };
+
   const [pageState, setPageState] = React.useState(defaultPage);
   const [rowsPerPageState, setRowsPerPage] = React.useState(defaultRowsPerPage);
 
@@ -452,6 +500,15 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
         <thead>
           {rowsHeader.map((row, index) => (
             <tr key={index}>
+              {(selection === 'multiple, row' || selection === 'multiple, checkbox') && (
+                <th className={classes.actionHeader}>
+                  <Checkbox
+                    checked={selectedRows.length === data.rows.length}
+                    onChange={onSelectAll}
+                  />
+                </th>
+              )}
+
               {columns.map(column => {
                 const sortingColumn = sortingKeyBy[column.field];
                 const sortingActive = Boolean(sortingColumn);
@@ -507,7 +564,30 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
           width={600}
         >
           {({ index, style }) => (
-            <div key={index} style={style} role="row">
+            <div
+              key={index}
+              style={style}
+              className={
+                selection === 'row' || selection === 'multiple, row'
+                  ? selectedRows.includes(data.rows[index])
+                    ? classes.selectedRow
+                    : classes.selectionRow
+                  : ''
+              }
+              role="row"
+              onClick={
+                selection === 'row' || selection === 'multiple, row'
+                  ? handleSelectionChange(data.rows[index])
+                  : undefined
+              }
+            >
+              {(selection === 'checkbox' || selection === 'multiple, checkbox') && (
+                <Checkbox
+                  checked={selectedRows.includes(data.rows[index])}
+                  onChange={handleSelectionChange(data.rows[index])}
+                />
+              )}
+
               {columns.map(column => (
                 <span key={column.field}>{data.rows[index][column.field]}</span>
               ))}
@@ -515,18 +595,18 @@ const DataGrid = React.forwardRef(function DataGrid(props, ref) {
           )}
         </List>
         {/*
-                  -        <table>
-                  -          <tbody>
-                  -            {rowsData.map((row, index) => (
-                  -              <tr key={index}>
-                  -                {columns.map(column => (
-                  -                  <td key={column.field}>{row[column.field]}</td>
-                  -                ))}
-                  -              </tr>
-                  -            ))}
-                  -          </tbody>
-                  -        </table>
-                  */}
+                      -        <table>
+                      -          <tbody>
+                      -            {rowsData.map((row, index) => (
+                      -              <tr key={index}>
+                      -                {columns.map(column => (
+                      -                  <td key={column.field}>{row[column.field]}</td>
+                      -                ))}
+                      -              </tr>
+                      -            ))}
+                      -          </tbody>
+                      -        </table>
+                      */}
       </div>
       {pagination ? (
         <table>
@@ -626,6 +706,13 @@ DataGrid.propTypes = {
    */
   loading: PropTypes.bool,
   /**
+   * Callback fired when the user change the row selection.
+   *
+   * @param {object} event The event source of the callback.
+   * @param {number[]} value The new selected rows.
+   */
+  onSelectionChange: PropTypes.func,
+  /**
    * Callback fired when the user change the column sort.
    *
    * @param {object} event The event source of the callback.
@@ -652,6 +739,10 @@ DataGrid.propTypes = {
    * The data record array to be rendered.
    */
   rowsData: PropTypes.array,
+  /**
+   * The type of selection for the rows.
+   */
+  selection: PropTypes.oneOf(['checkbox', 'multiple, checkbox', 'multiple, row', 'row']),
   /**
    * Sorting state. (Controlled)
    */
