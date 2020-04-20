@@ -667,9 +667,9 @@ export const huHU = {
     formatNumber: formatNumber('hu-HU'),
   },
   props: {
-    // MuiBreadcrumbs: {
-    //   expandText: 'Show path',
-    // },
+    MuiBreadcrumbs: {
+      expandText: 'Útvonal',
+    },
     MuiTablePagination: {
       backIconButtonText: 'Előző oldal',
       labelRowsPerPage: 'Sorok száma:',
@@ -691,27 +691,27 @@ export const huHU = {
     MuiAlert: {
       closeText: 'Bezárás',
     },
-    // MuiPagination: {
-    //   'aria-label': 'Pagination navigation',
-    //   getItemAriaLabel: (type, page, selected) => {
-    //     if (type === 'page') {
-    //       return `${selected ? '' : 'Go to '}page ${page}`;
-    //     }
-    //     if (type === 'first') {
-    //       return 'Go to first page';
-    //     }
-    //     if (type === 'last') {
-    //       return 'Go to last page';
-    //     }
-    //     if (type === 'next') {
-    //       return 'Go to next page';
-    //     }
-    //     if (type === 'previous') {
-    //       return 'Go to previous page';
-    //     }
-    //     return undefined;
-    //   },
-    // },
+    MuiPagination: {
+      'aria-label': 'Lapozás',
+      getItemAriaLabel: (type, page, selected) => {
+        if (type === 'page') {
+          return `${page}. oldal${selected ? '' : 'ra'}`;
+        }
+        if (type === 'first') {
+          return 'Első oldalra';
+        }
+        if (type === 'last') {
+          return 'Utolsó oldalra';
+        }
+        if (type === 'next') {
+          return 'Következő oldalra';
+        }
+        if (type === 'previous') {
+          return 'Előző oldalra';
+        }
+        return undefined;
+      },
+    },
   },
 };
 
