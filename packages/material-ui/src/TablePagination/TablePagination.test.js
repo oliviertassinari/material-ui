@@ -62,10 +62,10 @@ describe('<TablePagination />', () => {
       let labelDisplayedRowsCalled = false;
       function labelDisplayedRows({ from, to, count, page }) {
         labelDisplayedRowsCalled = true;
-        assert.strictEqual(from, 11);
-        assert.strictEqual(to, 20);
-        assert.strictEqual(count, 42);
-        assert.strictEqual(page, 1);
+        assert.strictEqual(from, '11');
+        assert.strictEqual(to, '20');
+        assert.strictEqual(count, '42');
+        assert.strictEqual(page, '1');
         return `Page ${page}`;
       }
 

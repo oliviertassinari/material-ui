@@ -23,6 +23,10 @@ const theme = createMuiTheme({
 </ThemeProvider>
 ```
 
+### Example
+
+{{"demo": "pages/guides/localization/Locales.js", "defaultCodeOpen": false}}
+
 ### Supported locales
 
 | Locale | BCP 47 language tag | Import name
@@ -63,9 +67,10 @@ You can [find the source](https://github.com/mui-org/material-ui/blob/master/pac
 
 To create your own translation, or to customise the English text, copy this file to your project, make any changes needed and import the locale from there. (Please do consider contributing new translations back to Material-UI by opening a pull request.)
 
-### Example
+## Format numbers
 
-{{"demo": "pages/guides/localization/Locales.js", "defaultCodeOpen": false}}
+The numbers are formated with the [Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat) API.
+You can customize the behavior by providing your own formater in `theme.localization.formatNumber`.
 
 ## RTL Support
 

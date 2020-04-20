@@ -1,4 +1,12 @@
+function formatNumber(locale) {
+  const numberFormater = new Intl.NumberFormat(locale);
+  return (number) => numberFormater.format(number);
+}
+
 export const azAZ = {
+  localization: {
+    formatNumber: formatNumber('az-AZ'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -6,7 +14,8 @@ export const azAZ = {
     MuiTablePagination: {
       backIconButtonText: 'Əvvəlki səhifə',
       labelRowsPerPage: 'Səhifəyə düşən sətrlər:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} dən ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} dən ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Növbəti səhifə',
     },
     MuiRating: {
@@ -57,6 +66,9 @@ export const azAZ = {
 };
 
 export const bgBG = {
+  localization: {
+    formatNumber: formatNumber('bg-BG'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -64,7 +76,8 @@ export const bgBG = {
     MuiTablePagination: {
       backIconButtonText: 'Предишна страница',
       labelRowsPerPage: 'Редове на страница:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} от ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} от ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Следваща страница',
     },
     MuiRating: {
@@ -106,6 +119,9 @@ export const bgBG = {
 };
 
 export const caES = {
+  localization: {
+    formatNumber: formatNumber('ca-ES'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -113,7 +129,8 @@ export const caES = {
     MuiTablePagination: {
       backIconButtonText: 'Pàgina anterior',
       labelRowsPerPage: 'Files per pàgina:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} de ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} de ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Següent pàgina',
     },
     MuiRating: {
@@ -155,6 +172,9 @@ export const caES = {
 };
 
 export const csCZ = {
+  localization: {
+    formatNumber: formatNumber('cs-CZ'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -162,7 +182,8 @@ export const csCZ = {
     MuiTablePagination: {
       backIconButtonText: 'Předchozí stránka',
       labelRowsPerPage: 'Řádků na stránce:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} z ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} z ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Další stránka',
     },
     MuiRating: {
@@ -212,6 +233,9 @@ export const csCZ = {
 };
 
 export const deDE = {
+  localization: {
+    formatNumber: formatNumber('de-DE'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -219,7 +243,8 @@ export const deDE = {
     MuiTablePagination: {
       backIconButtonText: 'Nächste Seite',
       labelRowsPerPage: 'Zeilen pro Seite:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} von ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} von ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Nächste Seite',
     },
     MuiRating: {
@@ -262,6 +287,9 @@ export const deDE = {
 
 // default
 export const enUS = {
+  localization: {
+    formatNumber: formatNumber('en-US'),
+  },
   /**
   props: {
     MuiBreadcrumbs: {
@@ -270,7 +298,8 @@ export const enUS = {
     MuiTablePagination: {
       backIconButtonText: 'Previous page',
       labelRowsPerPage: 'Rows per page:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} of ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+  `${from}-${to} of ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Next page',
     },
     MuiRating: {
@@ -313,6 +342,9 @@ export const enUS = {
 };
 
 export const esES = {
+  localization: {
+    formatNumber: formatNumber('es-ES'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -320,7 +352,8 @@ export const esES = {
     MuiTablePagination: {
       backIconButtonText: 'Página anterior',
       labelRowsPerPage: 'Filas por página:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} de ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} de ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Siguiente página',
     },
     MuiRating: {
@@ -362,6 +395,9 @@ export const esES = {
 };
 
 export const etEE = {
+  localization: {
+    formatNumber: formatNumber('et-EE'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -369,7 +405,8 @@ export const etEE = {
     MuiTablePagination: {
       backIconButtonText: 'Eelmine lehekülg',
       labelRowsPerPage: 'Ridu leheküljel:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} / ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} / ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Järgmine lehekülg',
     },
     MuiRating: {
@@ -411,6 +448,9 @@ export const etEE = {
 };
 
 export const faIR = {
+  localization: {
+    formatNumber: formatNumber('fa-IR'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -422,13 +462,11 @@ export const faIR = {
       backIconButtonText: 'صفحهٔ قبل',
       labelRowsPerPage: 'تعداد سطرهای هر صفحه:',
       labelDisplayedRows: ({ from, to, count }) =>
-        `${from.toLocaleString('fa-IR')}-${
-          to === -1 ? count.toLocaleString('fa-IR') : to.toLocaleString('fa-IR')
-        } از ${count.toLocaleString('fa-IR')}`,
+        `${from}-${to} از ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'صفحهٔ بعد',
     },
     MuiRating: {
-      getLabelText: (value) => `${value.toLocaleString('fa-IR')} ستاره`,
+      getLabelText: (value) => `${value} ستاره`,
       emptyLabelText: 'خالی',
     },
     MuiAutocomplete: {
@@ -445,7 +483,7 @@ export const faIR = {
       'aria-label': 'ناوبری صفحه',
       getItemAriaLabel: (type, page, selected) => {
         if (type === 'page') {
-          return `${selected ? '' : 'رفتن به '}صفحهٔ ${page.toLocaleString('fa-IR')}`;
+          return `${selected ? '' : 'رفتن به '}صفحهٔ ${page}`;
         }
         if (type === 'first') {
           return 'رفتن به اولین صفحه';
@@ -466,6 +504,9 @@ export const faIR = {
 };
 
 export const fiFI = {
+  localization: {
+    formatNumber: formatNumber('fi-FI'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -473,7 +514,8 @@ export const fiFI = {
     MuiTablePagination: {
       backIconButtonText: 'Edellinen sivu',
       labelRowsPerPage: 'Rivejä per sivu:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} / ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} / ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Seuraava sivu',
     },
     MuiRating: {
@@ -515,6 +557,9 @@ export const fiFI = {
 };
 
 export const frFR = {
+  localization: {
+    formatNumber: formatNumber('fr-FR'),
+  },
   props: {
     MuiBreadcrumbs: {
       expandText: 'Montrer le chemin',
@@ -522,7 +567,8 @@ export const frFR = {
     MuiTablePagination: {
       backIconButtonText: 'Page précédente',
       labelRowsPerPage: 'Lignes par page :',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} sur ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} sur ${count !== -1 ? count : `plus que ${to}`}`,
       nextIconButtonText: 'Page suivante',
     },
     MuiRating: {
@@ -564,6 +610,9 @@ export const frFR = {
 };
 
 export const heIL = {
+  localization: {
+    formatNumber: formatNumber('he-IL'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -572,7 +621,7 @@ export const heIL = {
       backIconButtonText: 'העמוד הקודם',
       labelRowsPerPage: 'שורות בעמוד:',
       labelDisplayedRows: ({ from, to, count }) =>
-        `${from}-${to === -1 ? count : to} מתוך ${count}`,
+        `${from}-${to} מתוך ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'העמוד הבא',
     },
     MuiRating: {
@@ -614,6 +663,9 @@ export const heIL = {
 };
 
 export const huHU = {
+  localization: {
+    formatNumber: formatNumber('hu-HU'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -621,7 +673,8 @@ export const huHU = {
     MuiTablePagination: {
       backIconButtonText: 'Előző oldal',
       labelRowsPerPage: 'Sorok száma:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} / ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} / ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Következő oldal',
     },
     MuiRating: {
@@ -663,6 +716,9 @@ export const huHU = {
 };
 
 export const hyAM = {
+  localization: {
+    formatNumber: formatNumber('hy-AM'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -670,7 +726,8 @@ export const hyAM = {
     MuiTablePagination: {
       backIconButtonText: 'Նախորդը',
       labelRowsPerPage: 'Տողեր մեկ էջում`',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} / ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} / ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Հաջորդը',
     },
     MuiRating: {
@@ -712,6 +769,9 @@ export const hyAM = {
 };
 
 export const idID = {
+  localization: {
+    formatNumber: formatNumber('id-ID'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -720,7 +780,7 @@ export const idID = {
       backIconButtonText: 'Halaman sebelumnya',
       labelRowsPerPage: 'Baris per halaman:',
       labelDisplayedRows: ({ from, to, count }) =>
-        `${from}-${to === -1 ? count : to} dari ${count}`,
+        `${from}-${to} dari ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Halaman selanjutnya',
     },
     MuiRating: {
@@ -762,6 +822,9 @@ export const idID = {
 };
 
 export const isIS = {
+  localization: {
+    formatNumber: formatNumber('is-IS'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -769,7 +832,8 @@ export const isIS = {
     MuiTablePagination: {
       backIconButtonText: 'Fyrri síða',
       labelRowsPerPage: 'Raðir á síðu:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} af ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} af ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Næsta síða',
     },
     MuiRating: {
@@ -811,6 +875,9 @@ export const isIS = {
 };
 
 export const itIT = {
+  localization: {
+    formatNumber: formatNumber('it-IT'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -818,7 +885,8 @@ export const itIT = {
     MuiTablePagination: {
       backIconButtonText: 'Pagina precedente',
       labelRowsPerPage: 'Righe per pagina:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} di ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} di ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Pagina successiva',
     },
     MuiRating: {
@@ -860,6 +928,9 @@ export const itIT = {
 };
 
 export const jaJP = {
+  localization: {
+    formatNumber: formatNumber('ja-JP'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -867,7 +938,8 @@ export const jaJP = {
     MuiTablePagination: {
       backIconButtonText: '前のページ',
       labelRowsPerPage: 'ページごとの行:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} of ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} of ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: '次のページ',
     },
     MuiRating: {
@@ -909,6 +981,9 @@ export const jaJP = {
 };
 
 export const koKR = {
+  localization: {
+    formatNumber: formatNumber('ko-KR'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -916,7 +991,8 @@ export const koKR = {
     MuiTablePagination: {
       backIconButtonText: '이전 페이지',
       labelRowsPerPage: '페이지 당 행:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} / ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} / ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: '다음 페이지',
     },
     MuiRating: {
@@ -934,6 +1010,9 @@ export const koKR = {
 };
 
 export const nlNL = {
+  localization: {
+    formatNumber: formatNumber('nl-NL'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -941,7 +1020,8 @@ export const nlNL = {
     MuiTablePagination: {
       backIconButtonText: 'Vorige pagina',
       labelRowsPerPage: 'Regels per pagina :',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} van ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} van ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Volgende pagina',
     },
     MuiRating: {
@@ -983,6 +1063,9 @@ export const nlNL = {
 };
 
 export const plPL = {
+  localization: {
+    formatNumber: formatNumber('pl-PL'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -990,7 +1073,8 @@ export const plPL = {
     MuiTablePagination: {
       backIconButtonText: 'Poprzednia strona',
       labelRowsPerPage: 'Wierszy na stronę:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} z ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} z ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Następna strona',
     },
     MuiRating: {
@@ -1043,6 +1127,9 @@ export const plPL = {
 };
 
 export const ptBR = {
+  localization: {
+    formatNumber: formatNumber('pt-BR'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -1050,7 +1137,8 @@ export const ptBR = {
     MuiTablePagination: {
       backIconButtonText: 'Página anterior',
       labelRowsPerPage: 'Linhas por página:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} de ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} de ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Próxima página',
     },
     MuiRating: {
@@ -1092,6 +1180,9 @@ export const ptBR = {
 };
 
 export const ptPT = {
+  localization: {
+    formatNumber: formatNumber('pt-PT'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -1099,7 +1190,8 @@ export const ptPT = {
     MuiTablePagination: {
       backIconButtonText: 'Página anterior',
       labelRowsPerPage: 'Linhas por página:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} de ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} de ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Próxima página',
     },
     MuiRating: {
@@ -1138,6 +1230,9 @@ export const ptPT = {
 };
 
 export const roRO = {
+  localization: {
+    formatNumber: formatNumber('ro-RO'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -1145,7 +1240,8 @@ export const roRO = {
     MuiTablePagination: {
       backIconButtonText: 'Pagina precedentă',
       labelRowsPerPage: 'Rânduri pe pagină:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} din ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} din ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Pagina următoare',
     },
     MuiRating: {
@@ -1187,6 +1283,9 @@ export const roRO = {
 };
 
 export const ruRU = {
+  localization: {
+    formatNumber: formatNumber('ru-RU'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -1194,7 +1293,8 @@ export const ruRU = {
     MuiTablePagination: {
       backIconButtonText: 'Предыдущая страница',
       labelRowsPerPage: 'Строк на странице:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} из ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} из ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Следующая страница',
     },
     MuiRating: {
@@ -1247,6 +1347,9 @@ export const ruRU = {
 };
 
 export const skSK = {
+  localization: {
+    formatNumber: formatNumber('sk-SK'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -1254,7 +1357,8 @@ export const skSK = {
     MuiTablePagination: {
       backIconButtonText: 'Predchádzajúca stránka',
       labelRowsPerPage: 'Riadkov na stránke:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} z ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} z ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Ďalšia stránka',
     },
     MuiRating: {
@@ -1304,6 +1408,9 @@ export const skSK = {
 };
 
 export const svSE = {
+  localization: {
+    formatNumber: formatNumber('sv-SE'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -1311,7 +1418,8 @@ export const svSE = {
     MuiTablePagination: {
       backIconButtonText: 'Föregående sida',
       labelRowsPerPage: 'Rader per sida:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} av ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} av ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Nästa sida',
     },
     MuiRating: {
@@ -1353,6 +1461,9 @@ export const svSE = {
 };
 
 export const trTR = {
+  localization: {
+    formatNumber: formatNumber('tr-TR'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -1361,7 +1472,7 @@ export const trTR = {
       backIconButtonText: 'Önceki sayfa',
       labelRowsPerPage: 'Sayfa başına satır:',
       labelDisplayedRows: ({ from, to, count }) =>
-        `${count} tanesinden ${from}-${to === -1 ? count : to}`,
+        `${from}-${to} tanesinden ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Sonraki sayfa',
     },
     MuiRating: {
@@ -1403,6 +1514,9 @@ export const trTR = {
 };
 
 export const ukUA = {
+  localization: {
+    formatNumber: formatNumber('uk-UA'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -1410,7 +1524,8 @@ export const ukUA = {
     MuiTablePagination: {
       backIconButtonText: 'Попередня сторінка',
       labelRowsPerPage: 'Рядків на сторінці:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} з ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} з ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Наступна сторінка',
     },
     MuiRating: {
@@ -1463,6 +1578,9 @@ export const ukUA = {
 };
 
 export const viVN = {
+  localization: {
+    formatNumber: formatNumber('vi-VN'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -1471,7 +1589,7 @@ export const viVN = {
       backIconButtonText: 'Trang trước',
       labelRowsPerPage: 'Số hàng mỗi trang:',
       labelDisplayedRows: ({ from, to, count }) =>
-        `${from}-${to === -1 ? count : to} trong ${count}`,
+        `${from}-${to} trong ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: 'Trang sau',
     },
     MuiRating: {
@@ -1513,6 +1631,9 @@ export const viVN = {
 };
 
 export const zhCN = {
+  localization: {
+    formatNumber: formatNumber('zh-CN'),
+  },
   props: {
     // MuiBreadcrumbs: {
     //   expandText: 'Show path',
@@ -1520,7 +1641,8 @@ export const zhCN = {
     MuiTablePagination: {
       backIconButtonText: '上一页',
       labelRowsPerPage: '每页行数:',
-      labelDisplayedRows: ({ from, to, count }) => `${from}-${to === -1 ? count : to} 的 ${count}`,
+      labelDisplayedRows: ({ from, to, count }) =>
+        `${from}-${to} 的 ${count !== -1 ? count : `more than ${to}`}`,
       nextIconButtonText: '下一页',
     },
     MuiRating: {
