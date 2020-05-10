@@ -74,6 +74,8 @@ You could also display a dialog when the user wants to add a new value.
 
 ## Disabled options
 
+The demo simulates a time picker of 30 minutes intervals with disabled slots.
+
 {{"demo": "pages/components/autocomplete/DisabledOptions.js"}}
 
 ## `useAutocomplete`

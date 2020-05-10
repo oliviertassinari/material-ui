@@ -31,12 +31,14 @@ export interface RenderGroupParams {
   children: React.ReactNode;
 }
 
-export interface RenderInputParams {
+export interface AutocompleteRenderInputParams {
+  ref: React.Ref<any>;
   id: string;
   disabled: boolean;
+  fullWidth: boolean;
+  size: 'small' | undefined;
   InputLabelProps: object;
   InputProps: {
-    ref: React.Ref<any>;
     className: string;
     startAdornment: React.ReactNode;
     endAdornment: React.ReactNode;
@@ -155,7 +157,7 @@ export interface AutocompleteProps<T>
    * @param {object} params
    * @returns {ReactNode}
    */
-  renderInput: (params: RenderInputParams) => React.ReactNode;
+  renderInput: (params: AutocompleteRenderInputParams) => React.ReactNode;
   /**
    * Render the option, use `getOptionLabel` by default.
    *

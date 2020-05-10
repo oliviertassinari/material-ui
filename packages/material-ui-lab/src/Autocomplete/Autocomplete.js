@@ -406,13 +406,13 @@ const Autocomplete = React.forwardRef(function Autocomplete(props, ref) {
         {...getRootProps(other)}
       >
         {renderInput({
+          ref: setAnchorEl,
           id,
           disabled,
           fullWidth: true,
           size: size === 'small' ? 'small' : undefined,
           InputLabelProps: getInputLabelProps(),
           InputProps: {
-            ref: setAnchorEl,
             className: classes.inputRoot,
             startAdornment,
             endAdornment: (
