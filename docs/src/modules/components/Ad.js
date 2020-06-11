@@ -149,7 +149,7 @@ function Ad(props) {
     }
   }
 
-  const getEventLabel = () => {
+  const getNetwork = () => {
     let label;
 
     if (children.type === AdCodeFund) {
@@ -172,8 +172,9 @@ function Ad(props) {
   };
 
   const ad = React.useContext(AdContext);
-  const eventLabel = getEventLabel();
-  const eventValue = `${adPlacement === 'body' ? ad.portal.placement : adPlacement}-${adShape}`;
+  const eventLabel = `${getNetwork()}-${
+    adPlacement === 'body' ? ad.portal.placement : adPlacement
+  }-${adShape}`;
 
   const timerAdblock = React.useRef();
 
@@ -249,7 +250,6 @@ function Ad(props) {
         eventCategory: 'ad',
         eventAction: 'display',
         eventLabel,
-        eventValue,
       });
 
       if (eventLabel.indexOf('in-house') === 0) {
@@ -258,7 +258,6 @@ function Ad(props) {
           eventCategory: 'in-house-ad',
           eventAction: 'display',
           eventLabel: children.props.ad.name,
-          eventValue,
         });
       }
     }, 2500);
@@ -266,35 +265,56 @@ function Ad(props) {
     return () => {
       clearTimeout(delay);
     };
-  }, [eventLabel, children.props.ad, eventValue]);
+  }, [eventLabel, children.props.ad]);
 
-  // Refresh the ad after 1m30.
+  const inactive = adPlacement !== placement;
+
+  const key = 0;
+  // Refresh the ad after 2m.
   // An approximation to trigger when coming back to the window tab "after a while".
-  const [key, setKey] = React.useState(0);
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setKey((currentKey) => currentKey + 1);
-    }, 90000);
+  // const [key, setKey] = React.useState(0);
+  // React.useEffect(() => {
+  //   if (inactive) {
+  //     return undefined;
+  //   }
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+  //   let interval;
 
-  if (adPlacement !== placement) {
+  //   const handlePause = () => {
+  //     clearInterval(interval);
+  //   }
+
+  //   const handleResume = () => {
+  //     clearInterval(interval);
+  //     interval = setInterval(() => {
+  //       setKey((currentKey) => currentKey + 1);
+  //     }, 2 * 60 * 1000);
+  //   }
+
+  //   handleResume();
+
+  //   window.addEventListener('focus', handleResume);
+  //   window.addEventListener('blur', handlePause);
+
+  //   return () => {
+  //     window.removeEventListener('focus', handleResume);
+  //     window.removeEventListener('blur', handlePause);
+  //     clearInterval(interval);
+  //   };
+  // }, [inactive]);
+
+  if (inactive) {
     return null;
   }
 
   return (
     <span
       className={clsx(classes.root, classes[`placement-${adPlacement}-${adShape}`])}
-      style={{ minHeight: adPlacement === 'body' ? minHeight : null }}
+      style={{ minHeight: `${adPlacement}-${adShape}` === 'body-image' ? minHeight : null }}
       data-ga-event-category="ad"
       data-ga-event-action="click"
       /* advertiser network */
       data-ga-event-label={eventLabel}
-      /* docs placement */
-      data-ga-event-value={eventValue}
     >
       {React.cloneElement(children, { key })}
     </span>
