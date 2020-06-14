@@ -204,6 +204,15 @@ export function ThemeProvider(props) {
           ...paletteColors,
         },
         spacing,
+        overrides: {
+          MuiTypography: {
+            display1: {
+              fontSize: '1rem',
+              fontFamily: 'Arial',
+              background: 'red',
+            },
+          }
+        },
       },
       dense ? highDensity : null,
       languageMap[userLanguage],

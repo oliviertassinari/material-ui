@@ -24,7 +24,7 @@ export interface TypographyTypeMap<P = {}, D extends React.ElementType = 'span'>
     gutterBottom?: boolean;
     noWrap?: boolean;
     paragraph?: boolean;
-    variant?: Variant | 'inherit';
+    variant?: Variant | 'inherit' | string;
     variantMapping?: Partial<Record<Variant, string>>;
   };
   defaultComponent: D;

@@ -14,6 +14,9 @@ export default function Types() {
 
   return (
     <div className={classes.root}>
+      <Typography variant="display1" component="h2" gutterBottom>
+        Display 1
+      </Typography>
       <Typography variant="h1" component="h2" gutterBottom>
         h1. Heading
       </Typography>

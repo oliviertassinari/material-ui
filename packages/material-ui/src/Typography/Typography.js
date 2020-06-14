@@ -219,7 +219,7 @@ Typography.propTypes = {
   /**
    * Applies the theme typography styles.
    */
-  variant: PropTypes.oneOf([
+  variant: PropTypes.oneOfType([PropTypes.oneOf([
     'h1',
     'h2',
     'h3',
@@ -235,7 +235,7 @@ Typography.propTypes = {
     'overline',
     'srOnly',
     'inherit',
-  ]),
+  ]), PropTypes.string]),
   /**
    * The component maps the variant prop to a range of different HTML element types.
    * For instance, subtitle1 to `<h6>`.
