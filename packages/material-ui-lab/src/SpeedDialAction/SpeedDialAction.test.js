@@ -7,8 +7,8 @@ import { createClientRender, fireEvent } from 'test/utils/createClientRender';
 import Icon from '@material-ui/core/Icon';
 import Tooltip from '@material-ui/core/Tooltip';
 import Fab from '@material-ui/core/Fab';
-import SpeedDialAction from './SpeedDialAction';
 import describeConformance from '@material-ui/core/test-utils/describeConformance';
+import SpeedDialAction from './SpeedDialAction';
 
 describe('<SpeedDialAction />', () => {
   let clock;
