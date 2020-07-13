@@ -22,5 +22,7 @@ ruleTester.run('no-hardcoded-labels', rule, {
     { code: '<button aria-label="a" />', errors: [{ messageId: 'literal-label' }] },
     { code: '<button>test<Component /></button>', errors: [{ messageId: 'literal-label' }] },
     { code: '<label>test<Component /></label>', errors: [{ messageId: 'literal-label' }] },
+    { code: "<label>{'< Back to blog'}</label>", errors: [{ messageId: 'literal-label' }] },
+    { code: '<label>{`< Back to blog`}</label>', errors: [{ messageId: 'literal-label' }] },
   ],
 });

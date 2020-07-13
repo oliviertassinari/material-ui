@@ -19,6 +19,17 @@ module.exports = {
     }
 
     return {
+      JSXExpressionContainer(node) {
+        const isTemplateLiteral = node.expression.type === 'TemplateLiteral';
+        const isStringLiteral =
+          node.expression.type === 'Literal' && typeof node.expression.value === 'string';
+
+        if (node.parent.type === 'JSXElement' && (isStringLiteral || isTemplateLiteral)) {
+          if (valueViolatesRule(node.value)) {
+            context.report({ messageId: 'literal-label', node });
+          }
+        }
+      },
       JSXText(node) {
         if (node.parent.type === 'JSXElement') {
           if (valueViolatesRule(node.value)) {
