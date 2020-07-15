@@ -110,5 +110,5 @@ export function AdCarbonInline(props) {
 }
 
 export default function AdCarbon() {
-  return adShape === 'image' ? <AdCarbonImage /> : <AdCarbonInline />;
+  return <AdCarbonImage />;
 }

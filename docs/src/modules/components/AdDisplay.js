@@ -36,7 +36,7 @@ export default function AdDisplay(props) {
 
   /* eslint-disable material-ui/no-hardcoded-labels, react/no-danger */
   return (
-    <span className={clsx(classes.root, 'ad-display', className)}>
+    <span className={clsx(classes.root, 'inhouse-display', className)}>
       <a href={ad.link} target="_blank" rel="noopener sponsored">
         <span className={classes.imageWrapper}>
           <img height="100" width="130" className={classes.image} src={ad.img} alt={ad.name} />
