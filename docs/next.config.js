@@ -71,6 +71,7 @@ module.exports = {
             'notistack',
             'material-table',
             '@material-ui/pickers',
+            '@material-ui/x-grid',
           ].includes(request);
 
           if (hasDependencyOnRepoPackages) {
@@ -98,7 +99,7 @@ module.exports = {
           // transpile 3rd party packages with dependencies in this repository
           {
             test: /\.(js|mjs|jsx)$/,
-            include: /node_modules(\/|\\)(material-table|notistack|@material-ui(\/|\\)pickers)/,
+            include: /node_modules(\/|\\)(material-table|notistack|@material-ui(\/|\\)(pickers|x-grid))/,
             use: {
               loader: 'babel-loader',
               options: {

@@ -46,10 +46,21 @@ module.exports = function setKarmaConfig(config) {
     preprocessors: {
       'test/karma.tests.js': ['webpack', 'sourcemap'],
     },
-    reporters: ['dots'],
+    // reporters: ['dots'],
     webpack: {
       mode: 'development',
       devtool: 'inline-source-map',
+      externals: [(context, request, callback) => {
+        const hasDependencyOnRepoPackages = [
+          '@material-ui/x-grid',
+        ].includes(request);
+
+        if (hasDependencyOnRepoPackages) {
+          return callback(null);
+        }
+
+        callback();
+      },],
       plugins: [
         new webpack.DefinePlugin({
           'process.env': {
@@ -60,6 +71,30 @@ module.exports = function setKarmaConfig(config) {
       ],
       module: {
         rules: [
+          // transpile 3rd party packages with dependencies in this repository
+          {
+            test: /\.(js)$/,
+            include: /node_modules(\/|\\)(@material-ui(\/|\\)(x-grid))/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                // on the server we use the transpiled commonJS build, on client ES6 modules
+                // babel needs to figure out in what context to parse the file
+                sourceType: 'unambiguous',
+                plugins: [
+                  [
+                    'babel-plugin-module-resolver',
+                    {
+                      alias: {
+                        '@material-ui/core': './packages/material-ui/src',
+                      },
+                      transformFunctions: ['require'],
+                    },
+                  ],
+                ],
+              },
+            },
+          },
           {
             test: /\.js$/,
             loader: 'babel-loader',
@@ -103,7 +138,7 @@ module.exports = function setKarmaConfig(config) {
 
   let newConfig = baseConfig;
 
-  if (browserStack.accessKey) {
+  if (browserStack.accessKey && false) {
     newConfig = {
       ...baseConfig,
       browserStack,
