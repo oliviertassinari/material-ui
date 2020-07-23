@@ -44,28 +44,6 @@ export const styles = (theme) => ({
   text: {
     padding: '6px 8px',
   },
-  /* Styles applied to the root element if `variant="text"` and `color="primary"`. */
-  textPrimary: {
-    color: theme.palette.primary.main,
-    '&:hover': {
-      backgroundColor: fade(theme.palette.primary.main, theme.palette.action.hoverOpacity),
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: 'transparent',
-      },
-    },
-  },
-  /* Styles applied to the root element if `variant="text"` and `color="secondary"`. */
-  textSecondary: {
-    color: theme.palette.secondary.main,
-    '&:hover': {
-      backgroundColor: fade(theme.palette.secondary.main, theme.palette.action.hoverOpacity),
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: 'transparent',
-      },
-    },
-  },
   /* Styles applied to the root element if `variant="outlined"`. */
   outlined: {
     padding: '5px 15px',
@@ -74,35 +52,6 @@ export const styles = (theme) => ({
     }`,
     '&$disabled': {
       border: `1px solid ${theme.palette.action.disabledBackground}`,
-    },
-  },
-  /* Styles applied to the root element if `variant="outlined"` and `color="primary"`. */
-  outlinedPrimary: {
-    color: theme.palette.primary.main,
-    border: `1px solid ${fade(theme.palette.primary.main, 0.5)}`,
-    '&:hover': {
-      border: `1px solid ${theme.palette.primary.main}`,
-      backgroundColor: fade(theme.palette.primary.main, theme.palette.action.hoverOpacity),
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: 'transparent',
-      },
-    },
-  },
-  /* Styles applied to the root element if `variant="outlined"` and `color="secondary"`. */
-  outlinedSecondary: {
-    color: theme.palette.secondary.main,
-    border: `1px solid ${fade(theme.palette.secondary.main, 0.5)}`,
-    '&:hover': {
-      border: `1px solid ${theme.palette.secondary.main}`,
-      backgroundColor: fade(theme.palette.secondary.main, theme.palette.action.hoverOpacity),
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: 'transparent',
-      },
-    },
-    '&$disabled': {
-      border: `1px solid ${theme.palette.action.disabled}`,
     },
   },
   /* Styles applied to the root element if `variant="contained"`. */
@@ -135,30 +84,46 @@ export const styles = (theme) => ({
       backgroundColor: theme.palette.action.disabledBackground,
     },
   },
-  /* Styles applied to the root element if `variant="contained"` and `color="primary"`. */
-  containedPrimary: {
-    color: theme.palette.primary.contrastText,
-    backgroundColor: theme.palette.primary.main,
-    '&:hover': {
-      backgroundColor: theme.palette.primary.dark,
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: theme.palette.primary.main,
+
+  ...Object.keys(theme.palette).filter(key => theme.palette[key] && theme.palette[key].main).reduce((acc, color) => {
+    return { 
+      ...acc,
+      [`outlined${capitalize(color)}`]: {
+        color: theme.palette[color].main,
+        border: `1px solid ${fade(theme.palette[color].main, 0.5)}`,
+        '&:hover': {
+          border: `1px solid ${theme.palette[color].main}`,
+          backgroundColor: fade(theme.palette[color].main, theme.palette.action.hoverOpacity),
+          // Reset on touch devices, it doesn't add specificity
+          '@media (hover: none)': {
+            backgroundColor: 'transparent',
+          },
+        },
       },
-    },
-  },
-  /* Styles applied to the root element if `variant="contained"` and `color="secondary"`. */
-  containedSecondary: {
-    color: theme.palette.secondary.contrastText,
-    backgroundColor: theme.palette.secondary.main,
-    '&:hover': {
-      backgroundColor: theme.palette.secondary.dark,
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: theme.palette.secondary.main,
+      [`contained${capitalize(color)}`]: {
+        color: theme.palette[color].contrastText,
+        backgroundColor: theme.palette[color].main,
+        '&:hover': {
+          backgroundColor: theme.palette[color].dark,
+          // Reset on touch devices, it doesn't add specificity
+          '@media (hover: none)': {
+            backgroundColor: theme.palette[color].main,
+          },
+        },
       },
-    },
-  },
+      [`text${capitalize(color)}`]: {
+        color: theme.palette[color].main,
+        '&:hover': {
+          backgroundColor: fade(theme.palette[color].main, theme.palette.action.hoverOpacity),
+          // Reset on touch devices, it doesn't add specificity
+          '@media (hover: none)': {
+            backgroundColor: 'transparent',
+          },
+        },
+      },
+    };
+  }, {}),
+  
   /* Styles applied to the root element if `disableElevation={true}`. */
   disableElevation: {
     boxShadow: 'none',
@@ -260,63 +225,6 @@ export const styles = (theme) => ({
   },
 });
 
-const isSupportedColor = (color) => {
-  const supportedColors = [
-    'primary',
-    'secondary',
-    'inherit',
-  ];
-
-  return supportedColors.indexOf(color) >= 0;
-}
-
-const useColorStyles = makeStyles((theme) => ({
-  containedColor: {
-    color: ({ color }) => theme.palette[color].contrastText,
-    backgroundColor: ({ color }) => theme.palette[color].main,
-    '&:hover': {
-      backgroundColor: ({ color }) => theme.palette[color].dark,
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: ({color}) => theme.palette[color].main,
-      },
-    },
-  },
-  textColor: { 
-    color: ({ color }) => theme.palette[color].main,
-    '&:hover': {
-      backgroundColor: ({ color }) => fade(theme.palette[color].main, theme.palette.action.hoverOpacity),
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: 'transparent',
-      },
-    },
-  },
-  outlinedColor: {
-    color: ({ color }) => theme.palette[color].main,
-    border: ({ color }) => `1px solid ${fade(theme.palette[color].main, 0.5)}`,
-    '&:hover': {
-      border: ({ color }) => `1px solid ${theme.palette[color].main}`,
-      backgroundColor: ({ color }) => fade(theme.palette[color].main, theme.palette.action.hoverOpacity),
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: 'transparent',
-      },
-    },
-  }
-}));
-
-const useDynamicButtonColor = ({ color, variant }) => {
-  if (!isSupportedColor(color)) {
-    console.log(`${variant}Color`);
-    console.log(useColorStyles({ color }));
-    return useColorStyles({ color })[`${variant}Color`];
-  }
-
-  return undefined;
-}
-
-
 const Button = React.forwardRef(function Button(props, ref) {
   const {
     children,
@@ -349,8 +257,6 @@ const Button = React.forwardRef(function Button(props, ref) {
     </span>
   );
 
-  const dynamicButtonClasses = useDynamicButtonColor({ color, variant });
-
   return (
     <ButtonBase
       className={clsx(
@@ -364,7 +270,6 @@ const Button = React.forwardRef(function Button(props, ref) {
           [classes.disabled]: disabled,
           [classes.fullWidth]: fullWidth,
           [classes.colorInherit]: color === 'inherit',
-          [dynamicButtonClasses]: dynamicButtonClasses,
         },
         className,
       )}

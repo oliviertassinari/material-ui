@@ -207,6 +207,7 @@ export function emphasize(color, coefficient = 0.15) {
  * @returns {string} A CSS color string. Hex input values are returned as rgb
  */
 export function fade(color, value) {
+  if(color === undefined) return "";
   color = decomposeColor(color);
   value = clamp(value);
 
