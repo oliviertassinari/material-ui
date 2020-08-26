@@ -12,6 +12,7 @@ async function exec(command, args) {
     env: process.env,
     stdio: 'pipe',
     encoding: 'utf-8',
+    maxBuffer: 1024 * 1024 * 2, // double the default
   };
 
   const results = await execFileAsync(command, args, options);
