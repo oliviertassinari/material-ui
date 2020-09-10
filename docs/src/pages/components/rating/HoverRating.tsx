@@ -2,6 +2,7 @@ import * as React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
+import StarIcon from '@material-ui/icons/Star';
 
 const labels: { [index: string]: string } = {
   0.5: 'Useless',
@@ -35,6 +36,7 @@ export default function HoverRating() {
         name="hover-feedback"
         value={value}
         precision={0.5}
+        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
         onChange={(event, newValue) => {
           setValue(newValue);
         }}
