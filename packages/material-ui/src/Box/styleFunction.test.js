@@ -186,4 +186,73 @@ describe('styleFunction', () => {
       });
     });
   });
+
+  it.only('KO 1.', () => {
+    let result;
+    expect(() => {
+      result = styleFunction({
+        theme: createMuiTheme({
+          spacing: [8, 16, 24],
+        }),
+        p: 2.5,
+      });
+    }).toWarnDev(['`p: 2.5` is not support']);
+    expect(result).to.deep.equal({ padding: 2.5 });
+  });
+
+  it.only('KO 2.', () => {
+    const result = styleFunction({
+      theme,
+      width: { color: 'red' },
+    });
+    expect(result).to.deep.equal({});
+  });
+
+  it.only('KO 3.', () => {
+    const result = styleFunction({
+      theme,
+      mx: { xs: 'auto', sm: 0 },
+      mb: { xs: 1, sm: 0 },
+    });
+    expect(result).to.deep.equal({
+      '@media (min-width:0px)': {
+        marginRight: 'auto',
+        marginLeft: 'auto',
+        marginBottom: '10px',
+      },
+      '@media (min-width:600px)': {
+        marginRight: '0px',
+        marginLeft: '0px',
+        marginBottom: '0px',
+      },
+    });
+  });
+
+  it.only('KO 6.', () => {
+    const result = styleFunction({
+      theme,
+      fontVariant: 'body1',
+    });
+    expect(result).to.deep.equal(theme.typography.body1);
+  });
+
+  it.only('KO 7.', () => {
+    const result = styleFunction({
+      theme,
+      borderRadius: 3,
+    });
+    expect(result).to.deep.equal({
+      borderRadius: 3 * theme.shape.borderRadius,
+    });
+  });
+
+  it.only('KO 9.', () => {
+    const result = styleFunction({
+      theme,
+      fontWeight: "regular",
+    });
+    expect(result).to.deep.equal({
+      fontWeight: 400,
+    });
+  });
 });

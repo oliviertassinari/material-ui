@@ -16,4 +16,17 @@ function ResponsiveTest() {
   >
     Object API
   </Box>;
+
+  // KO 4.
+  // @ts-expect-error wrong value for display
+  <Box display="yolo" />;
+  <Box
+    sx={{
+      // @ts-expect-error wrong value for display
+      display: 'yolo',
+    }}
+  />;
+
+  // KO 10.
+  <Box component="img" src="/fake.png" />;
 }
