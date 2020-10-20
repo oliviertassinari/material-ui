@@ -10,38 +10,36 @@ const rootEl = document.getElementById('root');
 
 const scenarioSuitePath = window.location.search.replace('?', '');
 
-const Component = requirePerfScenarios(scenarioSuitePath).default;
+const TestCase = requirePerfScenarios(scenarioSuitePath).default;
 
-const start = performance.now();
-let end;
-
-function TestCase(props) {
+function Profiler(props) {
+  const start = performance.now();
   const ref = React.useRef(null);
 
   React.useLayoutEffect(() => {
     // Force layout
     ref.current.getBoundingClientRect();
 
-    end = performance.now();
+    const end = performance.now();
     window.timing = {
       render: end - start,
     };
   });
 
   return (
-    <React.Profiler id={scenarioSuitePath} onRender={logReactMetrics}>
-      <div ref={ref}>{props.children}</div>
-    </React.Profiler>
+    <div ref={ref}>{props.children}</div>
   );
 }
 
-TestCase.propTypes = {
+Profiler.propTypes = {
   children: PropTypes.node,
 };
 
 ReactDOM.render(
-  <TestCase>
-    <Component />
-  </TestCase>,
+  <React.Profiler id={scenarioSuitePath} onRender={logReactMetrics}>
+    <Profiler>
+      <TestCase />
+    </Profiler>
+  </React.Profiler>,
   rootEl,
 );

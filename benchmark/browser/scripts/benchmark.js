@@ -96,6 +96,11 @@ async function run() {
 
   try {
     await runMeasures(browser, 'noop (baseline)', './noop/index.js', 10);
+    await runMeasures(browser, 'React primitives', './box-react-primitive/index.js', 10);
+    await runMeasures(browser, 'Cost of React', './box-cost-of-react/index.js', 10);
+    await runMeasures(browser, 'UI Box', './box-ui-box/index.js', 10);
+    await runMeasures(browser, 'Styled alternative ', './box-styled-alternative/index.js', 10);
+    await runMeasures(browser, 'Box emotion', './box-emotion/index.js', 10);
     await runMeasures(
       browser,
       'styled-components Box + @material-ui/system',
@@ -108,7 +113,6 @@ async function run() {
       './styled-components-box-styled-system/index.js',
       10,
     );
-    await runMeasures(browser, 'Box emotion', './box-emotion/index.js', 10);
     await runMeasures(browser, 'Box @material-ui/styles', './box-material-ui-styles/index.js', 10);
     await runMeasures(browser, 'Box styled-components', './box-styled-components/index.js', 10);
     await runMeasures(
