@@ -1,10 +1,10 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { useForkRef } from '@material-ui/core/utils';
 import { useUtils } from './hooks/useUtils';
-import CalendarIcon from '../svg-icons/CalendarIcon';
+import CalendarIcon from '../svg-icons/Calendar';
 import { useMaskedInput } from './hooks/useMaskedInput';
 import { DateInputProps, DateInputRefs } from './PureDateInput';
 import { getTextFieldAriaText } from './text-field-helper';

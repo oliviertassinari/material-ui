@@ -40,6 +40,9 @@ export const styles = (theme: Theme) =>
 
 export type PickersFadeTransitionGroupClassKey = keyof WithStyles<typeof styles>['classes'];
 
+/**
+ * @ignore - do not document.
+ */
 const FadeTransitionGroup: React.FC<FadeTransitionProps & WithStyles<typeof styles>> = ({
   classes,
   children,

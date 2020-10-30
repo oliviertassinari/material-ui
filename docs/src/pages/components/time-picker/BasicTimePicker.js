@@ -13,15 +13,19 @@ export default function BasicTimePicker() {
         <TimePicker
           label="12 hours"
           value={value}
-          onChange={(newValue) => setValue(newValue)}
-          renderInput={(props) => <TextField {...props} margin="normal" />}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
+          renderInput={(params) => <TextField {...params} margin="normal" />}
         />
         <TimePicker
           ampm={false}
           label="24 hours"
           value={value}
-          onChange={(newValue) => setValue(newValue)}
-          renderInput={(props) => <TextField {...props} margin="normal" />}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
+          renderInput={(params) => <TextField {...params} margin="normal" />}
         />
       </div>
     </LocalizationProvider>

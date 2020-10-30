@@ -14,8 +14,10 @@ export default function StaticTimePickerLandscape() {
         orientation="landscape"
         openTo="minutes"
         value={value}
-        onChange={(newValue) => setValue(newValue)}
-        renderInput={(props) => <TextField {...props} />}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
+        renderInput={(params) => <TextField {...params} />}
       />
     </LocalizationProvider>
   );

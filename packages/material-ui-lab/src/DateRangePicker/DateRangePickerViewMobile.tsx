@@ -30,6 +30,9 @@ interface DesktopDateRangeCalendarProps<TDate>
 
 const onlyDateView = ['date'] as ['date'];
 
+/**
+ * @ignore - internal component.
+ */
 export function DateRangePickerViewMobile<TDate>(props: DesktopDateRangeCalendarProps<TDate>) {
   const {
     changeMonth,

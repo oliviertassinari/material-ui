@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { TextFieldProps as MuiTextFieldPropsType } from '@material-ui/core/TextField';
 import { IconButtonProps } from '@material-ui/core/IconButton';
 import { InputAdornmentProps } from '@material-ui/core/InputAdornment';
@@ -46,20 +46,15 @@ export interface DateInputProps<TInputValue = ParsableDate, TDateValue = unknown
   mask?: string;
   /**
    * Regular expression to detect "accepted" symbols.
-   *
    * @default /\dap/gi
    */
   acceptRegex?: RegExp;
   /**
    * Props to pass to keyboard input adornment.
-   *
-   * @type {Partial<InputAdornmentProps>}
    */
   InputAdornmentProps?: Partial<InputAdornmentProps>;
   /**
    * Props to pass to keyboard adornment button.
-   *
-   * @type {Partial<IconButtonProps>}
    */
   OpenPickerButtonProps?: Partial<IconButtonProps>;
   /**
@@ -68,19 +63,16 @@ export interface DateInputProps<TInputValue = ParsableDate, TDateValue = unknown
   rifmFormatter?: (str: string) => string;
   /**
    * Do not render open picker button (renders only text field with validation).
-   *
    * @default false
    */
   disableOpenPicker?: boolean;
   /**
    * Disable mask on the keyboard, this should be used rarely. Consider passing proper mask for your format.
-   *
    * @default false
    */
   disableMaskedInput?: boolean;
   /**
    * Get aria-label text for control that opens picker dialog. Aria-label text must include selected date. @DateIOType
-   *
    * @default (value, utils) => `Choose date, selected date is ${utils.format(utils.date(value), 'fullDate')}`
    */
   getOpenDialogAriaText?: (value: ParsableDate, utils: MuiPickersAdapter) => string;

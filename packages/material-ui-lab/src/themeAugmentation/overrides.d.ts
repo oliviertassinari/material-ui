@@ -1,14 +1,3 @@
-import { TabListClassKey } from '../TabList';
-import { TabPanelClassKey } from '../TabPanel';
-import { TimelineClassKey } from '../Timeline';
-import { TimelineConnectorClassKey } from '../TimelineConnector';
-import { TimelineContentClassKey } from '../TimelineContent';
-import { TimelineDotClassKey } from '../TimelineDot';
-import { TimelineItemClassKey } from '../TimelineItem';
-import { TimelineOppositeContentClassKey } from '../TimelineOppositeContent';
-import { TimelineSeparatorClassKey } from '../TimelineSeparator';
-import { TreeItemClassKey } from '../TreeItem';
-import { TreeViewClassKey } from '../TreeView';
 import { ClockClassKey } from '../ClockPicker/Clock';
 import { ClockNumberClassKey } from '../ClockPicker/ClockNumber';
 import { ClockPointerClassKey } from '../ClockPicker/ClockPointer';
@@ -28,26 +17,25 @@ import { PickersModalDialogClassKey } from '../internal/pickers/PickersModalDial
 import { PickersMonthClassKey } from '../MonthPicker/PickersMonth';
 import { PickersPopperClassKey } from '../internal/pickers/PickersPopper';
 import { PickersSlideTransitionClassKey } from '../DayPicker/PickersSlideTransition';
-import { PickersToolbarClassKey } from '../internal/pickers/PickersToolbar';
 import { PickersToolbarButtonClassKey } from '../internal/pickers/PickersToolbarButton';
+import { PickersToolbarClassKey } from '../internal/pickers/PickersToolbar';
 import { PickersToolbarTextClassKey } from '../internal/pickers/PickersToolbarText';
 import { PickersYearClassKey } from '../YearPicker/PickersYear';
+import { TabListClassKey } from '../TabList';
+import { TabPanelClassKey } from '../TabPanel';
+import { TimelineClassKey } from '../Timeline';
+import { TimelineConnectorClassKey } from '../TimelineConnector';
+import { TimelineContentClassKey } from '../TimelineContent';
+import { TimelineDotClassKey } from '../TimelineDot';
+import { TimelineItemClassKey } from '../TimelineItem';
+import { TimelineOppositeContentClassKey } from '../TimelineOppositeContent';
+import { TimelineSeparatorClassKey } from '../TimelineSeparator';
 import { TimePickerToolbarClassKey } from '../TimePicker/TimePickerToolbar';
+import { TreeItemClassKey } from '../TreeItem';
+import { TreeViewClassKey } from '../TreeView';
 import { YearPickerClassKey } from '../YearPicker';
 
 export interface LabComponentNameToClassKey {
-  MuiTabList: TabListClassKey;
-  MuiTabPanel: TabPanelClassKey;
-  MuiTimeline: TimelineClassKey;
-  MuiTimelineConnector: TimelineConnectorClassKey;
-  MuiTimelineContent: TimelineContentClassKey;
-  MuiTimelineDot: TimelineDotClassKey;
-  MuiTimelineItem: TimelineItemClassKey;
-  MuiTimelineOppositeContent: TimelineOppositeContentClassKey;
-  MuiTimelineSeparator: TimelineSeparatorClassKey;
-  MuiTreeItem: TreeItemClassKey;
-  MuiTreeView: TreeViewClassKey;
-  // pickers sources
   MuiClock: ClockClassKey;
   MuiClockNumber: ClockNumberClassKey;
   MuiClockPointer: ClockPointerClassKey;
@@ -71,7 +59,18 @@ export interface LabComponentNameToClassKey {
   MuiPickersToolbarButton: PickersToolbarButtonClassKey;
   MuiPickersToolbarText: PickersToolbarTextClassKey;
   MuiPickersYear: PickersYearClassKey;
+  MuiTabList: TabListClassKey;
+  MuiTabPanel: TabPanelClassKey;
+  MuiTimeline: TimelineClassKey;
+  MuiTimelineConnector: TimelineConnectorClassKey;
+  MuiTimelineContent: TimelineContentClassKey;
+  MuiTimelineDot: TimelineDotClassKey;
+  MuiTimelineItem: TimelineItemClassKey;
+  MuiTimelineOppositeContent: TimelineOppositeContentClassKey;
+  MuiTimelineSeparator: TimelineSeparatorClassKey;
   MuiTimePickerToolbar: TimePickerToolbarClassKey;
+  MuiTreeItem: TreeItemClassKey;
+  MuiTreeView: TreeViewClassKey;
   MuiYearPicker: YearPickerClassKey;
 }
 

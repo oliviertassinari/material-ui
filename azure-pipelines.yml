@@ -99,7 +99,7 @@ steps:
 
   - script: |
       set -o pipefail
-      mkdir -p scripts/sizeSnapshot/build	
+      mkdir -p scripts/sizeSnapshot/build
       yarn docs:build | tee scripts/sizeSnapshot/build/docs.next
     displayName: 'build docs for size snapshot'
     env:

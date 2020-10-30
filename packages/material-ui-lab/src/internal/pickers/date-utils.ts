@@ -158,13 +158,11 @@ export const isEndOfRange = <TDate>(
 export interface DateValidationProps<TDate> {
   /**
    * Min selectable date. @DateIOType
-   *
    * @default Date(1900-01-01)
    */
   minDate?: TDate;
   /**
    * Max selectable date. @DateIOType
-   *
    * @default Date(2099-31-12)
    */
   maxDate?: TDate;
@@ -174,13 +172,11 @@ export interface DateValidationProps<TDate> {
   shouldDisableDate?: (day: TDate) => boolean;
   /**
    * Disable past dates.
-   *
    * @default false
    */
   disablePast?: boolean;
   /**
    * Disable future dates.
-   *
    * @default false
    */
   disableFuture?: boolean;

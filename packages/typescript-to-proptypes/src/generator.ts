@@ -3,6 +3,14 @@ import * as t from './types';
 
 export interface GenerateOptions {
   /**
+   * If source itself written in typescript prop-types disable prop-types validation
+   * by injecting propTypes as
+   * ```jsx
+   * .propTypes = { ... } as any
+   * ```
+   */
+  disableTypescriptPropTypesValidation?: boolean;
+  /**
    * Enable/disable the default sorting (ascending) or provide your own sort function
    * @default true
    */
@@ -59,15 +67,6 @@ export interface GenerateOptions {
    * - anything else by their stringified value using localeCompare
    */
   sortLiteralUnions?: (a: t.LiteralType, b: t.LiteralType) => number;
-
-  /**
-   * If source itself written in typescript prop-types disable prop-types validation
-   * by injecting propTypes as
-   * ```jsx
-   * .propTypes = { ... } as any
-   * ```
-   */
-  disableTypescriptPropTypesValidation?: boolean;
 }
 
 function defaultSortLiteralUnions(a: t.LiteralType, b: t.LiteralType) {
@@ -95,10 +94,10 @@ function defaultSortLiteralUnions(a: t.LiteralType, b: t.LiteralType) {
  */
 export function generate(component: t.Component, options: GenerateOptions = {}): string {
   const {
-    sortProptypes = true,
+    disableTypescriptPropTypesValidation = false,
     importedName = 'PropTypes',
     includeJSDoc = true,
-    disableTypescriptPropTypesValidation = false,
+    sortProptypes = true,
     previousPropTypesSource = new Map<string, string>(),
     reconcilePropTypes = (_prop: t.PropTypeDefinition, _previous: string, generated: string) =>
       generated,

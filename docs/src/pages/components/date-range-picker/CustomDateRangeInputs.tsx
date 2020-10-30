@@ -3,7 +3,7 @@ import DateFnsAdapter from '@material-ui/lab/dateAdapter/date-fns';
 import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
 import DateRangePicker, { DateRange } from '@material-ui/lab/DateRangePicker';
 
-export default function CustomRangeInputs() {
+export default function CustomDateRangeInputs() {
   const [selectedDate, handleDateChange] = React.useState<DateRange<Date>>([
     null,
     null,

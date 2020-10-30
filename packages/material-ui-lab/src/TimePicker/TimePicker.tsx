@@ -78,6 +78,9 @@ export type TimePickerGenericComponent<TWrapper extends SomeWrapper> = <TDate>(
   props: BaseTimePickerProps<TDate> & SharedPickerProps<TDate, TWrapper>,
 ) => JSX.Element;
 
+/**
+ * @ignore - do not document.
+ */
 /* @GeneratePropTypes */
 const TimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(ResponsiveWrapper, {
   name: 'MuiTimePicker',
@@ -87,35 +90,30 @@ const TimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Responsive
 (TimePicker as any).propTypes = {
   // ----------------------------- Warning --------------------------------
   // | These PropTypes are generated from the TypeScript type definitions |
-  // |    To update them edit typescript types and run "yarn proptypes"  |
+  // |     To update them edit TypeScript types and run "yarn proptypes"  |
   // ----------------------------------------------------------------------
   /**
    * Regular expression to detect "accepted" symbols.
-   *
    * @default /\dap/gi
    */
   acceptRegex: PropTypes.instanceOf(RegExp),
   /**
    * Enables keyboard listener for moving between days in calendar.
-   *
    * @default currentWrapper !== 'static'
    */
   allowKeyboardControl: PropTypes.bool,
   /**
    * 12h/24h view for hour selection clock.
-   *
    * @default true
    */
   ampm: PropTypes.bool,
   /**
    * Display ampm controls under the clock (instead of in the toolbar).
-   *
    * @default false
    */
   ampmInClock: PropTypes.bool,
   /**
    * "CANCEL" Text message
-   *
    * @default "CANCEL"
    */
   cancelText: PropTypes.node,
@@ -125,13 +123,11 @@ const TimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Responsive
   className: PropTypes.string,
   /**
    * If `true`, it shows the clear action in the picker dialog.
-   *
    * @default false
    */
   clearable: PropTypes.bool,
   /**
    * "CLEAR" Text message
-   *
    * @default "CLEAR"
    */
   clearText: PropTypes.node,
@@ -144,19 +140,16 @@ const TimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Responsive
   dateAdapter: PropTypes.object,
   /**
    * CSS media query when `Mobile` mode will be changed to `Desktop`.
-   *
    * @default "@media (pointer: fine)"
    * @example "@media (min-width: 720px)" or theme.breakpoints.up("sm")
    */
   desktopModeMediaQuery: PropTypes.string,
   /**
    * Props to be passed directly to material-ui [Dialog](https://material-ui.com/components/dialogs)
-   * @type {Partial<MuiDialogProps>}
    */
   DialogProps: PropTypes.object,
   /**
    * If `true` the popup or dialog will immediately close after submitting full date.
-   *
    * @default `true` for Desktop, `false` for Mobile (based on the chosen wrapper and `desktopModeMediaQuery` prop).
    */
   disableCloseOnSelect: PropTypes.bool,
@@ -166,19 +159,16 @@ const TimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Responsive
   disabled: PropTypes.bool,
   /**
    * Do not ignore date part when validating min/max time.
-   *
    * @default false
    */
   disableIgnoringDatePartForTimeValidation: PropTypes.bool,
   /**
    * Disable mask on the keyboard, this should be used rarely. Consider passing proper mask for your format.
-   *
    * @default false
    */
   disableMaskedInput: PropTypes.bool,
   /**
    * Do not render open picker button (renders only text field with validation).
-   *
    * @default false
    */
   disableOpenPicker: PropTypes.bool,
@@ -189,7 +179,6 @@ const TimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Responsive
   getClockLabelText: PropTypes.func,
   /**
    * Get aria-label text for control that opens picker dialog. Aria-label text must include selected date. @DateIOType
-   *
    * @default (value, utils) => `Choose date, selected date is ${utils.format(utils.date(value), 'fullDate')}`
    */
   getOpenDialogAriaText: PropTypes.func,
@@ -199,8 +188,6 @@ const TimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Responsive
   ignoreInvalidInputs: PropTypes.bool,
   /**
    * Props to pass to keyboard input adornment.
-   *
-   * @type {Partial<InputAdornmentProps>}
    */
   InputAdornmentProps: PropTypes.object,
   /**
@@ -243,13 +230,11 @@ const TimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Responsive
   ]),
   /**
    * Step over minutes.
-   *
    * @default 1
    */
   minutesStep: PropTypes.number,
   /**
    * "OK" button text.
-   *
    * @default "OK"
    */
   okText: PropTypes.node,
@@ -286,8 +271,6 @@ const TimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Responsive
   open: PropTypes.bool,
   /**
    * Props to pass to keyboard adornment button.
-   *
-   * @type {Partial<IconButtonProps>}
    */
   OpenPickerButtonProps: PropTypes.object,
   /**
@@ -330,7 +313,6 @@ const TimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Responsive
   shouldDisableTime: PropTypes.func,
   /**
    * If `true`, the today button will be displayed. **Note** that `showClearButton` has a higher priority.
-   *
    * @default false
    */
   showTodayButton: PropTypes.bool,
@@ -340,7 +322,6 @@ const TimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Responsive
   showToolbar: PropTypes.bool,
   /**
    * "TODAY" Text message
-   *
    * @default "TODAY"
    */
   todayText: PropTypes.node,
@@ -354,13 +335,11 @@ const TimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Responsive
   toolbarFormat: PropTypes.string,
   /**
    * Mobile picker date value placeholder, displaying if `value` === `null`.
-   *
    * @default "–"
    */
   toolbarPlaceholder: PropTypes.node,
   /**
    * Mobile picker title, displaying in the toolbar.
-   *
    * @default "SELECT DATE"
    */
   toolbarTitle: PropTypes.node,

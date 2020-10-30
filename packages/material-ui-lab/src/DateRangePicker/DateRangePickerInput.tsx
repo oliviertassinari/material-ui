@@ -62,6 +62,9 @@ export interface DateRangeInputProps
   validationError: DateRangeValidationError;
 }
 
+/**
+ * @ignore - internal component.
+ */
 const DateRangePickerInput: React.FC<DateRangeInputProps & WithStyles<typeof styles>> = ({
   classes,
   containerRef,

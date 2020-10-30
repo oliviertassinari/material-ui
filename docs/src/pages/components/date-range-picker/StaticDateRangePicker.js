@@ -13,7 +13,9 @@ export default function StaticDateRangePickerExample() {
       <StaticDateRangePicker
         displayStaticWrapperAs="desktop"
         value={value}
-        onChange={(newValue) => setValue(newValue)}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
         renderInput={(startProps, endProps) => (
           <React.Fragment>
             <TextField {...startProps} />

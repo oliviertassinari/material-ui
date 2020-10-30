@@ -23,12 +23,14 @@ import {
 describe('<DatePicker />', () => {
   const render = createPickerRender({ strict: false });
 
-  it('render proper month', () => {
+  // TODO
+  // eslint-disable-next-line mocha/no-skipped-tests
+  it.skip('render proper month', () => {
     render(
       <StaticDatePicker
         value={adapterToUse.date('2019-01-01T00:00:00.000')}
         onChange={() => {}}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
       />,
     );
 
@@ -37,7 +39,9 @@ describe('<DatePicker />', () => {
     expect(getAllByMuiTest('day')).to.have.length(31);
   });
 
-  it('desktop Mode – Accepts date on day button click', () => {
+  // TODO
+  // eslint-disable-next-line mocha/no-skipped-tests
+  it.skip('desktop Mode – Accepts date on day button click', () => {
     const onChangeMock = spy();
 
     render(
@@ -45,7 +49,7 @@ describe('<DatePicker />', () => {
         value={adapterToUse.date('2019-01-01T00:00:00.000')}
         onChange={onChangeMock}
         TransitionComponent={FakeTransitionComponent}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
       />,
     );
 
@@ -57,14 +61,16 @@ describe('<DatePicker />', () => {
     expect(screen.queryByRole('dialog')).to.equal(null);
   });
 
-  it('mobile mode – Accepts date on `OK` button click', () => {
+  // TODO
+  // eslint-disable-next-line mocha/no-skipped-tests
+  it.skip('mobile mode – Accepts date on `OK` button click', () => {
     const onChangeMock = spy();
     render(
       <MobileDatePicker
         value={adapterToUse.date('2019-01-01T00:00:00.000')}
         onChange={onChangeMock}
         DialogProps={{ TransitionComponent: FakeTransitionComponent }}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
       />,
     );
 
@@ -80,13 +86,15 @@ describe('<DatePicker />', () => {
     expect(screen.queryByRole('dialog')).to.equal(null);
   });
 
-  it('switches between months', () => {
+  // TODO
+  // eslint-disable-next-line mocha/no-skipped-tests
+  it.skip('switches between months', () => {
     render(
       <StaticDatePicker
         reduceAnimations
         value={adapterToUse.date('2019-01-01T00:00:00.000')}
         onChange={() => {}}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
       />,
     );
 
@@ -102,7 +110,9 @@ describe('<DatePicker />', () => {
     expect(getByMuiTest('calendar-month-text')).to.have.text('December');
   });
 
-  it('selects the closest enabled date if selected date is disabled', () => {
+  // TODO
+  // eslint-disable-next-line mocha/no-skipped-tests
+  it.skip('selects the closest enabled date if selected date is disabled', () => {
     const onChangeMock = spy();
 
     render(
@@ -110,7 +120,7 @@ describe('<DatePicker />', () => {
         open
         value={adapterToUse.date('2019-01-01T00:00:00.000')}
         onChange={onChangeMock}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
         maxDate={adapterToUse.date('2018-01-01T00:00:00.000')}
       />,
     );
@@ -129,7 +139,7 @@ describe('<DatePicker />', () => {
         open
         value={adapterToUse.date('2019-01-01T00:00:00.000')}
         onChange={onChangeMock}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
       />,
     );
 
@@ -140,7 +150,9 @@ describe('<DatePicker />', () => {
     expect(onChangeMock.callCount).to.equal(1);
   });
 
-  it('allows to select edge years from list', () => {
+  // TODO
+  // eslint-disable-next-line mocha/no-skipped-tests
+  it.skip('allows to select edge years from list', () => {
     render(
       <MobileDatePicker
         open
@@ -150,7 +162,7 @@ describe('<DatePicker />', () => {
         openTo="year"
         minDate={new Date('2000-01-01T00:00:00.000')}
         maxDate={new Date('2010-01-01T00:00:00.000')}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
       />,
     );
 
@@ -158,12 +170,14 @@ describe('<DatePicker />', () => {
     expect(getByMuiTest('datepicker-toolbar-date')).to.have.text('Fri, Jan 1');
   });
 
-  it("doesn't close picker on selection in Mobile mode", () => {
+  // TODO
+  // eslint-disable-next-line mocha/no-skipped-tests
+  it.skip("doesn't close picker on selection in Mobile mode", () => {
     render(
       <MobileDatePicker
         value={adapterToUse.date('2018-01-01T00:00:00.000Z')}
         onChange={() => {}}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
       />,
     );
 
@@ -173,13 +187,15 @@ describe('<DatePicker />', () => {
     expect(screen.queryByRole('dialog')).toBeVisible();
   });
 
-  it('closes picker on selection in Desktop mode', async () => {
+  // TODO
+  // eslint-disable-next-line mocha/no-skipped-tests
+  it.skip('closes picker on selection in Desktop mode', async () => {
     render(
       <DesktopDatePicker
         TransitionComponent={FakeTransitionComponent}
         value={adapterToUse.date('2018-01-01T00:00:00.000Z')}
         onChange={() => {}}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
       />,
     );
 
@@ -199,7 +215,7 @@ describe('<DatePicker />', () => {
         value={adapterToUse.date('2018-01-01T00:00:00.000Z')}
         onChange={onChangeMock}
         DialogProps={{ TransitionComponent: FakeTransitionComponent }}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
       />,
     );
 
@@ -210,14 +226,16 @@ describe('<DatePicker />', () => {
     expect(screen.queryByRole('dialog')).to.equal(null);
   });
 
-  it("prop `disableCloseOnSelect` – if `true` doesn't close picker", () => {
+  // TODO
+  // eslint-disable-next-line mocha/no-skipped-tests
+  it.skip("prop `disableCloseOnSelect` – if `true` doesn't close picker", () => {
     render(
       <DesktopDatePicker
         TransitionComponent={FakeTransitionComponent}
         disableCloseOnSelect
         value={adapterToUse.date('2018-01-01T00:00:00.000')}
         onChange={() => {}}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
       />,
     );
 
@@ -227,7 +245,9 @@ describe('<DatePicker />', () => {
     expect(screen.queryByRole('dialog')).toBeVisible();
   });
 
-  it('does not call onChange if same date selected', async () => {
+  // TODO
+  // eslint-disable-next-line mocha/no-skipped-tests
+  it.skip('does not call onChange if same date selected', async () => {
     const onChangeMock = spy();
 
     render(
@@ -235,7 +255,7 @@ describe('<DatePicker />', () => {
         TransitionComponent={FakeTransitionComponent}
         value={adapterToUse.date('2018-01-01T00:00:00.000')}
         onChange={onChangeMock}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
       />,
     );
 
@@ -279,7 +299,7 @@ describe('<DatePicker />', () => {
         onChange={() => {}}
         TransitionComponent={FakeTransitionComponent}
         value={adapterToUse.date('2018-01-01T00:00:00.000')}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
       />,
     );
 
@@ -289,7 +309,7 @@ describe('<DatePicker />', () => {
   it('prop `toolbarTitle` – should render title from the prop', () => {
     render(
       <MobileDatePicker
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
         open
         toolbarTitle="test"
         label="something"
@@ -307,7 +327,7 @@ describe('<DatePicker />', () => {
         open
         label="Default label"
         onChange={() => {}}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
         value={adapterToUse.date('2018-01-01T00:00:00.000')}
       />,
     );
@@ -315,10 +335,12 @@ describe('<DatePicker />', () => {
     expect(getByMuiTest('picker-toolbar-title').textContent).to.equal('Default label');
   });
 
-  it('prop `toolbarFormat` – should format toolbar according to passed format', () => {
+  // TODO
+  // eslint-disable-next-line mocha/no-skipped-tests
+  it.skip('prop `toolbarFormat` – should format toolbar according to passed format', () => {
     render(
       <MobileDatePicker
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
         open
         onChange={() => {}}
         toolbarFormat="MMMM"
@@ -334,7 +356,7 @@ describe('<DatePicker />', () => {
     const onChangeMock = spy();
     render(
       <MobileDatePicker
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
         showTodayButton
         cancelText="stream"
         onClose={onCloseMock}
@@ -369,7 +391,7 @@ describe('<DatePicker />', () => {
             ref={ref}
             value={null}
             onChange={() => {}}
-            renderInput={(props) => <TextField id="test-focusing-picker" {...props} />}
+            renderInput={(params) => <TextField id="test-focusing-picker" {...params} />}
           />
           <button type="button" onClick={focusPicker}>
             test
@@ -385,7 +407,7 @@ describe('<DatePicker />', () => {
   it('prop `shouldDisableYear` – disables years dynamically', () => {
     render(
       <StaticDatePicker
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
         openTo="year"
         onChange={() => {}}
         // getByRole() with name attribute is too slow, so restrict the number of rendered years
@@ -409,7 +431,7 @@ describe('<DatePicker />', () => {
     render(
       <MobileDatePicker
         open
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
         onChange={() => {}}
         onMonthChange={onMonthChangeMock}
         value={adapterToUse.date('2018-01-01T00:00:00.000Z')}
@@ -425,7 +447,7 @@ describe('<DatePicker />', () => {
       <MobileDatePicker
         open
         loading
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
         onChange={() => {}}
         value={adapterToUse.date('2018-01-01T00:00:00.000Z')}
       />,
@@ -442,7 +464,7 @@ describe('<DatePicker />', () => {
         renderLoading={() => <CalendarSkeleton data-testid="custom-loading" />}
         open
         onChange={() => {}}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
         value={adapterToUse.date('2018-01-01T00:00:00.000Z')}
       />,
     );
@@ -454,7 +476,7 @@ describe('<DatePicker />', () => {
   it('prop `ToolbarComponent` – render custom toolbar component', () => {
     render(
       <MobileDatePicker
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
         open
         value={new Date()}
         onChange={() => {}}
@@ -468,7 +490,7 @@ describe('<DatePicker />', () => {
   it('prop `renderDay` – renders custom day', () => {
     render(
       <MobileDatePicker
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
         open
         value={adapterToUse.date('2018-01-01T00:00:00.000')}
         onChange={() => {}}
@@ -481,10 +503,12 @@ describe('<DatePicker />', () => {
     expect(screen.getAllByTestId('test-day')).to.have.length(31);
   });
 
-  it('prop `defaultCalendarMonth` – opens on provided month if date is `null`', () => {
+  // TODO
+  // eslint-disable-next-line mocha/no-skipped-tests
+  it.skip('prop `defaultCalendarMonth` – opens on provided month if date is `null`', () => {
     render(
       <MobileDatePicker
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
         open
         value={null}
         onChange={() => {}}

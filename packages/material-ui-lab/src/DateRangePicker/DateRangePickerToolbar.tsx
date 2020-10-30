@@ -31,6 +31,9 @@ interface DateRangePickerToolbarProps
   setCurrentlySelectingRangeEnd: (newSelectingEnd: 'start' | 'end') => void;
 }
 
+/**
+ * @ignore - internal component.
+ */
 const DateRangePickerToolbar: React.FC<DateRangePickerToolbarProps & WithStyles<typeof styles>> = ({
   classes,
   currentlySelectingRangeEnd,

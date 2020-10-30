@@ -1,6 +1,9 @@
 ---
-title: TimePicker React component
+title: React Time Picker component
 components: TimePicker
+githubLabel: 'component: TimePicker'
+packageName: '@material-ui/lab'
+materialDesign: https://material.io/components/time-pickers
 ---
 
 # Time Picker
@@ -10,9 +13,11 @@ components: TimePicker
 Time pickers allow the user to select a single time (in the hours:minutes format).
 The selected time is indicated by the filled circle at the end of the clock hand.
 
+{{"component": "modules/components/ComponentLinkHeader.js"}}
+
 ## Requirements
 
-This component relies on the date management library of your choice. We support [date-fns](https://date-fns.org/), [luxon](https://moment.github.io/luxon/), [dayjs](https://github.com/iamkun/dayjs), [moment](https://momentjs.com/) and any other library via [date-io](https://github.com/dmtrKovalenko/date-io) adapter.
+This component relies on the date management library of your choice. We support [date-fns](https://date-fns.org/), [luxon](https://moment.github.io/luxon/), [dayjs](https://github.com/iamkun/dayjs), [moment](https://momentjs.com/) and any other library via a public `dateAdapter` interface.
 
 Please install any of these libraries and set up the right date engine by wrapping your root (or the highest level you wish the pickers to be available) with `LocalizationProvider`:
 
@@ -54,7 +59,7 @@ This can be customized with the `desktopModeMediaQuery` prop.
 
 {{"demo": "pages/components/time-picker/ResponsiveTimePickers.js"}}
 
-## Time Validation
+## Time validation
 
 {{"demo": "pages/components/time-picker/TimeValidationTimePicker.js"}}
 

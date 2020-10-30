@@ -13,8 +13,10 @@ export default function StaticDatePickerDemo() {
         displayStaticWrapperAs="desktop"
         openTo="year"
         value={value}
-        onChange={(newValue) => setValue(newValue)}
-        renderInput={(props) => <TextField {...props} />}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
+        renderInput={(params) => <TextField {...params} />}
       />
     </LocalizaitonProvider>
   );

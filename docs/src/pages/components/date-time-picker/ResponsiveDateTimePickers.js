@@ -16,18 +16,24 @@ export default function ResponsiveDateTimePickers() {
       <div style={{ width: 300 }}>
         <MobileDateTimePicker
           value={value}
-          onChange={(newValue) => setValue(newValue)}
-          renderInput={(props) => <TextField {...props} margin="normal" />}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
+          renderInput={(params) => <TextField {...params} margin="normal" />}
         />
         <DesktopDateTimePicker
           value={value}
-          onChange={(newValue) => setValue(newValue)}
-          renderInput={(props) => <TextField {...props} margin="normal" />}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
+          renderInput={(params) => <TextField {...params} margin="normal" />}
         />
         <DateTimePicker
-          renderInput={(props) => <TextField {...props} margin="normal" />}
+          renderInput={(params) => <TextField {...params} margin="normal" />}
           value={value}
-          onChange={(newValue) => setValue(newValue)}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
         />
       </div>
     </LocalizationProvider>

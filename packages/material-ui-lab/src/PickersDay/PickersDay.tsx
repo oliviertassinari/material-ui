@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import ButtonBase, { ButtonBaseProps } from '@material-ui/core/ButtonBase';
 import { createStyles, WithStyles, withStyles, Theme, alpha } from '@material-ui/core/styles';
@@ -128,6 +128,9 @@ export interface PickersDayProps<TDate> extends ExtendMui<ButtonBaseProps> {
   onDaySelect: (day: TDate, isFinish: PickerSelectionState) => void;
 }
 
+/**
+ * @ignore - do not document.
+ */
 const PickersDay = React.forwardRef(function PickersDay<TDate>(
   props: PickersDayProps<TDate> & WithStyles<typeof styles>,
   forwardedRef: React.Ref<HTMLButtonElement>,
@@ -263,7 +266,7 @@ export const areDayPropsEqual = (
 (PickersDay as any).propTypes = {
   // ----------------------------- Warning --------------------------------
   // | These PropTypes are generated from the TypeScript type definitions |
-  // |    To update them edit typescript types and run "yarn proptypes"  |
+  // |     To update them edit TypeScript types and run "yarn proptypes"  |
   // ----------------------------------------------------------------------
   /**
    * If `true`, keyboard control and focus management is enabled.

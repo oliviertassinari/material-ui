@@ -10,4 +10,8 @@ const DateRangeDelimiter = styled(Typography)(
 
 export type DateRangeDelimiterProps = React.ComponentProps<typeof DateRangeDelimiter>;
 
+/**
+ * TODO use Box
+ * @ignore - internal component.
+ */
 export default DateRangeDelimiter;

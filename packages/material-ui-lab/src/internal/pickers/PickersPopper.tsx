@@ -6,7 +6,7 @@ import Popper, { PopperProps as MuiPopperProps } from '@material-ui/core/Popper'
 import TrapFocus, {
   TrapFocusProps as MuiTrapFocusProps,
 } from '@material-ui/core/Unstable_TrapFocus';
-import { useForkRef } from '@material-ui/core/utils';
+import { useForkRef, setRef, useEventCallback } from '@material-ui/core/utils';
 import { createStyles, WithStyles, withStyles, Theme } from '@material-ui/core/styles';
 import { TransitionProps as MuiTransitionProps } from '@material-ui/core/transitions';
 import { useGlobalKeyDown, keycode } from './hooks/useKeyDown';
@@ -69,9 +69,16 @@ const PickersPopper: React.FC<PickerPopperProps & WithStyles<typeof styles>> = (
     TrapFocusProps,
   } = props;
   const paperRef = React.useRef<HTMLElement>(null);
-  const handlePopperRef = useForkRef(paperRef, containerRef);
+  const handleRef = useForkRef(paperRef, containerRef);
   const lastFocusedElementRef = React.useRef<Element | null>(null);
-  const popperOptions = React.useMemo(() => ({ onCreate: onOpen }), [onOpen]);
+
+  const handlePaperRef = useEventCallback((node) => {
+    setRef(handleRef, node);
+
+    if (node) {
+      onOpen();
+    }
+  });
 
   useGlobalKeyDown(open, {
     [keycode.Esc]: onClose,
@@ -114,7 +121,6 @@ const PickersPopper: React.FC<PickerPopperProps & WithStyles<typeof styles>> = (
       open={open}
       anchorEl={anchorEl}
       className={clsx(classes.root, PopperProps?.className)}
-      popperOptions={popperOptions}
       {...PopperProps}
     >
       {({ TransitionProps, placement }) => (
@@ -130,7 +136,7 @@ const PickersPopper: React.FC<PickerPopperProps & WithStyles<typeof styles>> = (
             <Paper
               tabIndex={-1}
               elevation={8}
-              ref={handlePopperRef}
+              ref={handlePaperRef}
               className={clsx(classes.paper, {
                 [classes.topTransition]: placement === 'top',
               })}

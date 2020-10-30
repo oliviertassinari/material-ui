@@ -65,7 +65,7 @@ describe('<TimePicker />', () => {
         openTo="minutes"
         value={adapterToUse.date('2018-01-01T00:00:00.000')}
         onChange={onChangeMock}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
       />,
     );
 
@@ -82,7 +82,7 @@ describe('<TimePicker />', () => {
         views={['hours', 'minutes', 'seconds']}
         value={adapterToUse.date('2018-01-01T00:00:00.000')}
         onChange={() => {}}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
       />,
     );
 
@@ -116,7 +116,7 @@ describe('<TimePicker />', () => {
           open
           value={time}
           onChange={(newTime) => setTime(newTime)}
-          renderInput={(props) => <TextField {...props} />}
+          renderInput={(params) => <TextField {...params} />}
         />
       );
     }
@@ -184,7 +184,7 @@ describe('<TimePicker />', () => {
     beforeEach(() => {
       render(
         <MobileTimePicker
-          renderInput={(props) => <TextField {...props} />}
+          renderInput={(params) => <TextField {...params} />}
           open
           ampm={false}
           onChange={() => {}}

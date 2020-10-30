@@ -48,13 +48,15 @@ export const styles = createStyles({
 
 export type YearPickerClassKey = keyof WithStyles<typeof styles>['classes'];
 
+/**
+ * @ignore - do not document.
+ */
 const YearPicker = React.forwardRef(function YearPicker<TDate>(
   props: YearPickerProps<TDate> & WithStyles<typeof styles>,
   ref: React.Ref<HTMLDivElement>,
 ) {
   const {
     allowKeyboardControl,
-    onFocusedDayChange,
     classes,
     className,
     date,
@@ -64,6 +66,7 @@ const YearPicker = React.forwardRef(function YearPicker<TDate>(
     maxDate,
     minDate,
     onChange,
+    onFocusedDayChange,
     onYearChange,
     shouldDisableYear,
   } = props;
@@ -174,7 +177,7 @@ const YearPicker = React.forwardRef(function YearPicker<TDate>(
 (YearPicker as any).propTypes = {
   // ----------------------------- Warning --------------------------------
   // | These PropTypes are generated from the TypeScript type definitions |
-  // |    To update them edit typescript types and run "yarn proptypes"  |
+  // |     To update them edit TypeScript types and run "yarn proptypes"  |
   // ----------------------------------------------------------------------
   /**
    * @ignore

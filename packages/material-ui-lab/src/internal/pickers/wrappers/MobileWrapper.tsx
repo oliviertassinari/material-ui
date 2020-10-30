@@ -1,6 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
-
+import PropTypes from 'prop-types';
 import { PureDateInput } from '../PureDateInput';
 import { WrapperVariantContext } from './WrapperVariantContext';
 import PickersModalDialog from '../PickersModalDialog';

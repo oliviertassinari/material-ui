@@ -43,6 +43,9 @@ export interface ClockPointerProps
   type: ClockViewType;
 }
 
+/**
+ * @ignore - internal component.
+ */
 class ClockPointer extends React.Component<ClockPointerProps> {
   static getDerivedStateFromProps = (
     nextProps: ClockPointerProps,

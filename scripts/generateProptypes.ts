@@ -24,6 +24,33 @@ enum GenerateResult {
  */
 const todoComponents: string[] = [];
 
+const todoComponentsTs: string[] = [
+  'ClockPicker',
+  'DatePicker',
+  'DateRangePicker',
+  'DateRangePickerDay',
+  'DayPicker',
+  'DesktopDatePicker',
+  'DesktopDateRangePicker',
+  'StaticDateRangePicker',
+  'MobileDateRangePicker',
+  'DateTimePicker',
+  'DesktopDateTimePicker',
+  'DesktopTimePicker',
+  'LocalizationProvider',
+  'MobileDatePicker',
+  'MobileDateTimePicker',
+  'MobileTimePicker',
+  'MonthPicker',
+  'PickersCalendarSkeleton',
+  'PickersDay',
+  'StaticDatePicker',
+  'StaticDateTimePicker',
+  'StaticTimePicker',
+  'TimePicker',
+  'YearPicker',
+];
+
 const useExternalPropsFromInputBase = [
   'autoComplete',
   'autoFocus',
@@ -171,6 +198,7 @@ async function generateProptypes(
   program: ttp.ts.Program,
   sourceFile: string,
   tsFile: string = sourceFile,
+  tsTodo: boolean = false,
 ): Promise<GenerateResult> {
   const proptypes = ttp.parseFromProgram(tsFile, program, {
     shouldResolveObject: ({ name }) => {
@@ -203,12 +231,15 @@ async function generateProptypes(
   const isTsFile = /(\.(ts|tsx))/.test(sourceFile);
 
   const unstyledFile = tsFile.endsWith('Styled.d.ts')
-    ? tsFile.replace(/Styled/g, 'Unstyled')
+    ? tsFile.replace(/material-ui-lab|material-ui-core|Styled/g, (matched) => {
+        if (matched === 'Styled') return 'Unstyled';
+        return 'material-ui-unstyled';
+      })
     : null;
 
   const result = ttp.inject(proptypes, sourceContent, {
+    disableTypescriptPropTypesValidation: tsTodo,
     removeExistingPropTypes: true,
-    disableTypescriptPropTypesValidation: isTsFile,
     babelOptions: {
       filename: sourceFile,
     },
@@ -324,18 +355,19 @@ async function run(argv: HandlerArgv) {
     .filter((filePath) => {
       return filePattern.test(filePath);
     });
-
   const program = ttp.createTSProgram(files, tsconfig);
 
   const promises = files.map<Promise<GenerateResult>>(async (tsFile) => {
-    const jsFile = tsFile.replace('.d.ts', '.js');
+    const componentName = path.basename(tsFile).replace(/(\.d\.ts|\.tsx|\.js)/g, '');
 
-    if (todoComponents.includes(path.basename(jsFile, '.js'))) {
+    if (todoComponents.includes(componentName)) {
       return GenerateResult.TODO;
     }
 
+    const tsTodo = todoComponentsTs.includes(componentName);
+
     const sourceFile = tsFile.includes('.d.ts') ? tsFile.replace('.d.ts', '.js') : tsFile;
-    return generateProptypes(program, sourceFile, tsFile);
+    return generateProptypes(program, sourceFile, tsFile, tsTodo);
   });
 
   const results = await Promise.all(promises);

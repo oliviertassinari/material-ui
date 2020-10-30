@@ -1,54 +1,50 @@
 import PropTypes from 'prop-types';
 import { makePickerWithStateAndWrapper } from '../internal/pickers/Picker/makePickerWithState';
 import {
-  BaseDatePickerProps,
-  datePickerConfig,
-  DatePickerGenericComponent,
-} from '../DatePicker/DatePicker';
-import { MobileWrapper } from '../internal/pickers/wrappers/Wrapper';
+  BaseTimePickerProps,
+  timePickerConfig,
+  TimePickerGenericComponent,
+} from '../TimePicker/TimePicker';
+import { DesktopWrapper } from '../internal/pickers/wrappers/Wrapper';
 
+/**
+ * @ignore - do not document.
+ */
 /* @GeneratePropTypes */
-const MobileDatePicker = makePickerWithStateAndWrapper<BaseDatePickerProps<unknown>>(
-  MobileWrapper,
-  {
-    name: 'MuiMobileDatePicker',
-    ...datePickerConfig,
-  },
-) as DatePickerGenericComponent<typeof MobileWrapper>;
+const DesktopTimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(DesktopWrapper, {
+  name: 'MuiDesktopTimePicker',
+  ...timePickerConfig,
+}) as TimePickerGenericComponent<typeof DesktopWrapper>;
 
-(MobileDatePicker as any).propTypes = {
+(DesktopTimePicker as any).propTypes = {
   // ----------------------------- Warning --------------------------------
   // | These PropTypes are generated from the TypeScript type definitions |
-  // |    To update them edit typescript types and run "yarn proptypes"  |
+  // |     To update them edit TypeScript types and run "yarn proptypes"  |
   // ----------------------------------------------------------------------
   /**
    * Regular expression to detect "accepted" symbols.
-   *
    * @default /\dap/gi
    */
   acceptRegex: PropTypes.instanceOf(RegExp),
   /**
-   * "CANCEL" Text message
-   *
-   * @default "CANCEL"
+   * Enables keyboard listener for moving between days in calendar.
+   * @default currentWrapper !== 'static'
    */
-  cancelText: PropTypes.node,
+  allowKeyboardControl: PropTypes.bool,
+  /**
+   * 12h/24h view for hour selection clock.
+   * @default true
+   */
+  ampm: PropTypes.bool,
+  /**
+   * Display ampm controls under the clock (instead of in the toolbar).
+   * @default false
+   */
+  ampmInClock: PropTypes.bool,
   /**
    * className applied to the root component.
    */
   className: PropTypes.string,
-  /**
-   * If `true`, it shows the clear action in the picker dialog.
-   *
-   * @default false
-   */
-  clearable: PropTypes.bool,
-  /**
-   * "CLEAR" Text message
-   *
-   * @default "CLEAR"
-   */
-  clearText: PropTypes.node,
   /**
    * Allows to pass configured date-io adapter directly. More info [here](https://next.material-ui-pickers.dev/guides/date-adapter-passing)
    * ```jsx
@@ -57,13 +53,7 @@ const MobileDatePicker = makePickerWithStateAndWrapper<BaseDatePickerProps<unkno
    */
   dateAdapter: PropTypes.object,
   /**
-   * Props to be passed directly to material-ui [Dialog](https://material-ui.com/components/dialogs)
-   * @type {Partial<MuiDialogProps>}
-   */
-  DialogProps: PropTypes.object,
-  /**
    * If `true` the popup or dialog will immediately close after submitting full date.
-   *
    * @default `true` for Desktop, `false` for Mobile (based on the chosen wrapper and `desktopModeMediaQuery` prop).
    */
   disableCloseOnSelect: PropTypes.bool,
@@ -72,20 +62,27 @@ const MobileDatePicker = makePickerWithStateAndWrapper<BaseDatePickerProps<unkno
    */
   disabled: PropTypes.bool,
   /**
+   * Do not ignore date part when validating min/max time.
+   * @default false
+   */
+  disableIgnoringDatePartForTimeValidation: PropTypes.bool,
+  /**
    * Disable mask on the keyboard, this should be used rarely. Consider passing proper mask for your format.
-   *
    * @default false
    */
   disableMaskedInput: PropTypes.bool,
   /**
    * Do not render open picker button (renders only text field with validation).
-   *
    * @default false
    */
   disableOpenPicker: PropTypes.bool,
   /**
+   * Accessible text that helps user to understand which time and view is selected.
+   * @default (view, time) => `Select ${view}. Selected time is ${format(time, 'fullTime')}`
+   */
+  getClockLabelText: PropTypes.func,
+  /**
    * Get aria-label text for control that opens picker dialog. Aria-label text must include selected date. @DateIOType
-   *
    * @default (value, utils) => `Choose date, selected date is ${utils.format(utils.date(value), 'fullDate')}`
    */
   getOpenDialogAriaText: PropTypes.func,
@@ -95,8 +92,6 @@ const MobileDatePicker = makePickerWithStateAndWrapper<BaseDatePickerProps<unkno
   ignoreInvalidInputs: PropTypes.bool,
   /**
    * Props to pass to keyboard input adornment.
-   *
-   * @type {Partial<InputAdornmentProps>}
    */
   InputAdornmentProps: PropTypes.object,
   /**
@@ -122,7 +117,7 @@ const MobileDatePicker = makePickerWithStateAndWrapper<BaseDatePickerProps<unkno
   /**
    * @ignore
    */
-  maxDate: PropTypes.oneOfType([
+  maxTime: PropTypes.oneOfType([
     PropTypes.any,
     PropTypes.instanceOf(Date),
     PropTypes.number,
@@ -131,18 +126,17 @@ const MobileDatePicker = makePickerWithStateAndWrapper<BaseDatePickerProps<unkno
   /**
    * @ignore
    */
-  minDate: PropTypes.oneOfType([
+  minTime: PropTypes.oneOfType([
     PropTypes.any,
     PropTypes.instanceOf(Date),
     PropTypes.number,
     PropTypes.string,
   ]),
   /**
-   * "OK" button text.
-   *
-   * @default "OK"
+   * Step over minutes.
+   * @default 1
    */
-  okText: PropTypes.node,
+  minutesStep: PropTypes.number,
   /**
    * Callback fired when date is accepted @DateIOType.
    */
@@ -176,8 +170,6 @@ const MobileDatePicker = makePickerWithStateAndWrapper<BaseDatePickerProps<unkno
   open: PropTypes.bool,
   /**
    * Props to pass to keyboard adornment button.
-   *
-   * @type {Partial<IconButtonProps>}
    */
   OpenPickerButtonProps: PropTypes.object,
   /**
@@ -185,9 +177,17 @@ const MobileDatePicker = makePickerWithStateAndWrapper<BaseDatePickerProps<unkno
    */
   openPickerIcon: PropTypes.node,
   /**
+   * First view to show.
+   */
+  openTo: PropTypes.oneOf(['date', 'hours', 'minutes', 'month', 'seconds', 'year']),
+  /**
    * Force rendering in particular orientation.
    */
   orientation: PropTypes.oneOf(['landscape', 'portrait']),
+  /**
+   * Popper props passed down to [Popper](https://material-ui.com/api/popper/) component.
+   */
+  PopperProps: PropTypes.object,
   /**
    * Make picker read only.
    */
@@ -206,21 +206,14 @@ const MobileDatePicker = makePickerWithStateAndWrapper<BaseDatePickerProps<unkno
    */
   rifmFormatter: PropTypes.func,
   /**
-   * If `true`, the today button will be displayed. **Note** that `showClearButton` has a higher priority.
-   *
-   * @default false
+   * Dynamically check if time is disabled or not.
+   * If returns `false` appropriate time point will ot be acceptable.
    */
-  showTodayButton: PropTypes.bool,
+  shouldDisableTime: PropTypes.func,
   /**
    * If `true`, show the toolbar even in desktop mode.
    */
   showToolbar: PropTypes.bool,
-  /**
-   * "TODAY" Text message
-   *
-   * @default "TODAY"
-   */
-  todayText: PropTypes.node,
   /**
    * Component that will replace default toolbar renderer.
    */
@@ -231,16 +224,18 @@ const MobileDatePicker = makePickerWithStateAndWrapper<BaseDatePickerProps<unkno
   toolbarFormat: PropTypes.string,
   /**
    * Mobile picker date value placeholder, displaying if `value` === `null`.
-   *
    * @default "–"
    */
   toolbarPlaceholder: PropTypes.node,
   /**
    * Mobile picker title, displaying in the toolbar.
-   *
    * @default "SELECT DATE"
    */
   toolbarTitle: PropTypes.node,
+  /**
+   * Custom component for popper [Transition](https://material-ui.com/components/transitions/#transitioncomponent-prop).
+   */
+  TransitionComponent: PropTypes.elementType,
   /**
    * The value of the picker.
    */
@@ -250,8 +245,12 @@ const MobileDatePicker = makePickerWithStateAndWrapper<BaseDatePickerProps<unkno
     PropTypes.number,
     PropTypes.string,
   ]),
+  /**
+   * Array of views to show.
+   */
+  views: PropTypes.arrayOf(PropTypes.oneOf(['hours', 'minutes', 'seconds']).isRequired),
 };
 
-export type MobileDatePickerProps = React.ComponentProps<typeof MobileDatePicker>;
+export type DesktopTimePickerProps = React.ComponentProps<typeof DesktopTimePicker>;
 
-export default MobileDatePicker;
+export default DesktopTimePicker;

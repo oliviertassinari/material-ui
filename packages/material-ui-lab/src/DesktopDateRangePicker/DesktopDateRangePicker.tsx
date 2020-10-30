@@ -2,6 +2,9 @@ import PropTypes from 'prop-types';
 import { makeDateRangePicker } from '../DateRangePicker/makeDateRangePicker';
 import DesktopTooltipWrapper from '../internal/pickers/wrappers/DesktopTooltipWrapper';
 
+/**
+ * @ignore - do not document.
+ */
 /* @GeneratePropTypes */
 const DesktopDateRangePicker = makeDateRangePicker(
   'MuiPickersDateRangePicker',
@@ -11,17 +14,15 @@ const DesktopDateRangePicker = makeDateRangePicker(
 (DesktopDateRangePicker as any).propTypes = {
   // ----------------------------- Warning --------------------------------
   // | These PropTypes are generated from the TypeScript type definitions |
-  // |    To update them edit typescript types and run "yarn proptypes"  |
+  // |     To update them edit TypeScript types and run "yarn proptypes"  |
   // ----------------------------------------------------------------------
   /**
    * Regular expression to detect "accepted" symbols.
-   *
    * @default /\dap/gi
    */
   acceptRegex: PropTypes.instanceOf(RegExp),
   /**
    * Enables keyboard listener for moving between days in calendar.
-   *
    * @default currentWrapper !== 'static'
    */
   allowKeyboardControl: PropTypes.bool,
@@ -32,7 +33,6 @@ const DesktopDateRangePicker = makeDateRangePicker(
   allowSameDateSelection: PropTypes.bool,
   /**
    * The number of calendars that render on **desktop**.
-   *
    * @default 2
    */
   calendars: PropTypes.oneOf([1, 2, 3]),
@@ -54,13 +54,11 @@ const DesktopDateRangePicker = makeDateRangePicker(
   defaultCalendarMonth: PropTypes.any,
   /**
    * if `true` after selecting `start` date  calendar will not automatically switch to the month of `end` date
-   *
    * @default false
    */
   disableAutoMonthSwitching: PropTypes.bool,
   /**
    * If `true` the popup or dialog will immediately close after submitting full date.
-   *
    * @default `true` for Desktop, `false` for Mobile (based on the chosen wrapper and `desktopModeMediaQuery` prop).
    */
   disableCloseOnSelect: PropTypes.bool,
@@ -70,7 +68,6 @@ const DesktopDateRangePicker = makeDateRangePicker(
   disabled: PropTypes.bool,
   /**
    * Disable future dates.
-   *
    * @default false
    */
   disableFuture: PropTypes.bool,
@@ -81,31 +78,26 @@ const DesktopDateRangePicker = makeDateRangePicker(
   disableHighlightToday: PropTypes.bool,
   /**
    * Disable mask on the keyboard, this should be used rarely. Consider passing proper mask for your format.
-   *
    * @default false
    */
   disableMaskedInput: PropTypes.bool,
   /**
    * Do not render open picker button (renders only text field with validation).
-   *
    * @default false
    */
   disableOpenPicker: PropTypes.bool,
   /**
    * Disable past dates.
-   *
    * @default false
    */
   disablePast: PropTypes.bool,
   /**
    * Text for end input label and toolbar placeholder.
-   *
    * @default "end"
    */
   endText: PropTypes.node,
   /**
    * Get aria-label text for control that opens picker dialog. Aria-label text must include selected date. @DateIOType
-   *
    * @default (value, utils) => `Choose date, selected date is ${utils.format(utils.date(value), 'fullDate')}`
    */
   getOpenDialogAriaText: PropTypes.func,
@@ -119,8 +111,6 @@ const DesktopDateRangePicker = makeDateRangePicker(
   ignoreInvalidInputs: PropTypes.bool,
   /**
    * Props to pass to keyboard input adornment.
-   *
-   * @type {Partial<InputAdornmentProps>}
    */
   InputAdornmentProps: PropTypes.object,
   /**
@@ -141,7 +131,6 @@ const DesktopDateRangePicker = makeDateRangePicker(
   label: PropTypes.node,
   /**
    * Props to pass to left arrow button.
-   * @type {Partial<IconButtonProps>}
    */
   leftArrowButtonProps: PropTypes.object,
   /**
@@ -155,7 +144,6 @@ const DesktopDateRangePicker = makeDateRangePicker(
   /**
    * If `true` renders `LoadingComponent` in calendar instead of calendar view.
    * Can be used to preload information and show it in calendar.
-   *
    * @default false
    */
   loading: PropTypes.bool,
@@ -165,13 +153,11 @@ const DesktopDateRangePicker = makeDateRangePicker(
   mask: PropTypes.string,
   /**
    * Max selectable date. @DateIOType
-   *
    * @default Date(2099-31-12)
    */
   maxDate: PropTypes.any,
   /**
    * Min selectable date. @DateIOType
-   *
    * @default Date(1900-01-01)
    */
   minDate: PropTypes.any,
@@ -216,8 +202,6 @@ const DesktopDateRangePicker = makeDateRangePicker(
   open: PropTypes.bool,
   /**
    * Props to pass to keyboard adornment button.
-   *
-   * @type {Partial<IconButtonProps>}
    */
   OpenPickerButtonProps: PropTypes.object,
   /**
@@ -238,7 +222,6 @@ const DesktopDateRangePicker = makeDateRangePicker(
   readOnly: PropTypes.bool,
   /**
    * Disable heavy animations.
-   *
    * @default /(android)/i.test(window.navigator.userAgent).
    */
   reduceAnimations: PropTypes.bool,
@@ -268,7 +251,6 @@ const DesktopDateRangePicker = makeDateRangePicker(
   renderInput: PropTypes.func.isRequired,
   /**
    * Component displaying when passed `loading` true.
-   *
    * @default () => "..."
    */
   renderLoading: PropTypes.func,
@@ -278,7 +260,6 @@ const DesktopDateRangePicker = makeDateRangePicker(
   rifmFormatter: PropTypes.func,
   /**
    * Props to pass to right arrow button.
-   * @type {Partial<IconButtonProps>}
    */
   rightArrowButtonProps: PropTypes.object,
   /**
@@ -309,7 +290,6 @@ const DesktopDateRangePicker = makeDateRangePicker(
   showToolbar: PropTypes.bool,
   /**
    * Text for start input label and toolbar placeholder.
-   *
    * @default "Start"
    */
   startText: PropTypes.node,
@@ -323,13 +303,11 @@ const DesktopDateRangePicker = makeDateRangePicker(
   toolbarFormat: PropTypes.string,
   /**
    * Mobile picker date value placeholder, displaying if `value` === `null`.
-   *
    * @default "–"
    */
   toolbarPlaceholder: PropTypes.node,
   /**
    * Mobile picker title, displaying in the toolbar.
-   *
    * @default "SELECT DATE"
    */
   toolbarTitle: PropTypes.node,

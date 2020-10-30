@@ -7,6 +7,9 @@ import {
 } from '../DateTimePicker/DateTimePicker';
 import { StaticWrapper } from '../internal/pickers/wrappers/Wrapper';
 
+/**
+ * @ignore - do not document.
+ */
 /* @GeneratePropTypes */
 const StaticDateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unknown>>(
   StaticWrapper,
@@ -19,17 +22,15 @@ const StaticDateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerPro
 (StaticDateTimePicker as any).propTypes = {
   // ----------------------------- Warning --------------------------------
   // | These PropTypes are generated from the TypeScript type definitions |
-  // |    To update them edit typescript types and run "yarn proptypes"  |
+  // |     To update them edit TypeScript types and run "yarn proptypes"  |
   // ----------------------------------------------------------------------
   /**
    * Regular expression to detect "accepted" symbols.
-   *
    * @default /\dap/gi
    */
   acceptRegex: PropTypes.instanceOf(RegExp),
   /**
    * Enables keyboard listener for moving between days in calendar.
-   *
    * @default currentWrapper !== 'static'
    */
   allowKeyboardControl: PropTypes.bool,
@@ -40,13 +41,11 @@ const StaticDateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerPro
   allowSameDateSelection: PropTypes.bool,
   /**
    * 12h/24h view for hour selection clock.
-   *
    * @default true
    */
   ampm: PropTypes.bool,
   /**
    * Display ampm controls under the clock (instead of in the toolbar).
-   *
    * @default false
    */
   ampmInClock: PropTypes.bool,
@@ -72,7 +71,6 @@ const StaticDateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerPro
   defaultCalendarMonth: PropTypes.any,
   /**
    * If `true` the popup or dialog will immediately close after submitting full date.
-   *
    * @default `true` for Desktop, `false` for Mobile (based on the chosen wrapper and `desktopModeMediaQuery` prop).
    */
   disableCloseOnSelect: PropTypes.bool,
@@ -82,7 +80,6 @@ const StaticDateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerPro
   disabled: PropTypes.bool,
   /**
    * Disable future dates.
-   *
    * @default false
    */
   disableFuture: PropTypes.bool,
@@ -93,31 +90,26 @@ const StaticDateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerPro
   disableHighlightToday: PropTypes.bool,
   /**
    * Do not ignore date part when validating min/max time.
-   *
    * @default false
    */
   disableIgnoringDatePartForTimeValidation: PropTypes.bool,
   /**
    * Disable mask on the keyboard, this should be used rarely. Consider passing proper mask for your format.
-   *
    * @default false
    */
   disableMaskedInput: PropTypes.bool,
   /**
    * Do not render open picker button (renders only text field with validation).
-   *
    * @default false
    */
   disableOpenPicker: PropTypes.bool,
   /**
    * Disable past dates.
-   *
    * @default false
    */
   disablePast: PropTypes.bool,
   /**
    * Force static wrapper inner components to be rendered in mobile or desktop mode
-   *
    * @default "static"
    */
   displayStaticWrapperAs: PropTypes.oneOf(['desktop', 'mobile']),
@@ -128,7 +120,6 @@ const StaticDateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerPro
   getClockLabelText: PropTypes.func,
   /**
    * Get aria-label text for control that opens picker dialog. Aria-label text must include selected date. @DateIOType
-   *
    * @default (value, utils) => `Choose date, selected date is ${utils.format(utils.date(value), 'fullDate')}`
    */
   getOpenDialogAriaText: PropTypes.func,
@@ -146,8 +137,6 @@ const StaticDateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerPro
   ignoreInvalidInputs: PropTypes.bool,
   /**
    * Props to pass to keyboard input adornment.
-   *
-   * @type {Partial<InputAdornmentProps>}
    */
   InputAdornmentProps: PropTypes.object,
   /**
@@ -168,7 +157,6 @@ const StaticDateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerPro
   label: PropTypes.node,
   /**
    * Props to pass to left arrow button.
-   * @type {Partial<IconButtonProps>}
    */
   leftArrowButtonProps: PropTypes.object,
   /**
@@ -182,7 +170,6 @@ const StaticDateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerPro
   /**
    * If `true` renders `LoadingComponent` in calendar instead of calendar view.
    * Can be used to preload information and show it in calendar.
-   *
    * @default false
    */
   loading: PropTypes.bool,
@@ -246,7 +233,6 @@ const StaticDateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerPro
   ]),
   /**
    * Step over minutes.
-   *
    * @default 1
    */
   minutesStep: PropTypes.number,
@@ -295,8 +281,6 @@ const StaticDateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerPro
   open: PropTypes.bool,
   /**
    * Props to pass to keyboard adornment button.
-   *
-   * @type {Partial<IconButtonProps>}
    */
   OpenPickerButtonProps: PropTypes.object,
   /**
@@ -317,7 +301,6 @@ const StaticDateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerPro
   readOnly: PropTypes.bool,
   /**
    * Disable heavy animations.
-   *
    * @default /(android)/i.test(window.navigator.userAgent).
    */
   reduceAnimations: PropTypes.bool,
@@ -336,7 +319,6 @@ const StaticDateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerPro
   renderInput: PropTypes.func.isRequired,
   /**
    * Component displaying when passed `loading` true.
-   *
    * @default () => "..."
    */
   renderLoading: PropTypes.func,
@@ -346,7 +328,6 @@ const StaticDateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerPro
   rifmFormatter: PropTypes.func,
   /**
    * Props to pass to right arrow button.
-   * @type {Partial<IconButtonProps>}
    */
   rightArrowButtonProps: PropTypes.object,
   /**
@@ -394,13 +375,11 @@ const StaticDateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerPro
   toolbarFormat: PropTypes.string,
   /**
    * Mobile picker date value placeholder, displaying if `value` === `null`.
-   *
    * @default "–"
    */
   toolbarPlaceholder: PropTypes.node,
   /**
    * Mobile picker title, displaying in the toolbar.
-   *
    * @default "SELECT DATE"
    */
   toolbarTitle: PropTypes.node,

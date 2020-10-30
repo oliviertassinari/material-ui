@@ -59,6 +59,9 @@ export const styles = (theme: Theme) =>
 
 export type PickersYearClassKey = keyof WithStyles<typeof styles>['classes'];
 
+/**
+ * @ignore - internal component.
+ */
 const PickersYear = React.forwardRef<HTMLButtonElement, YearProps & WithStyles<typeof styles>>(
   (props, forwardedRef) => {
     const {

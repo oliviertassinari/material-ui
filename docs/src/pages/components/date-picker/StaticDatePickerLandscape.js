@@ -15,8 +15,10 @@ export default function StaticDatePickerLandscape() {
         openTo="date"
         value={value}
         shouldDisableDate={isWeekend}
-        onChange={(newValue) => setValue(newValue)}
-        renderInput={(props) => <TextField {...props} />}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
+        renderInput={(params) => <TextField {...params} />}
       />
     </LocalizaitonProvider>
   );

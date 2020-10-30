@@ -50,6 +50,9 @@ export const styles = (theme: Theme) => {
 
 export type DateTimePickerTabsClassKey = keyof WithStyles<typeof styles>['classes'];
 
+/**
+ * @ignore - internal component.
+ */
 const DateTimePickerTabs: React.FC<DateTimePickerTabsProps & WithStyles<typeof styles>> = (
   props,
 ) => {

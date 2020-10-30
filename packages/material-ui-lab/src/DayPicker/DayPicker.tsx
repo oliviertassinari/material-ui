@@ -35,7 +35,6 @@ export interface DayPickerProps<TDate, TView extends DatePickerView = DatePicker
   onChange: PickerOnChangeFn<TDate>;
   /**
    * Disable heavy animations.
-   *
    * @default /(android)/i.test(window.navigator.userAgent).
    */
   reduceAnimations?: boolean;
@@ -87,6 +86,9 @@ export type DayPickerClassKey = keyof WithStyles<typeof styles>['classes'];
 export const defaultReduceAnimations =
   typeof navigator !== 'undefined' && /(android)/i.test(navigator.userAgent);
 
+/**
+ * @ignore - do not document.
+ */
 const DayPicker = React.forwardRef(function DayPicker<
   TDate extends any,
   TView extends DatePickerView = DatePickerView
@@ -245,11 +247,10 @@ const DayPicker = React.forwardRef(function DayPicker<
 (DayPicker as any).propTypes = {
   // ----------------------------- Warning --------------------------------
   // | These PropTypes are generated from the TypeScript type definitions |
-  // |    To update them edit typescript types and run "yarn proptypes"  |
+  // |     To update them edit TypeScript types and run "yarn proptypes"  |
   // ----------------------------------------------------------------------
   /**
    * Enables keyboard listener for moving between days in calendar.
-   *
    * @default currentWrapper !== 'static'
    */
   allowKeyboardControl: PropTypes.bool,
@@ -272,32 +273,27 @@ const DayPicker = React.forwardRef(function DayPicker<
   defaultCalendarMonth: PropTypes.any,
   /**
    * Disable future dates.
-   *
    * @default false
    */
   disableFuture: PropTypes.bool,
   /**
    * Disable past dates.
-   *
    * @default false
    */
   disablePast: PropTypes.bool,
   /**
    * If `true` renders `LoadingComponent` in calendar instead of calendar view.
    * Can be used to preload information and show it in calendar.
-   *
    * @default false
    */
   loading: PropTypes.bool,
   /**
    * Max selectable date. @DateIOType
-   *
    * @default Date(2099-31-12)
    */
   maxDate: PropTypes.any,
   /**
    * Min selectable date. @DateIOType
-   *
    * @default Date(1900-01-01)
    */
   minDate: PropTypes.any,
@@ -319,13 +315,11 @@ const DayPicker = React.forwardRef(function DayPicker<
   openTo: PropTypes.oneOf(['date', 'month', 'year']),
   /**
    * Disable heavy animations.
-   *
    * @default /(android)/i.test(window.navigator.userAgent).
    */
   reduceAnimations: PropTypes.bool,
   /**
    * Component displaying when passed `loading` true.
-   *
    * @default () => "..."
    */
   renderLoading: PropTypes.func,

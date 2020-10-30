@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
@@ -97,6 +97,9 @@ export const styles = (theme: Theme) =>
 
 export type ClockClassKey = keyof WithStyles<typeof styles>['classes'];
 
+/**
+ * @ignore - internal component.
+ */
 function Clock<TDate>(props: ClockProps<TDate> & WithStyles<typeof styles>) {
   const {
     allowKeyboardControl,

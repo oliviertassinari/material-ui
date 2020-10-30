@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { isRangeValid } from '../internal/pickers/date-utils';
 import { BasePickerProps } from '../internal/pickers/typings/BasePicker';
 import { calculateRangeChange } from './date-range-manager';
@@ -28,7 +28,6 @@ export interface ExportedDateRangePickerViewProps<TDate>
     Omit<BasePickerProps, 'value' | 'onChange'> {
   /**
    * if `true` after selecting `start` date  calendar will not automatically switch to the month of `end` date
-   *
    * @default false
    */
   disableAutoMonthSwitching?: boolean;
@@ -43,6 +42,9 @@ interface DateRangePickerViewProps<TDate>
   endText: React.ReactNode;
 }
 
+/**
+ * @ignore - internal component.
+ */
 export function DateRangePickerView<TDate>(props: DateRangePickerViewProps<TDate>) {
   const {
     calendars = 2,

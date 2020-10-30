@@ -1,25 +1,27 @@
 ---
-title: Date Range Picker React component
+title: React Date Range Picker component
 components: DateRangePicker
-githubLabel: component: DateRangePicker
-packageName: @material-ui/lab
+githubLabel: 'component: DateRangePicker'
+packageName: '@material-ui/lab'
 materialDesign: https://material.io/components/date-pickers
 ---
 
-# Date range picker
+# Date Range Picker [<span role="img" title="Enterprise">⚡️</span>](https://material-ui.com/store/items/material-ui-x/)
 
 <p class="description">Date pickers let the user select a range of dates.</p>
 
 > ⚠️⚠️ The date range picker is unstable, and **not suitable** for usage in production. ⚠️⚠️
-
+> <br /><br />
 > The date range picker will be made available in the coming months for production use as part of a paid extension (commercial license) to the community edition (MIT license) of Material-UI.
 > This paid extension will include advanced components (rich data grid, date range picker, tree view drag & drop, etc.). [Early access](https://material-ui.com/store/items/material-ui-x/) starts at an affordable price.
 
-The [date range pickers](https://material.io/components/pickers/) let the user select a range of dates.
+The date range pickers let the user select a range of dates.
+
+{{"component": "modules/components/ComponentLinkHeader.js"}}
 
 ## Requirements
 
-This component relies on the date management library of your choice. We support [date-fns](https://date-fns.org/), [luxon](https://moment.github.io/luxon/), [dayjs](https://github.com/iamkun/dayjs), [moment](https://momentjs.com/) and any other library via [date-io](https://github.com/dmtrKovalenko/date-io) adapter.
+This component relies on the date management library of your choice. We support [date-fns](https://date-fns.org/), [luxon](https://moment.github.io/luxon/), [dayjs](https://github.com/iamkun/dayjs), [moment](https://momentjs.com/) and any other library via a public `dateAdapter` interface.
 
 Please install any of these libraries and set up the right date engine by wrapping your root (or the highest level you wish the pickers to be available) with `LocalizationProvider`:
 

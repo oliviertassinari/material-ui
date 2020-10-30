@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { DateIOFormats, IUtils } from '@date-io/core/IUtils';
 
 export type MuiPickersAdapter<TDate = unknown> = IUtils<TDate>;
@@ -23,6 +23,9 @@ export interface LocalizationProviderProps {
   locale?: string | object;
 }
 
+/**
+ * @ignore - do not document.
+ */
 const LocalizationProvider: React.FC<LocalizationProviderProps> = (props) => {
   const { children, dateAdapter: Utils, dateFormats, dateLibInstance, locale } = props;
   const utils = React.useMemo(
@@ -38,7 +41,7 @@ const LocalizationProvider: React.FC<LocalizationProviderProps> = (props) => {
 (LocalizationProvider as any).propTypes = {
   // ----------------------------- Warning --------------------------------
   // | These PropTypes are generated from the TypeScript type definitions |
-  // |    To update them edit typescript types and run "yarn proptypes"  |
+  // |     To update them edit TypeScript types and run "yarn proptypes"  |
   // ----------------------------------------------------------------------
   /**
    * @ignore

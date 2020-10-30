@@ -20,7 +20,10 @@ export interface ClockPickerStandaloneProps<TDate>
   className?: string;
 }
 
-/** Wrapping public API for better standalone usage of './ClockPicker' */
+/**
+ * Wrapping public API for better standalone usage of './ClockPicker'
+ * @ignore - internal component.
+ */
 export default React.forwardRef(function ClockPickerStandalone<TDate>(
   props: ClockPickerStandaloneProps<TDate>,
   ref: React.Ref<HTMLDivElement>,

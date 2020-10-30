@@ -50,21 +50,25 @@ export type TimePickerToolbarClassKey = keyof WithStyles<typeof styles>['classes
 
 const clockTypographyVariant = 'h3';
 
-const TimePickerToolbar: React.FC<ToolbarComponentProps & WithStyles<typeof styles>> = ({
-  ampm,
-  ampmInClock,
-  date,
-  classes,
-  isLandscape,
-  isMobileKeyboardViewOpen,
-  onChange,
-  openView,
-  setOpenView,
-  toggleMobileKeyboardView,
-  toolbarTitle = 'SELECT TIME',
-  views,
-  ...other
-}) => {
+/**
+ * @ignore - internal component.
+ */
+const TimePickerToolbar: React.FC<ToolbarComponentProps & WithStyles<typeof styles>> = (props) => {
+  const {
+    ampm,
+    ampmInClock,
+    classes,
+    date,
+    isLandscape,
+    isMobileKeyboardViewOpen,
+    onChange,
+    openView,
+    setOpenView,
+    toggleMobileKeyboardView,
+    toolbarTitle = 'SELECT TIME',
+    views,
+    ...other
+  } = props;
   const utils = useUtils();
   const theme = useTheme();
   const showAmPmControl = Boolean(ampm && !ampmInClock);

@@ -1,47 +1,34 @@
 import PropTypes from 'prop-types';
 import { makePickerWithStateAndWrapper } from '../internal/pickers/Picker/makePickerWithState';
 import {
-  BaseTimePickerProps,
-  timePickerConfig,
-  TimePickerGenericComponent,
-} from '../TimePicker/TimePicker';
+  BaseDatePickerProps,
+  datePickerConfig,
+  DatePickerGenericComponent,
+} from '../DatePicker/DatePicker';
 import { StaticWrapper } from '../internal/pickers/wrappers/Wrapper';
 
+/**
+ * @ignore - do not document.
+ */
 /* @GeneratePropTypes */
-const StaticTimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(StaticWrapper, {
-  name: 'MuiStaticTimePicker',
-  ...timePickerConfig,
-}) as TimePickerGenericComponent<typeof StaticWrapper>;
+const StaticDatePicker = makePickerWithStateAndWrapper<BaseDatePickerProps<unknown>>(
+  StaticWrapper,
+  {
+    name: 'MuiStaticDatePicker',
+    ...datePickerConfig,
+  },
+) as DatePickerGenericComponent<typeof StaticWrapper>;
 
-(StaticTimePicker as any).propTypes = {
+(StaticDatePicker as any).propTypes = {
   // ----------------------------- Warning --------------------------------
   // | These PropTypes are generated from the TypeScript type definitions |
-  // |    To update them edit typescript types and run "yarn proptypes"  |
+  // |     To update them edit TypeScript types and run "yarn proptypes"  |
   // ----------------------------------------------------------------------
   /**
    * Regular expression to detect "accepted" symbols.
-   *
    * @default /\dap/gi
    */
   acceptRegex: PropTypes.instanceOf(RegExp),
-  /**
-   * Enables keyboard listener for moving between days in calendar.
-   *
-   * @default currentWrapper !== 'static'
-   */
-  allowKeyboardControl: PropTypes.bool,
-  /**
-   * 12h/24h view for hour selection clock.
-   *
-   * @default true
-   */
-  ampm: PropTypes.bool,
-  /**
-   * Display ampm controls under the clock (instead of in the toolbar).
-   *
-   * @default false
-   */
-  ampmInClock: PropTypes.bool,
   /**
    * className applied to the root component.
    */
@@ -55,7 +42,6 @@ const StaticTimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Stat
   dateAdapter: PropTypes.object,
   /**
    * If `true` the popup or dialog will immediately close after submitting full date.
-   *
    * @default `true` for Desktop, `false` for Mobile (based on the chosen wrapper and `desktopModeMediaQuery` prop).
    */
   disableCloseOnSelect: PropTypes.bool,
@@ -64,37 +50,22 @@ const StaticTimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Stat
    */
   disabled: PropTypes.bool,
   /**
-   * Do not ignore date part when validating min/max time.
-   *
-   * @default false
-   */
-  disableIgnoringDatePartForTimeValidation: PropTypes.bool,
-  /**
    * Disable mask on the keyboard, this should be used rarely. Consider passing proper mask for your format.
-   *
    * @default false
    */
   disableMaskedInput: PropTypes.bool,
   /**
    * Do not render open picker button (renders only text field with validation).
-   *
    * @default false
    */
   disableOpenPicker: PropTypes.bool,
   /**
    * Force static wrapper inner components to be rendered in mobile or desktop mode
-   *
    * @default "static"
    */
   displayStaticWrapperAs: PropTypes.oneOf(['desktop', 'mobile']),
   /**
-   * Accessible text that helps user to understand which time and view is selected.
-   * @default (view, time) => `Select ${view}. Selected time is ${format(time, 'fullTime')}`
-   */
-  getClockLabelText: PropTypes.func,
-  /**
    * Get aria-label text for control that opens picker dialog. Aria-label text must include selected date. @DateIOType
-   *
    * @default (value, utils) => `Choose date, selected date is ${utils.format(utils.date(value), 'fullDate')}`
    */
   getOpenDialogAriaText: PropTypes.func,
@@ -104,8 +75,6 @@ const StaticTimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Stat
   ignoreInvalidInputs: PropTypes.bool,
   /**
    * Props to pass to keyboard input adornment.
-   *
-   * @type {Partial<InputAdornmentProps>}
    */
   InputAdornmentProps: PropTypes.object,
   /**
@@ -131,7 +100,7 @@ const StaticTimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Stat
   /**
    * @ignore
    */
-  maxTime: PropTypes.oneOfType([
+  maxDate: PropTypes.oneOfType([
     PropTypes.any,
     PropTypes.instanceOf(Date),
     PropTypes.number,
@@ -140,18 +109,12 @@ const StaticTimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Stat
   /**
    * @ignore
    */
-  minTime: PropTypes.oneOfType([
+  minDate: PropTypes.oneOfType([
     PropTypes.any,
     PropTypes.instanceOf(Date),
     PropTypes.number,
     PropTypes.string,
   ]),
-  /**
-   * Step over minutes.
-   *
-   * @default 1
-   */
-  minutesStep: PropTypes.number,
   /**
    * Callback fired when date is accepted @DateIOType.
    */
@@ -185,18 +148,12 @@ const StaticTimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Stat
   open: PropTypes.bool,
   /**
    * Props to pass to keyboard adornment button.
-   *
-   * @type {Partial<IconButtonProps>}
    */
   OpenPickerButtonProps: PropTypes.object,
   /**
    * Icon displaying for open picker button.
    */
   openPickerIcon: PropTypes.node,
-  /**
-   * First view to show.
-   */
-  openTo: PropTypes.oneOf(['date', 'hours', 'minutes', 'month', 'seconds', 'year']),
   /**
    * Force rendering in particular orientation.
    */
@@ -219,11 +176,6 @@ const StaticTimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Stat
    */
   rifmFormatter: PropTypes.func,
   /**
-   * Dynamically check if time is disabled or not.
-   * If returns `false` appropriate time point will ot be acceptable.
-   */
-  shouldDisableTime: PropTypes.func,
-  /**
    * If `true`, show the toolbar even in desktop mode.
    */
   showToolbar: PropTypes.bool,
@@ -237,13 +189,11 @@ const StaticTimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Stat
   toolbarFormat: PropTypes.string,
   /**
    * Mobile picker date value placeholder, displaying if `value` === `null`.
-   *
    * @default "–"
    */
   toolbarPlaceholder: PropTypes.node,
   /**
    * Mobile picker title, displaying in the toolbar.
-   *
    * @default "SELECT DATE"
    */
   toolbarTitle: PropTypes.node,
@@ -256,12 +206,8 @@ const StaticTimePicker = makePickerWithStateAndWrapper<BaseTimePickerProps>(Stat
     PropTypes.number,
     PropTypes.string,
   ]),
-  /**
-   * Array of views to show.
-   */
-  views: PropTypes.arrayOf(PropTypes.oneOf(['hours', 'minutes', 'seconds']).isRequired),
 };
 
-export type StaticTimePickerProps = React.ComponentProps<typeof StaticTimePicker>;
+export type StaticDatePickerProps = React.ComponentProps<typeof StaticDatePicker>;
 
-export default StaticTimePicker;
+export default StaticDatePicker;

@@ -12,6 +12,9 @@ interface GetHourNumbersOptions {
   utils: MuiPickersAdapter;
 }
 
+/**
+ * @ignore - internal component.
+ */
 export const getHourNumbers = ({
   ampm,
   date,

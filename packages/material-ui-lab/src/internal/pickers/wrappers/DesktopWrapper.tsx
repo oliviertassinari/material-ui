@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { WrapperVariantContext } from './WrapperVariantContext';
 import { KeyboardDateInput } from '../KeyboardDateInput';
 import PickersPopper from '../PickersPopper';

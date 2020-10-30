@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { createStyles, WithStyles, withStyles } from '@material-ui/core/styles';
 import Clock from './Clock';
 import { pipe } from '../internal/pickers/utils';
@@ -20,25 +20,21 @@ import { useMeridiemMode } from '../internal/pickers/hooks/date-helpers-hooks';
 export interface ExportedClockPickerProps<TDate> extends TimeValidationProps<TDate> {
   /**
    * 12h/24h view for hour selection clock.
-   *
    * @default true
    */
   ampm?: boolean;
   /**
    * Step over minutes.
-   *
    * @default 1
    */
   minutesStep?: number;
   /**
    * Display ampm controls under the clock (instead of in the toolbar).
-   *
    * @default false
    */
   ampmInClock?: boolean;
   /**
    * Enables keyboard listener for moving between days in calendar.
-   *
    * @default currentWrapper !== 'static'
    */
   allowKeyboardControl?: boolean;
@@ -104,6 +100,9 @@ const getHoursAriaText = (hour: string) => `${hour} hours`;
 
 const getSecondsAriaText = (seconds: string) => `${seconds} seconds`;
 
+/**
+ * @ignore - do not document.
+ */
 function ClockPicker<TDate>(props: ClockPickerProps<TDate> & WithStyles<typeof styles>) {
   const {
     allowKeyboardControl,
@@ -315,23 +314,20 @@ function ClockPicker<TDate>(props: ClockPickerProps<TDate> & WithStyles<typeof s
 (ClockPicker as any).propTypes = {
   // ----------------------------- Warning --------------------------------
   // | These PropTypes are generated from the TypeScript type definitions |
-  // |    To update them edit typescript types and run "yarn proptypes"  |
+  // |     To update them edit TypeScript types and run "yarn proptypes"  |
   // ----------------------------------------------------------------------
   /**
    * Enables keyboard listener for moving between days in calendar.
-   *
    * @default currentWrapper !== 'static'
    */
   allowKeyboardControl: PropTypes.bool,
   /**
    * 12h/24h view for hour selection clock.
-   *
    * @default true
    */
   ampm: PropTypes.bool,
   /**
    * Display ampm controls under the clock (instead of in the toolbar).
-   *
    * @default false
    */
   ampmInClock: PropTypes.bool,
@@ -345,7 +341,6 @@ function ClockPicker<TDate>(props: ClockPickerProps<TDate> & WithStyles<typeof s
   date: PropTypes.any,
   /**
    * Do not ignore date part when validating min/max time.
-   *
    * @default false
    */
   disableIgnoringDatePartForTimeValidation: PropTypes.bool,
@@ -368,7 +363,6 @@ function ClockPicker<TDate>(props: ClockPickerProps<TDate> & WithStyles<typeof s
   getSecondsClockNumberText: PropTypes.func,
   /**
    * Props to pass to left arrow button.
-   * @type {Partial<IconButtonProps>}
    */
   leftArrowButtonProps: PropTypes.object,
   /**
@@ -391,7 +385,6 @@ function ClockPicker<TDate>(props: ClockPickerProps<TDate> & WithStyles<typeof s
   minTime: PropTypes.any,
   /**
    * Step over minutes.
-   *
    * @default 1
    */
   minutesStep: PropTypes.number,
@@ -417,7 +410,6 @@ function ClockPicker<TDate>(props: ClockPickerProps<TDate> & WithStyles<typeof s
   previousViewAvailable: PropTypes.bool.isRequired,
   /**
    * Props to pass to right arrow button.
-   * @type {Partial<IconButtonProps>}
    */
   rightArrowButtonProps: PropTypes.object,
   /**

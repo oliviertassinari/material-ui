@@ -7,6 +7,9 @@ import {
 import { DesktopWrapper } from '../internal/pickers/wrappers/Wrapper';
 import { makePickerWithStateAndWrapper } from '../internal/pickers/Picker/makePickerWithState';
 
+/**
+ * @ignore - do not document.
+ */
 /* @GeneratePropTypes */
 const DesktopDatePicker = makePickerWithStateAndWrapper<BaseDatePickerProps<unknown>>(
   DesktopWrapper,
@@ -19,11 +22,10 @@ const DesktopDatePicker = makePickerWithStateAndWrapper<BaseDatePickerProps<unkn
 (DesktopDatePicker as any).propTypes = {
   // ----------------------------- Warning --------------------------------
   // | These PropTypes are generated from the TypeScript type definitions |
-  // |    To update them edit typescript types and run "yarn proptypes"  |
+  // |     To update them edit TypeScript types and run "yarn proptypes"  |
   // ----------------------------------------------------------------------
   /**
    * Regular expression to detect "accepted" symbols.
-   *
    * @default /\dap/gi
    */
   acceptRegex: PropTypes.instanceOf(RegExp),
@@ -40,7 +42,6 @@ const DesktopDatePicker = makePickerWithStateAndWrapper<BaseDatePickerProps<unkn
   dateAdapter: PropTypes.object,
   /**
    * If `true` the popup or dialog will immediately close after submitting full date.
-   *
    * @default `true` for Desktop, `false` for Mobile (based on the chosen wrapper and `desktopModeMediaQuery` prop).
    */
   disableCloseOnSelect: PropTypes.bool,
@@ -50,19 +51,16 @@ const DesktopDatePicker = makePickerWithStateAndWrapper<BaseDatePickerProps<unkn
   disabled: PropTypes.bool,
   /**
    * Disable mask on the keyboard, this should be used rarely. Consider passing proper mask for your format.
-   *
    * @default false
    */
   disableMaskedInput: PropTypes.bool,
   /**
    * Do not render open picker button (renders only text field with validation).
-   *
    * @default false
    */
   disableOpenPicker: PropTypes.bool,
   /**
    * Get aria-label text for control that opens picker dialog. Aria-label text must include selected date. @DateIOType
-   *
    * @default (value, utils) => `Choose date, selected date is ${utils.format(utils.date(value), 'fullDate')}`
    */
   getOpenDialogAriaText: PropTypes.func,
@@ -72,8 +70,6 @@ const DesktopDatePicker = makePickerWithStateAndWrapper<BaseDatePickerProps<unkn
   ignoreInvalidInputs: PropTypes.bool,
   /**
    * Props to pass to keyboard input adornment.
-   *
-   * @type {Partial<InputAdornmentProps>}
    */
   InputAdornmentProps: PropTypes.object,
   /**
@@ -147,8 +143,6 @@ const DesktopDatePicker = makePickerWithStateAndWrapper<BaseDatePickerProps<unkn
   open: PropTypes.bool,
   /**
    * Props to pass to keyboard adornment button.
-   *
-   * @type {Partial<IconButtonProps>}
    */
   OpenPickerButtonProps: PropTypes.object,
   /**
@@ -194,13 +188,11 @@ const DesktopDatePicker = makePickerWithStateAndWrapper<BaseDatePickerProps<unkn
   toolbarFormat: PropTypes.string,
   /**
    * Mobile picker date value placeholder, displaying if `value` === `null`.
-   *
    * @default "–"
    */
   toolbarPlaceholder: PropTypes.node,
   /**
    * Mobile picker title, displaying in the toolbar.
-   *
    * @default "SELECT DATE"
    */
   toolbarTitle: PropTypes.node,

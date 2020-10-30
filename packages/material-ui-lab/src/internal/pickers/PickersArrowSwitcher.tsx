@@ -25,12 +25,10 @@ export interface ExportedArrowSwitcherProps {
   rightArrowButtonText?: string;
   /**
    * Props to pass to left arrow button.
-   * @type {Partial<IconButtonProps>}
    */
   leftArrowButtonProps?: Partial<IconButtonProps>;
   /**
    * Props to pass to right arrow button.
-   * @type {Partial<IconButtonProps>}
    */
   rightArrowButtonProps?: Partial<IconButtonProps>;
 }

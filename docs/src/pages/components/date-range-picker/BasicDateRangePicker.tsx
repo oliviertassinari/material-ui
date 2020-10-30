@@ -14,7 +14,9 @@ export default function BasicDateRangePicker() {
         startText="Check-in"
         endText="Check-out"
         value={value}
-        onChange={(newValue) => setValue(newValue)}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
         renderInput={(startProps, endProps) => (
           <React.Fragment>
             <TextField {...startProps} />

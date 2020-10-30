@@ -78,6 +78,9 @@ export const styles = (theme: Theme) => {
 
 export type ClockNumberClassKey = keyof WithStyles<typeof styles>['classes'];
 
+/**
+ * @ignore - internal component.
+ */
 const ClockNumber: React.FC<ClockNumberProps & WithStyles<typeof styles>> = (props) => {
   const {
     disabled,

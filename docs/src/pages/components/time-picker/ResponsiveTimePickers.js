@@ -17,19 +17,23 @@ export default function ResponsiveTimePickers() {
         <MobileTimePicker
           label="For mobile"
           value={value}
-          onChange={(newValue) => setValue(newValue)}
-          renderInput={(props) => <TextField {...props} margin="normal" />}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
+          renderInput={(params) => <TextField {...params} margin="normal" />}
         />
         <DesktopTimePicker
           label="For desktop"
           value={value}
-          onChange={(newValue) => setValue(newValue)}
-          renderInput={(props) => <TextField {...props} margin="normal" />}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
+          renderInput={(params) => <TextField {...params} margin="normal" />}
         />
         <TimePicker
           value={value}
           onChange={setValue}
-          renderInput={(props) => <TextField {...props} margin="normal" />}
+          renderInput={(params) => <TextField {...params} margin="normal" />}
         />
       </div>
     </LocalizationProvider>

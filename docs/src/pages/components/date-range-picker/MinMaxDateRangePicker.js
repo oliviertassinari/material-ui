@@ -19,7 +19,9 @@ export default function MinMaxDateRangePicker() {
         disablePast
         value={value}
         maxDate={getWeeksAfter(value[0], 4)}
-        onChange={(newValue) => setValue(newValue)}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
         renderInput={(startProps, endProps) => (
           <React.Fragment>
             <TextField {...startProps} />

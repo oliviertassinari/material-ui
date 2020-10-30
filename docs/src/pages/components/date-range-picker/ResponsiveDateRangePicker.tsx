@@ -16,7 +16,9 @@ export default function ResponsiveDateRangePicker() {
       <MobileDateRangePicker
         startText="Mobile start"
         value={value}
-        onChange={(newValue) => setValue(newValue)}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
         renderInput={(startProps, endProps) => (
           <React.Fragment>
             <TextField {...startProps} />
@@ -28,7 +30,9 @@ export default function ResponsiveDateRangePicker() {
       <DesktopDateRangePicker
         startText="Desktop start"
         value={value}
-        onChange={(newValue) => setValue(newValue)}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
         renderInput={(startProps, endProps) => (
           <React.Fragment>
             <TextField {...startProps} />

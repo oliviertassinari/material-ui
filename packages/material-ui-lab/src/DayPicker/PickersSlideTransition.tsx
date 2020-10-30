@@ -66,6 +66,9 @@ export const styles = (theme: Theme) => {
 
 export type PickersSlideTransitionClassKey = keyof WithStyles<typeof styles>['classes'];
 
+/**
+ * @ignore - do not document.
+ */
 const SlideTransition: React.FC<SlideTransitionProps & WithStyles<typeof styles>> = ({
   children,
   classes,

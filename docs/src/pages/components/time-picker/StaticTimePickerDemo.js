@@ -12,8 +12,10 @@ export default function StaticTimePickerDemo() {
       <StaticTimePicker
         displayStaticWrapperAs="mobile"
         value={value}
-        onChange={(newValue) => setValue(newValue)}
-        renderInput={(props) => <TextField {...props} />}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
+        renderInput={(params) => <TextField {...params} />}
       />
     </LocalizationProvider>
   );

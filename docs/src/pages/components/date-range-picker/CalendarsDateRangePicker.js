@@ -17,7 +17,9 @@ export default function CalendarsDateRangePicker() {
         <DateRangePicker
           calendars={1}
           value={value}
-          onChange={(newValue) => setValue(newValue)}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
           renderInput={(startProps, endProps) => (
             <React.Fragment>
               <TextField {...startProps} />
@@ -30,7 +32,9 @@ export default function CalendarsDateRangePicker() {
         <DateRangePicker
           calendars={2}
           value={value}
-          onChange={(newValue) => setValue(newValue)}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
           renderInput={(startProps, endProps) => (
             <React.Fragment>
               <TextField {...startProps} />
@@ -43,7 +47,9 @@ export default function CalendarsDateRangePicker() {
         <DateRangePicker
           calendars={3}
           value={value}
-          onChange={(newValue) => setValue(newValue)}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
           renderInput={(startProps, endProps) => (
             <React.Fragment>
               <TextField {...startProps} />

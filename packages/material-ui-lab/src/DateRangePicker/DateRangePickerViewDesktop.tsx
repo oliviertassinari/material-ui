@@ -24,7 +24,6 @@ import { doNothing } from '../internal/pickers/utils';
 export interface ExportedDesktopDateRangeCalendarProps<TDate> {
   /**
    * The number of calendars that render on **desktop**.
-   *
    * @default 2
    */
   calendars?: 1 | 2 | 3;
@@ -82,6 +81,9 @@ function getCalendarsArray(calendars: ExportedDesktopDateRangeCalendarProps<unkn
   }
 }
 
+/**
+ * @ignore - internal component.
+ */
 function DateRangePickerViewDesktop<TDate>(
   props: DesktopDateRangeCalendarProps<TDate> & WithStyles<typeof styles>,
 ) {

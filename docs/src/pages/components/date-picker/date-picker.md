@@ -1,20 +1,25 @@
 ---
-title: DatePicker React component
+title: React Date Picker component
 components: DatePicker, PickersDay
+githubLabel: 'component: DatePicker'
+packageName: '@material-ui/lab'
+materialDesign: https://material.io/components/date-pickers
 ---
 
-# Date picker
+# Date Picker
 
 <p class="description">Date pickers let the user select a date.</p>
 
-[Date pickers](https://material.io/components/pickers/) let the user select a date. Date pickers are displayed with:
+Date pickers let the user select a date. Date pickers are displayed with:
 
 - Dialogs on mobile
 - Text field dropdowns on desktop
 
+{{"component": "modules/components/ComponentLinkHeader.js"}}
+
 ## Requirements
 
-This component relies on the date management library of your choice. We support [date-fns](https://date-fns.org/), [luxon](https://moment.github.io/luxon/), [dayjs](https://github.com/iamkun/dayjs), [moment](https://momentjs.com/) and any other library via [date-io](https://github.com/dmtrKovalenko/date-io) adapter.
+This component relies on the date management library of your choice. We support [date-fns](https://date-fns.org/), [luxon](https://moment.github.io/luxon/), [dayjs](https://github.com/iamkun/dayjs), [moment](https://momentjs.com/) and any other library via a public `dateAdapter` interface.
 
 Please install any of these libraries and set up the right date engine by wrapping your root (or the highest level you wish the pickers to be available) with `LocalizationProvider`:
 

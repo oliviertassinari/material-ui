@@ -36,7 +36,7 @@ function fakeFetch(date: Date, { signal }: { signal: AbortSignal }) {
 
 const initialValue = new Date();
 
-export default function ServerRequest() {
+export default function ServerRequestDatePicker() {
   const requestAbortController = React.useRef<AbortController | null>(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [highlightedDays, setHighlightedDays] = React.useState([1, 2, 15]);
@@ -79,9 +79,11 @@ export default function ServerRequest() {
       <DatePicker
         value={value}
         loading={isLoading}
-        onChange={(newValue) => setValue(newValue)}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
         onMonthChange={handleMonthChange}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
         renderLoading={() => <PickersCalendarSkeleton />}
         renderDay={(day, _value, DayComponentProps) => {
           const isSelected =

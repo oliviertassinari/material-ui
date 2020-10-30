@@ -41,6 +41,9 @@ export const styles = (theme: Theme) =>
 
 export type PickersMonthClassKey = keyof WithStyles<typeof styles>['classes'];
 
+/**
+ * @ignore - do not document.
+ */
 const PickersMonth: React.FC<MonthProps & WithStyles<typeof styles>> = (props) => {
   const { classes, disabled, onSelect, selected, value, ...other } = props;
   const handleSelection = () => {

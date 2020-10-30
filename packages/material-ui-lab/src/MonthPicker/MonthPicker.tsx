@@ -34,6 +34,9 @@ export const styles = createStyles({
 
 export type MonthPickerClassKey = keyof WithStyles<typeof styles>['classes'];
 
+/**
+ * @ignore - do not document.
+ */
 const MonthPicker = React.forwardRef(function MonthPicker<TDate>(
   props: MonthPickerProps<TDate> & WithStyles<typeof styles>,
   ref: React.Ref<HTMLDivElement>,
@@ -103,7 +106,7 @@ const MonthPicker = React.forwardRef(function MonthPicker<TDate>(
 (MonthPicker as any).propTypes = {
   // ----------------------------- Warning --------------------------------
   // | These PropTypes are generated from the TypeScript type definitions |
-  // |    To update them edit typescript types and run "yarn proptypes"  |
+  // |     To update them edit TypeScript types and run "yarn proptypes"  |
   // ----------------------------------------------------------------------
   /**
    * @ignore

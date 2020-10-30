@@ -1,13 +1,8 @@
 import * as React from 'react';
+import Box from '@material-ui/core/Box';
 import DateFnsAdapter from '@material-ui/lab/dateAdapter/date-fns';
 import LocalizaitonProvider from '@material-ui/lab/LocalizationProvider';
-import { styled } from '@material-ui/core/styles';
 import DesktopDatePicker from '@material-ui/lab/DatePicker';
-
-const InputContainer = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
-});
 
 export default function CustomInput() {
   const [value, setValue] = React.useState(new Date());
@@ -17,12 +12,14 @@ export default function CustomInput() {
       <DesktopDatePicker
         label="Custom input"
         value={value}
-        onChange={(newValue) => setValue(newValue)}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
         renderInput={({ inputRef, inputProps, InputProps }) => (
-          <InputContainer>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <input ref={inputRef} {...inputProps} />
             {InputProps?.endAdornment}
-          </InputContainer>
+          </Box>
         )}
       />
     </LocalizaitonProvider>

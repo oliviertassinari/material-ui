@@ -6,7 +6,7 @@ import DatePicker from '@material-ui/lab/DatePicker';
 import MobileDatePicker from '@material-ui/lab/MobileDatePicker';
 import DesktopDatePicker from '@material-ui/lab/DesktopDatePicker';
 
-export default function DatePickersVariants() {
+export default function ResponsiveDatePickers() {
   const [value, setValue] = React.useState<Date | null>(new Date());
 
   return (
@@ -15,15 +15,19 @@ export default function DatePickersVariants() {
         <MobileDatePicker
           label="For mobile"
           value={value}
-          onChange={(newValue) => setValue(newValue)}
-          renderInput={(props) => <TextField {...props} margin="normal" />}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
+          renderInput={(params) => <TextField {...params} margin="normal" />}
         />
         <DesktopDatePicker
           label="For desktop"
           value={value}
           minDate={new Date('2017-01-01')}
-          onChange={(newValue) => setValue(newValue)}
-          renderInput={(props) => <TextField {...props} margin="normal" />}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
+          renderInput={(params) => <TextField {...params} margin="normal" />}
         />
         <DatePicker
           disableFuture
@@ -31,8 +35,10 @@ export default function DatePickersVariants() {
           openTo="year"
           views={['year', 'month', 'date']}
           value={value}
-          onChange={(newValue) => setValue(newValue)}
-          renderInput={(props) => <TextField {...props} margin="normal" />}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
+          renderInput={(params) => <TextField {...params} margin="normal" />}
         />
       </div>
     </LocalizationProvider>

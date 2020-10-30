@@ -38,7 +38,6 @@ const pages = [
           { pathname: '/components/button-group' },
           { pathname: '/components/checkboxes', title: 'Checkbox' },
           { pathname: '/components/floating-action-button' },
-          { pathname: '/components/pickers', title: 'Date / Time' },
           { pathname: '/components/radio-buttons', title: 'Radio button' },
           { pathname: '/components/rating' },
           { pathname: '/components/selects', title: 'Select' },
@@ -147,13 +146,15 @@ const pages = [
           { pathname: '/components/about-the-lab', title: 'About the lab 🧪' },
           {
             pathname: '/components',
-            subheader: '/components/pickers',
+            subheader: '/components/lab-pickers',
+            title: 'Date / Time',
             children: [
+              { pathname: '/components/pickers', title: 'Introduction' },
               { pathname: '/components/date-picker' },
               { pathname: '/components/date-range-picker' },
               { pathname: '/components/date-time-picker' },
               { pathname: '/components/time-picker' },
-            ]
+            ],
           },
           { pathname: '/components/slider-styled' },
           { pathname: '/components/timeline' },

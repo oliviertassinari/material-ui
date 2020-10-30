@@ -20,6 +20,9 @@ export const styles = createStyles({
 });
 export type DatePickerToolbarClassKey = keyof WithStyles<typeof styles>['classes'];
 
+/**
+ * @ignore - internal component.
+ */
 const DatePickerToolbar: React.FC<ToolbarComponentProps & WithStyles<typeof styles>> = ({
   classes,
   date,

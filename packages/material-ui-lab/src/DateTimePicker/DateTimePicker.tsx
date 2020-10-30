@@ -129,6 +129,9 @@ export type DateTimePickerGenericComponent<TWrapper extends SomeWrapper> = <TDat
   props: BaseDateTimePickerProps<TDate> & SharedPickerProps<TDate, TWrapper>,
 ) => JSX.Element;
 
+/**
+ * @ignore - do not document.
+ */
 /* @GeneratePropTypes */
 const DateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unknown>>(
   ResponsiveWrapper,
@@ -141,17 +144,15 @@ const DateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unk
 (DateTimePicker as any).propTypes = {
   // ----------------------------- Warning --------------------------------
   // | These PropTypes are generated from the TypeScript type definitions |
-  // |    To update them edit typescript types and run "yarn proptypes"  |
+  // |     To update them edit TypeScript types and run "yarn proptypes"  |
   // ----------------------------------------------------------------------
   /**
    * Regular expression to detect "accepted" symbols.
-   *
    * @default /\dap/gi
    */
   acceptRegex: PropTypes.instanceOf(RegExp),
   /**
    * Enables keyboard listener for moving between days in calendar.
-   *
    * @default currentWrapper !== 'static'
    */
   allowKeyboardControl: PropTypes.bool,
@@ -162,19 +163,16 @@ const DateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unk
   allowSameDateSelection: PropTypes.bool,
   /**
    * 12h/24h view for hour selection clock.
-   *
    * @default true
    */
   ampm: PropTypes.bool,
   /**
    * Display ampm controls under the clock (instead of in the toolbar).
-   *
    * @default false
    */
   ampmInClock: PropTypes.bool,
   /**
    * "CANCEL" Text message
-   *
    * @default "CANCEL"
    */
   cancelText: PropTypes.node,
@@ -184,13 +182,11 @@ const DateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unk
   className: PropTypes.string,
   /**
    * If `true`, it shows the clear action in the picker dialog.
-   *
    * @default false
    */
   clearable: PropTypes.bool,
   /**
    * "CLEAR" Text message
-   *
    * @default "CLEAR"
    */
   clearText: PropTypes.node,
@@ -212,19 +208,16 @@ const DateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unk
   defaultCalendarMonth: PropTypes.any,
   /**
    * CSS media query when `Mobile` mode will be changed to `Desktop`.
-   *
    * @default "@media (pointer: fine)"
    * @example "@media (min-width: 720px)" or theme.breakpoints.up("sm")
    */
   desktopModeMediaQuery: PropTypes.string,
   /**
    * Props to be passed directly to material-ui [Dialog](https://material-ui.com/components/dialogs)
-   * @type {Partial<MuiDialogProps>}
    */
   DialogProps: PropTypes.object,
   /**
    * If `true` the popup or dialog will immediately close after submitting full date.
-   *
    * @default `true` for Desktop, `false` for Mobile (based on the chosen wrapper and `desktopModeMediaQuery` prop).
    */
   disableCloseOnSelect: PropTypes.bool,
@@ -234,7 +227,6 @@ const DateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unk
   disabled: PropTypes.bool,
   /**
    * Disable future dates.
-   *
    * @default false
    */
   disableFuture: PropTypes.bool,
@@ -245,25 +237,21 @@ const DateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unk
   disableHighlightToday: PropTypes.bool,
   /**
    * Do not ignore date part when validating min/max time.
-   *
    * @default false
    */
   disableIgnoringDatePartForTimeValidation: PropTypes.bool,
   /**
    * Disable mask on the keyboard, this should be used rarely. Consider passing proper mask for your format.
-   *
    * @default false
    */
   disableMaskedInput: PropTypes.bool,
   /**
    * Do not render open picker button (renders only text field with validation).
-   *
    * @default false
    */
   disableOpenPicker: PropTypes.bool,
   /**
    * Disable past dates.
-   *
    * @default false
    */
   disablePast: PropTypes.bool,
@@ -274,7 +262,6 @@ const DateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unk
   getClockLabelText: PropTypes.func,
   /**
    * Get aria-label text for control that opens picker dialog. Aria-label text must include selected date. @DateIOType
-   *
    * @default (value, utils) => `Choose date, selected date is ${utils.format(utils.date(value), 'fullDate')}`
    */
   getOpenDialogAriaText: PropTypes.func,
@@ -292,8 +279,6 @@ const DateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unk
   ignoreInvalidInputs: PropTypes.bool,
   /**
    * Props to pass to keyboard input adornment.
-   *
-   * @type {Partial<InputAdornmentProps>}
    */
   InputAdornmentProps: PropTypes.object,
   /**
@@ -314,7 +299,6 @@ const DateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unk
   label: PropTypes.node,
   /**
    * Props to pass to left arrow button.
-   * @type {Partial<IconButtonProps>}
    */
   leftArrowButtonProps: PropTypes.object,
   /**
@@ -328,7 +312,6 @@ const DateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unk
   /**
    * If `true` renders `LoadingComponent` in calendar instead of calendar view.
    * Can be used to preload information and show it in calendar.
-   *
    * @default false
    */
   loading: PropTypes.bool,
@@ -392,13 +375,11 @@ const DateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unk
   ]),
   /**
    * Step over minutes.
-   *
    * @default 1
    */
   minutesStep: PropTypes.number,
   /**
    * "OK" button text.
-   *
    * @default "OK"
    */
   okText: PropTypes.node,
@@ -447,8 +428,6 @@ const DateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unk
   open: PropTypes.bool,
   /**
    * Props to pass to keyboard adornment button.
-   *
-   * @type {Partial<IconButtonProps>}
    */
   OpenPickerButtonProps: PropTypes.object,
   /**
@@ -473,7 +452,6 @@ const DateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unk
   readOnly: PropTypes.bool,
   /**
    * Disable heavy animations.
-   *
    * @default /(android)/i.test(window.navigator.userAgent).
    */
   reduceAnimations: PropTypes.bool,
@@ -492,7 +470,6 @@ const DateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unk
   renderInput: PropTypes.func.isRequired,
   /**
    * Component displaying when passed `loading` true.
-   *
    * @default () => "..."
    */
   renderLoading: PropTypes.func,
@@ -502,7 +479,6 @@ const DateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unk
   rifmFormatter: PropTypes.func,
   /**
    * Props to pass to right arrow button.
-   * @type {Partial<IconButtonProps>}
    */
   rightArrowButtonProps: PropTypes.object,
   /**
@@ -534,7 +510,6 @@ const DateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unk
   showDaysOutsideCurrentMonth: PropTypes.bool,
   /**
    * If `true`, the today button will be displayed. **Note** that `showClearButton` has a higher priority.
-   *
    * @default false
    */
   showTodayButton: PropTypes.bool,
@@ -548,7 +523,6 @@ const DateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unk
   timeIcon: PropTypes.node,
   /**
    * "TODAY" Text message
-   *
    * @default "TODAY"
    */
   todayText: PropTypes.node,
@@ -562,13 +536,11 @@ const DateTimePicker = makePickerWithStateAndWrapper<BaseDateTimePickerProps<unk
   toolbarFormat: PropTypes.string,
   /**
    * Mobile picker date value placeholder, displaying if `value` === `null`.
-   *
    * @default "–"
    */
   toolbarPlaceholder: PropTypes.node,
   /**
    * Mobile picker title, displaying in the toolbar.
-   *
    * @default "SELECT DATE"
    */
   toolbarTitle: PropTypes.node,

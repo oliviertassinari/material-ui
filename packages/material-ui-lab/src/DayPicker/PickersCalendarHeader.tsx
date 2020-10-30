@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import Fade from '@material-ui/core/Fade';
 import { createStyles, WithStyles, withStyles, Theme } from '@material-ui/core/styles';
@@ -93,6 +93,9 @@ function getSwitchingViewAriaText(view: DatePickerView) {
     : 'calendar view is open, switch to year view';
 }
 
+/**
+ * @ignore - do not document.
+ */
 function PickersCalendarHeader<TDate>(
   props: PickersCalendarHeaderProps<TDate> & WithStyles<typeof styles>,
 ) {

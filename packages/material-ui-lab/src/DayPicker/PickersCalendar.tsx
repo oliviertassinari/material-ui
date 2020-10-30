@@ -29,20 +29,17 @@ export interface ExportedCalendarProps<TDate>
   ) => JSX.Element;
   /**
    * Enables keyboard listener for moving between days in calendar.
-   *
    * @default currentWrapper !== 'static'
    */
   allowKeyboardControl?: boolean;
   /**
    * If `true` renders `LoadingComponent` in calendar instead of calendar view.
    * Can be used to preload information and show it in calendar.
-   *
    * @default false
    */
   loading?: boolean;
   /**
    * Component displaying when passed `loading` true.
-   *
    * @default () => "..."
    */
   renderLoading?: () => React.ReactNode;
@@ -108,6 +105,9 @@ export const styles = (theme: Theme) =>
 
 export type PickersCalendarClassKey = keyof WithStyles<typeof styles>['classes'];
 
+/**
+ * @ignore - do not document.
+ */
 function PickersCalendar<TDate>(props: PickersCalendarProps<TDate> & WithStyles<typeof styles>) {
   const {
     allowKeyboardControl,

@@ -24,7 +24,9 @@ export default function CustomDateTimePicker() {
           todayText="now"
           openTo="hours"
           value={value}
-          onChange={(newValue) => setValue(newValue)}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
           minDate={new Date('2018-01-01')}
           leftArrowIcon={<AlarmIcon />}
           rightArrowIcon={<SnoozeIcon />}
@@ -33,9 +35,9 @@ export default function CustomDateTimePicker() {
           openPickerIcon={<ClockIcon />}
           minTime={new Date(0, 0, 0, 9)}
           maxTime={new Date(0, 0, 0, 20)}
-          renderInput={(props) => (
+          renderInput={(params) => (
             <TextField
-              {...props}
+              {...params}
               margin="normal"
               variant="outlined"
               helperText="Hardcoded helper text"
@@ -44,23 +46,25 @@ export default function CustomDateTimePicker() {
         />
         <MobileDateTimePicker
           value={value}
-          onChange={(newValue) => setValue(newValue)}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
           label="With error handler"
           onError={console.log}
           minDate={new Date('2018-01-01T00:00')}
           inputFormat="yyyy/MM/dd hh:mm a"
           mask="___/__/__ __:__ _M"
-          renderInput={(props) => (
-            <TextField variant="outlined" {...props} margin="normal" />
+          renderInput={(params) => (
+            <TextField variant="outlined" {...params} margin="normal" />
           )}
         />
         <DateTimePicker
           clearable
           value={clearedDate}
           onChange={(newValue) => setClearedDate(newValue)}
-          renderInput={(props) => (
+          renderInput={(params) => (
             <TextField
-              {...props}
+              {...params}
               margin="normal"
               helperText="Clear Initial State"
             />

@@ -3,8 +3,8 @@ import frLocale from 'date-fns/locale/fr';
 import ruLocale from 'date-fns/locale/ru';
 import arSaLocale from 'date-fns/locale/ar-SA';
 import enLocale from 'date-fns/locale/en-US';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import ToggleButton from '@material-ui/core/ToggleButton';
+import ToggleButtonGroup from '@material-ui/core/ToggleButtonGroup';
 import TextField from '@material-ui/core/TextField';
 import DateFnsAdapter from '@material-ui/lab/dateAdapter/date-fns';
 import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
@@ -36,7 +36,7 @@ export default function LocalizedTimePicker() {
           <TimePicker
             value={selectedDate}
             onChange={(date) => handleDateChange(date)}
-            renderInput={(props) => <TextField {...props} margin="normal" />}
+            renderInput={(params) => <TextField {...params} margin="normal" />}
           />
           <ToggleButtonGroup value={locale} exclusive>
             {Object.keys(localeMap).map((localeItem) => (

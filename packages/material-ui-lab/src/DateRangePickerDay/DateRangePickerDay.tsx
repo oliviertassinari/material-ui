@@ -94,6 +94,9 @@ const styles = (theme: Theme) =>
     rangeIntervalDayPreviewEnd: {},
   });
 
+/**
+ * @ignore - do not document.
+ */
 const DateRangePickerDay = React.forwardRef(function DateRangePickerDay<TDate>(
   props: DateRangePickerDayProps<TDate> & WithStyles<typeof styles>,
   ref: React.Ref<HTMLButtonElement>,
@@ -161,7 +164,7 @@ const DateRangePickerDay = React.forwardRef(function DateRangePickerDay<TDate>(
 (DateRangePickerDay as any).propTypes = {
   // ----------------------------- Warning --------------------------------
   // | These PropTypes are generated from the TypeScript type definitions |
-  // |    To update them edit typescript types and run "yarn proptypes"  |
+  // |     To update them edit TypeScript types and run "yarn proptypes"  |
   // ----------------------------------------------------------------------
   /**
    * The content of the component.
@@ -213,6 +216,12 @@ const DateRangePickerDay = React.forwardRef(function DateRangePickerDay<TDate>(
   selected: PropTypes.bool,
 };
 
+/**
+ *
+ * API:
+ *
+ * - [DateRangePickerDay API](https://material-ui.com/api/date-range-picker-day/)
+ */
 export default withStyles(styles, { name: 'MuiDateRangePickerDay' })(
   React.memo(DateRangePickerDay, (prevProps, nextProps) => {
     return (

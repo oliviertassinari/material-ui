@@ -1,9 +1,12 @@
 ---
-title: DateTimePicker React component
+title: React Date Time Picker component
 components: DateTimePicker
+githubLabel: 'component: DateTimePicker'
+packageName: '@material-ui/lab'
+materialDesign: https://material.io/components/date-pickers
 ---
 
-# Date & Time picker
+# Date Time Picker
 
 <p class="description">Combined date & time picker.</p>
 
@@ -12,9 +15,11 @@ This component combines the date & time pickers. It allows to select both date a
 Note that this component is the [DatePicker](/components/date-picker/) and [TimePicker](/components/time-picker/)
 component combined, so any of these components' props can be passed to the DateTimePicker.
 
+{{"component": "modules/components/ComponentLinkHeader.js"}}
+
 ## Requirements
 
-This component relies on the date management library of your choice. We support [date-fns](https://date-fns.org/), [luxon](https://moment.github.io/luxon/), [dayjs](https://github.com/iamkun/dayjs), [moment](https://momentjs.com/) and any other library via [date-io](https://github.com/dmtrKovalenko/date-io) adapter.
+This component relies on the date management library of your choice. We support [date-fns](https://date-fns.org/), [luxon](https://moment.github.io/luxon/), [dayjs](https://github.com/iamkun/dayjs), [moment](https://momentjs.com/) and any other library via a public `dateAdapter` interface.
 
 Please install any of these libraries and set up the right date engine by wrapping your root (or the highest level you wish the pickers to be available) with `LocalizationProvider`:
 
@@ -50,7 +55,7 @@ This can be customized with the `desktopModeMediaQuery` prop.
 
 {{"demo": "pages/components/date-time-picker/ResponsiveDateTimePickers.js"}}
 
-## Date and Time validation
+## Date and time validation
 
 It is possible to restrict date and time selection in two ways:
 

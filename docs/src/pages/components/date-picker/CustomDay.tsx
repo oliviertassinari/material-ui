@@ -72,7 +72,7 @@ export default function CustomDay() {
         value={selectedDate}
         onChange={handleDateChange}
         renderDay={renderWeekPickerDay as any}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(params) => <TextField {...params} />}
         inputFormat="'Week of' MMM d"
       />
     </LocalizaitonProvider>
