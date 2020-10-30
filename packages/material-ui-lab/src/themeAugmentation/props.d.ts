@@ -9,10 +9,43 @@ import { TimelineOppositeContentProps } from '../TimelineOppositeContent';
 import { TimelineSeparatorProps } from '../TimelineSeparator';
 import { TreeItemProps } from '../TreeItem';
 import { TreeViewProps } from '../TreeView';
+import { PickersDayProps } from '../PickersDay';
+import { DatePickerProps } from '../DatePicker';
+import { DateTimePickerProps } from '../DateTimePicker';
+import { DayPickerProps } from '../DayPicker';
+import { DesktopDateTimePickerProps } from '../DesktopDateTimePicker';
+import { DesktopTimePickerProps } from '../DesktopTimePicker';
+import { ClockPickerProps } from '../ClockPicker';
+import { MobileDatePickerProps } from '../MobileDatePicker';
+import { MobileDateTimePickerProps } from '../MobileDateTimePicker';
+import { MobileTimePickerProps } from '../MobileTimePicker';
+import { MonthPickerProps } from '../MonthPicker/MonthPicker';
+import { PickersCalendarSkeletonProps } from '../PickersCalendarSkeleton';
+import { StaticDatePickerProps } from '../StaticDatePicker';
+import { StaticDateTimePickerProps } from '../StaticDateTimePicker';
+import { StaticTimePickerProps } from '../StaticTimePicker';
+import { TimePickerProps } from '../TimePicker';
+import { YearPickerProps } from '../YearPicker';
 
 export interface LabComponentsPropsList {
+  MuiClockPicker: ClockPickerProps<unknown>;
+  MuiDatePicker: DatePickerProps;
+  MuiDateTimePicker: DateTimePickerProps;
+  MuiDayPicker: DayPickerProps<unknown>;
+  MuiDesktopDateTimePicker: DesktopDateTimePickerProps;
+  MuiDesktopTimePicker: DesktopTimePickerProps;
+  MuiMobileDatePicker: MobileDatePickerProps;
+  MuiMobileDateTimePicker: MobileDateTimePickerProps;
+  MuiMobileTimePicker: MobileTimePickerProps;
+  MuiMonthPicker: MonthPickerProps<unknown>;
+  MuiPickersCalendarSkeleton: PickersCalendarSkeletonProps;
+  MuiPickersDay: PickersDayProps<unknown>;
+  MuiStaticDatePicker: StaticDatePickerProps;
+  MuiStaticDateTimePicker: StaticDateTimePickerProps;
+  MuiStaticTimePicker: StaticTimePickerProps;
   MuiTabList: TabListProps;
   MuiTabPanel: TabPanelProps;
+  MuiTimePicker: TimePickerProps;
   MuiTimeline: TimelineProps;
   MuiTimelineConnector: TimelineConnectorProps;
   MuiTimelineContent: TimelineContentProps;
@@ -22,6 +55,7 @@ export interface LabComponentsPropsList {
   MuiTimelineSeparator: TimelineSeparatorProps;
   MuiTreeItem: TreeItemProps;
   MuiTreeView: TreeViewProps;
+  MuiYearPicker: YearPickerProps<unknown>;
 }
 
 declare module '@material-ui/core/styles/props' {

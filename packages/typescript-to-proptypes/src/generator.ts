@@ -59,6 +59,15 @@ export interface GenerateOptions {
    * - anything else by their stringified value using localeCompare
    */
   sortLiteralUnions?: (a: t.LiteralType, b: t.LiteralType) => number;
+
+  /**
+   * If source itself written in typescript prop-types disable prop-types validation
+   * by injecting propTypes as
+   * ```jsx
+   * .propTypes = { ... } as any
+   * ```
+   */
+  disableTypescriptPropTypesValidation?: boolean;
 }
 
 function defaultSortLiteralUnions(a: t.LiteralType, b: t.LiteralType) {
@@ -89,6 +98,7 @@ export function generate(component: t.Component, options: GenerateOptions = {}):
     sortProptypes = true,
     importedName = 'PropTypes',
     includeJSDoc = true,
+    disableTypescriptPropTypesValidation = false,
     previousPropTypesSource = new Map<string, string>(),
     reconcilePropTypes = (_prop: t.PropTypeDefinition, _previous: string, generated: string) =>
       generated,
@@ -182,7 +192,10 @@ export function generate(component: t.Component, options: GenerateOptions = {}):
 
     if (propType.type === 'UnionNode') {
       const uniqueTypes = t.uniqueUnionTypes(propType).types;
-      const isOptional = uniqueTypes.some((type) => type.type === 'UndefinedNode');
+      const isOptional = uniqueTypes.some(
+        (type) =>
+          type.type === 'UndefinedNode' || (type.type === 'LiteralNode' && type.value === 'null'),
+      );
       const nonNullishUniqueTypes = uniqueTypes.filter((type) => {
         return (
           type.type !== 'UndefinedNode' && !(type.type === 'LiteralNode' && type.value === 'null')
@@ -304,5 +317,11 @@ export function generate(component: t.Component, options: GenerateOptions = {}):
     options.comment &&
     `// ${options.comment.split(/\r?\n/gm).reduce((prev, curr) => `${prev}\n// ${curr}`)}\n`;
 
-  return `${component.name}.propTypes = {\n${comment !== undefined ? comment : ''}${generated}\n}`;
+  const componentNameNode = disableTypescriptPropTypesValidation
+    ? `(${component.name} as any)`
+    : component.name;
+
+  return `${componentNameNode}.propTypes = {\n${
+    comment !== undefined ? comment : ''
+  }${generated}\n}`;
 }
