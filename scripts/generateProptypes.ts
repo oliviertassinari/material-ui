@@ -56,12 +56,28 @@ const useExternalPropsFromInputBase = [
  * of dynamically loading them. At that point this list should be removed.
  * TODO: typecheck values
  */
-const useExternalDocumentation: Record<string, string[]> = {
+const useExternalDocumentation: Record<string, '*' | string[]> = {
   Button: ['disableRipple'],
   // `classes` is always external since it is applied from a HOC
   // In DialogContentText we pass it through
   // Therefore it's considered "unused" in the actual component but we still want to document it.
   DialogContentText: ['classes'],
+  DatePicker: '*',
+  MobileDatePicker: '*',
+  StaticDatePicker: '*',
+  DesktopDatePicker: '*',
+  TimePicker: '*',
+  MobileTimePicker: '*',
+  StaticTimePicker: '*',
+  DesktopTimePicker: '*',
+  DateTimePicker: '*',
+  MobileDateTimePicker: '*',
+  StaticDateTimePicker: '*',
+  DesktopDateTimePicker: '*',
+  DateRangePicker: '*',
+  MobileDateRangePicker: '*',
+  StaticDateRangePicker: '*',
+  DesktopDateRangePicker: '*',
   FilledInput: useExternalPropsFromInputBase,
   IconButton: ['disableRipple'],
   Input: useExternalPropsFromInputBase,
@@ -187,14 +203,12 @@ async function generateProptypes(
   const isTsFile = /(\.(ts|tsx))/.test(sourceFile);
 
   const unstyledFile = tsFile.endsWith('Styled.d.ts')
-    ? tsFile.replace(/material-ui-lab|material-ui-core|Styled/g, (matched) => {
-        if (matched === 'Styled') return 'Unstyled';
-        return 'material-ui-unstyled';
-      })
+    ? tsFile.replace(/Styled/g, 'Unstyled')
     : null;
 
   const result = ttp.inject(proptypes, sourceContent, {
     removeExistingPropTypes: true,
+    disableTypescriptPropTypesValidation: isTsFile,
     babelOptions: {
       filename: sourceFile,
     },
@@ -249,7 +263,8 @@ async function generateProptypes(
       const { name: componentName } = component;
       if (
         useExternalDocumentation[componentName] &&
-        useExternalDocumentation[componentName].includes(prop.name)
+        (useExternalDocumentation[componentName] === '*' ||
+          useExternalDocumentation[componentName].includes(prop.name))
       ) {
         shouldDocument = true;
       }
@@ -287,7 +302,6 @@ async function run(argv: HandlerArgv) {
 
   const allFiles = await Promise.all(
     [
-      path.resolve(__dirname, '../packages/material-ui-unstyled/src'),
       path.resolve(__dirname, '../packages/material-ui/src'),
       path.resolve(__dirname, '../packages/material-ui-lab/src'),
     ].map((folderPath) =>
@@ -310,6 +324,7 @@ async function run(argv: HandlerArgv) {
     .filter((filePath) => {
       return filePattern.test(filePath);
     });
+
   const program = ttp.createTSProgram(files, tsconfig);
 
   const promises = files.map<Promise<GenerateResult>>(async (tsFile) => {
