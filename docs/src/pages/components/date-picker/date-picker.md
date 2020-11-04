@@ -19,7 +19,7 @@ Date pickers let the user select a date. Date pickers are displayed with:
 
 ## Requirements
 
-This component relies on the date management library of your choice. We support [date-fns](https://date-fns.org/), [luxon](https://moment.github.io/luxon/), [dayjs](https://github.com/iamkun/dayjs), [moment](https://momentjs.com/) and any other library via a public `dateAdapter` interface.
+This component relies on the date management library of your choice. It supports [date-fns](https://date-fns.org/), [luxon](https://moment.github.io/luxon/), [dayjs](https://github.com/iamkun/dayjs), [moment](https://momentjs.com/) and any other library via a public `dateAdapter` interface.
 
 Please install any of these libraries and set up the right date engine by wrapping your root (or the highest level you wish the pickers to be available) with `LocalizationProvider`:
 
@@ -39,7 +39,7 @@ function App() {
 
 ## Basic usage
 
-The date picker will be rendered to modal dialog on mobile and textfield with popover on desktop.
+The date picker will be rendered as a modal dialog on mobile, and a textfield with a popover on desktop.
 
 {{"demo": "pages/components/date-picker/BasicDatePicker.js"}}
 
@@ -63,13 +63,13 @@ Use `LocalizationProvider` to change the date-engine locale that is used to rend
 
 ## Views playground
 
-It is possible to combine `year`, `month`, and `date` selection views. Views will appear in the order they passed to the `views` array.
+It's possible to combine `year`, `month`, and `date` selection views. Views will appear in the order they're included in the `views` array.
 
 {{"demo": "pages/components/date-picker/ViewsDatePicker.js"}}
 
 ## Static mode
 
-It is possible to render any picker without the modal/popover and text field. This can be helpful to build custom popover/modal containers.
+It's possible to render any picker without the modal/popover and text field. This can be helpful when building custom popover/modal containers.
 
 {{"demo": "pages/components/date-picker/StaticDatePickerDemo.js", "bg": true}}
 
@@ -81,7 +81,7 @@ For ease of use the date picker will automatically change the layout between por
 
 ## Sub-components
 
-Some lower level sub-components (`DayPicker`, `MonthPicker` and `YearPicker`) are also exported. These are rendering without a wrapper or outer logic (masked input, date values parsing and validation, etc.).
+Some lower level sub-components (`DayPicker`, `MonthPicker` and `YearPicker`) are also exported. These are rendered without a wrapper or outer logic (masked input, date values parsing and validation, etc.).
 
 {{"demo": "pages/components/date-picker/InternalPickers.js"}}
 
@@ -100,6 +100,6 @@ You can take advantage of the internal [PickersDay](/api/pickers-day) component.
 
 ## Dynamic data
 
-Sometimes it may be necessary to display additional info right in the calendar. Here is an example of prefetching and displaying server-side data using the `onMonthChange`, `loading`, and `renderDay` props.
+Sometimes it may be necessary to display additional info right in the calendar. Here's an example of prefetching and displaying server-side data using the `onMonthChange`, `loading`, and `renderDay` props.
 
 {{"demo": "pages/components/date-picker/ServerRequestDatePicker.js"}}

@@ -10,7 +10,7 @@ materialDesign: https://material.io/components/date-pickers
 
 <p class="description">Date pickers let the user select a range of dates.</p>
 
-> ⚠️⚠️ The date range picker is unstable, and **not suitable** for usage in production. ⚠️⚠️
+> ⚠️⚠️ The date range picker is unstable, and **not suitable** for use in production. ⚠️⚠️
 > <br /><br />
 > The date range picker will be made available in the coming months for production use as part of a paid extension (commercial license) to the community edition (MIT license) of Material-UI.
 > This paid extension will include advanced components (rich data grid, date range picker, tree view drag & drop, etc.). [Early access](https://material-ui.com/store/items/material-ui-x/) starts at an affordable price.
@@ -21,7 +21,7 @@ The date range pickers let the user select a range of dates.
 
 ## Requirements
 
-This component relies on the date management library of your choice. We support [date-fns](https://date-fns.org/), [luxon](https://moment.github.io/luxon/), [dayjs](https://github.com/iamkun/dayjs), [moment](https://momentjs.com/) and any other library via a public `dateAdapter` interface.
+This component relies on the date management library of your choice. It supports [date-fns](https://date-fns.org/), [luxon](https://moment.github.io/luxon/), [dayjs](https://github.com/iamkun/dayjs), [moment](https://momentjs.com/) and any other library via a public `dateAdapter` interface.
 
 Please install any of these libraries and set up the right date engine by wrapping your root (or the highest level you wish the pickers to be available) with `LocalizationProvider`:
 
@@ -41,7 +41,7 @@ function App() {
 
 ## Basic usage
 
-Basic DateRangePicker example. Note that you can pass almost any prop from [DatePicker]('/api/date-picker/').
+Note that you can pass almost any prop from [DatePicker]('/api/date-picker/').
 
 {{"demo": "pages/components/date-range-picker/BasicDateRangePicker.js"}}
 
@@ -72,7 +72,7 @@ Disabling dates behaves the same as the simple `DatePicker`.
 ## Custom input component
 
 You can customize the rendered input with the `renderInput` prop. For `DateRangePicker` it takes **2** parameters – for start and end input respectively.
-If you need to render custom input make sure to spread `ref` and `inputProps` correctly to the input components.
+If you need to render custom inputs make sure to spread `ref` and `inputProps` correctly to the input components.
 
 {{"demo": "pages/components/date-range-picker/CustomDateRangeInputs.js"}}
 

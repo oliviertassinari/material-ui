@@ -10,7 +10,7 @@ materialDesign: https://material.io/components/date-pickers
 
 <p class="description">Combined date & time picker.</p>
 
-This component combines the date & time pickers. It allows to select both date and time with the same control.
+This component combines the date & time pickers. It allows the user to select both date and time with the same control.
 
 Note that this component is the [DatePicker](/components/date-picker/) and [TimePicker](/components/time-picker/)
 component combined, so any of these components' props can be passed to the DateTimePicker.
@@ -19,7 +19,7 @@ component combined, so any of these components' props can be passed to the DateT
 
 ## Requirements
 
-This component relies on the date management library of your choice. We support [date-fns](https://date-fns.org/), [luxon](https://moment.github.io/luxon/), [dayjs](https://github.com/iamkun/dayjs), [moment](https://momentjs.com/) and any other library via a public `dateAdapter` interface.
+This component relies on the date management library of your choice. It supports [date-fns](https://date-fns.org/), [luxon](https://moment.github.io/luxon/), [dayjs](https://github.com/iamkun/dayjs), [moment](https://momentjs.com/) and any other library via a public `dateAdapter` interface.
 
 Please install any of these libraries and set up the right date engine by wrapping your root (or the highest level you wish the pickers to be available) with `LocalizationProvider`:
 

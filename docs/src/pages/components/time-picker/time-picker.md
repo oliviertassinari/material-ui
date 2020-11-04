@@ -17,7 +17,7 @@ The selected time is indicated by the filled circle at the end of the clock hand
 
 ## Requirements
 
-This component relies on the date management library of your choice. We support [date-fns](https://date-fns.org/), [luxon](https://moment.github.io/luxon/), [dayjs](https://github.com/iamkun/dayjs), [moment](https://momentjs.com/) and any other library via a public `dateAdapter` interface.
+This component relies on the date management library of your choice. It supports [date-fns](https://date-fns.org/), [luxon](https://moment.github.io/luxon/), [dayjs](https://github.com/iamkun/dayjs), [moment](https://momentjs.com/) and any other library via a public `dateAdapter` interface.
 
 Please install any of these libraries and set up the right date engine by wrapping your root (or the highest level you wish the pickers to be available) with `LocalizationProvider`:
 
@@ -65,7 +65,7 @@ This can be customized with the `desktopModeMediaQuery` prop.
 
 ## Static mode
 
-It is possible to render any picker inline. This will enable building custom popover/modal containers.
+It's possible to render any picker inline. This will enable building custom popover/modal containers.
 
 {{"demo": "pages/components/time-picker/StaticTimePickerDemo.js", "bg": true}}
 
