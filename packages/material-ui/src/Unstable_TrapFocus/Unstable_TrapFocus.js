@@ -126,27 +126,10 @@ function Unstable_TrapFocus(props) {
 
   const prevOpenRef = React.useRef();
   React.useEffect(() => {
-    const doc = ownerDocument(rootRef.current);
-
-    if (
-      !prevOpenRef.current &&
-      open &&
-      rootRef.current &&
-      ((rootRef.current.contains(doc.activeElement) && disableAutoFocus) || !disableAutoFocus) &&
-      !ignoreNextEnforceFocus.current
-    ) {
-      if (!nodeToRestore.current) {
-        nodeToRestore.current = doc.activeElement;
-      }
-
-      activated.current = true;
-      onSentinelFocus('start')();
-    }
-
     prevOpenRef.current = open;
-  }, [disableAutoFocus, open]);
+  }, [open]);
 
-  if (!prevOpenRef.current && open && typeof window !== 'undefined' && !disableRestoreFocus) {
+  if (!prevOpenRef.current && open && typeof window !== 'undefined' && !disableAutoFocus) {
     // WARNING: Potentially unsafe in concurrent mode.
     // The way the read on `nodeToRestore` is setup could make this actually safe.
     // Say we render `open={false}` -> `open={true}` but never commit.
@@ -189,7 +172,7 @@ function Unstable_TrapFocus(props) {
         rootRef.current.setAttribute('tabIndex', -1);
       }
 
-      if (activated.current && !ignoreNextEnforceFocus.current) {
+      if (activated.current) {
         rootRef.current.focus();
       }
     }
@@ -284,8 +267,6 @@ function Unstable_TrapFocus(props) {
     };
 
     const loopFocus = (nativeEvent) => {
-      lastEvent.current = nativeEvent;
-
       if (disableEnforceFocus || !isEnabled() || nativeEvent.key !== 'Tab') {
         return;
       }
@@ -327,17 +308,9 @@ function Unstable_TrapFocus(props) {
   }, [disableAutoFocus, disableEnforceFocus, disableRestoreFocus, isEnabled, open]);
 
   const onFocus = (event) => {
-    if (
-      !activated.current &&
-      rootRef.current &&
-      event.relatedTarget &&
-      !rootRef.current.contains(event.relatedTarget) &&
-      event.relatedTarget !== sentinelStart.current &&
-      event.relatedTarget !== sentinelEnd.current
-    ) {
+    if (!activated.current) {
       nodeToRestore.current = event.relatedTarget;
     }
-
     activated.current = true;
     reactFocusEventTarget.current = event.target;
 
@@ -349,19 +322,9 @@ function Unstable_TrapFocus(props) {
 
   return (
     <React.Fragment>
-      <div
-        onFocus={onSentinelFocus('start')}
-        tabIndex={0}
-        ref={sentinelStart}
-        data-test="sentinelStart"
-      />
+      <div tabIndex={0} ref={sentinelStart} data-test="sentinelStart" />
       {React.cloneElement(children, { ref: handleRef, onFocus })}
-      <div
-        onFocus={onSentinelFocus('end')}
-        tabIndex={0}
-        ref={sentinelEnd}
-        data-test="sentinelEnd"
-      />
+      <div tabIndex={0} ref={sentinelEnd} data-test="sentinelEnd" />
     </React.Fragment>
   );
 }
