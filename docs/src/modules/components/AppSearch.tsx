@@ -5,11 +5,29 @@ import useLazyCSS from 'docs/src/modules/utils/useLazyCSS';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { alpha, useTheme, makeStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
+import Box, { SxProps } from '@material-ui/core/Box';
 import SearchIcon from '@material-ui/icons/Search';
 import { handleEvent } from 'docs/src/modules/components/MarkdownLinks';
 import docsearch from 'docsearch.js';
 import { LANGUAGES_SSR } from 'docs/src/modules/constants';
 import { useUserLanguage, useTranslate } from 'docs/src/modules/utils/i18n';
+
+const shortcut = {
+  color: theme => alpha(theme.palette.common.white, 0.8),
+  border: theme => `1px solid ${alpha(theme.palette.common.white, 0.45)}`,
+  px: 0.5,
+  position: 'absolute',
+  right: theme => theme.spacing(1),
+  height: 23,
+  top: 'calc(50% - 11px)',
+  borderRadius: 1,
+  transition: theme => theme.transitions.create('opacity', {
+    duration: theme.transitions.duration.shortest,
+  }),
+  '&.Mui-focused': {
+    opacity: 0,
+  },
+} as SxProps;
 
 const useStyles = makeStyles(
   (theme) => ({
@@ -105,22 +123,6 @@ const useStyles = makeStyles(
     inputInput: {
       padding: theme.spacing(1, 1, 1, 9),
     },
-    shortcut: {
-      color: alpha(theme.palette.common.white, 0.8),
-      border: `1px solid ${alpha(theme.palette.common.white, 0.45)}`,
-      padding: theme.spacing(0, 0.5),
-      position: 'absolute',
-      right: theme.spacing(1),
-      height: 23,
-      top: 'calc(50% - 11px)',
-      borderRadius: theme.shape.borderRadius,
-      transition: theme.transitions.create('opacity', {
-        duration: theme.transitions.duration.shortest,
-      }),
-      '&.Mui-focused': {
-        opacity: 0,
-      },
-    },
   }),
   { name: 'AppSearch' },
 );
@@ -132,7 +134,7 @@ const useStyles = makeStyles(
  */
 export default function AppSearch() {
   const classes = useStyles();
-  const inputRef = React.useRef(null);
+  const inputRef = React.useRef<HTMLElement | null>(null);
   const [focused, setFocused] = React.useState(false);
   const theme = useTheme();
   const userLanguage = useUserLanguage();
@@ -143,7 +145,7 @@ export default function AppSearch() {
   React.useEffect(() => {
     const handleKeyDown = (nativeEvent) => {
       if (nativeEvent.key === 'Escape' && document.activeElement === inputRef.current) {
-        inputRef.current.blur();
+        inputRef.current!.blur();
         return;
       }
 
@@ -262,8 +264,10 @@ export default function AppSearch() {
           input: classes.inputInput,
         }}
       />
-      {/* eslint-disable-next-line material-ui/no-hardcoded-labels */}
-      <div className={clsx(classes.shortcut, { 'Mui-focused': focused })}>/</div>
+      <Box sx={shortcut} className={clsx({ 'Mui-focused': focused })}>
+        {/* eslint-disable-next-line material-ui/no-hardcoded-labels */}
+        {'/'}
+      </Box>
     </div>
   );
 }
