@@ -7,33 +7,6 @@ import { onSpaceOrEnter } from '../internal/pickers/utils';
 import { useCanAutoFocus } from '../internal/pickers/hooks/useCanAutoFocus';
 import { PickerSelectionState } from '../internal/pickers/hooks/usePickerState';
 
-const positions: Record<number, [number, number]> = {
-  0: [0, 40],
-  1: [55, 19.6],
-  2: [94.4, 59.5],
-  3: [109, 114],
-  4: [94.4, 168.5],
-  5: [54.5, 208.4],
-  6: [0, 223],
-  7: [-54.5, 208.4],
-  8: [-94.4, 168.5],
-  9: [-109, 114],
-  10: [-94.4, 59.5],
-  11: [-54.5, 19.6],
-  12: [0, 5],
-  13: [36.9, 49.9],
-  14: [64, 77],
-  15: [74, 114],
-  16: [64, 151],
-  17: [37, 178],
-  18: [0, 188],
-  19: [-37, 178],
-  20: [-64, 151],
-  21: [-74, 114],
-  22: [-64, 77],
-  23: [-37, 50],
-};
-
 export interface ClockNumberProps {
   disabled: boolean;
   getClockNumberText: (currentItemText: string) => string;
@@ -44,21 +17,21 @@ export interface ClockNumberProps {
   selected: boolean;
 }
 
+const CLOCK_WIDTH = 220;
+const HOUR_WIDTH = 32;
+
 export const styles = (theme: Theme) => {
-  const size = 32;
   const clockNumberColor =
     theme.palette.mode === 'light' ? theme.palette.text.primary : theme.palette.text.secondary;
 
   return createStyles({
     root: {
       outline: 0,
-      marginLeft: '1.5px',
-      marginBottom: '10px',
-      width: size,
-      height: size,
+      width: HOUR_WIDTH,
+      height: HOUR_WIDTH,
       userSelect: 'none',
       position: 'absolute',
-      left: `calc((100% - ${size}px) / 2)`,
+      left: `calc((100% - ${HOUR_WIDTH}px) / 2)`,
       display: 'inline-flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -103,12 +76,14 @@ const ClockNumber: React.FC<ClockNumberProps & WithStyles<typeof styles>> = (pro
   });
 
   const transformStyle = React.useMemo(() => {
-    const position = positions[index];
+    const angle = ((index % 12) / 12) * Math.PI * 2 - Math.PI / 2;
+    const x = ((Math.cos(angle) * (CLOCK_WIDTH - HOUR_WIDTH)) / 2) * (isInner ? 0.65 : 1);
+    const y = ((Math.sin(angle) * (CLOCK_WIDTH - HOUR_WIDTH)) / 2) * (isInner ? 0.65 : 1);
 
     return {
-      transform: `translate(${position[0]}px, ${position[1]}px`,
+      transform: `translate(${x}px, ${y + (CLOCK_WIDTH - HOUR_WIDTH) / 2}px`,
     };
-  }, [index]);
+  }, [index, isInner]);
 
   React.useEffect(() => {
     if (canAutoFocus && selected && ref.current) {

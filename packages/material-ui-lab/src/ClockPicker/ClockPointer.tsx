@@ -70,32 +70,30 @@ class ClockPointer extends React.Component<ClockPointerProps> {
     previousType: undefined,
   };
 
-  getAngleStyle = () => {
-    const { value, isInner, type } = this.props;
-
-    const max = type === 'hours' ? 12 : 60;
-    let angle = (360 / max) * value;
-
-    if (type === 'hours' && value > 12) {
-      angle -= 360; // round up angle to max 360 degrees
-    }
-
-    return {
-      height: isInner ? '26%' : '40%',
-      transform: `rotateZ(${angle}deg)`,
-    };
-  };
-
   render() {
     const { classes, hasSelected, isInner, type, value, ...other } = this.props;
 
+    const getAngleStyle = () => {
+      const max = type === 'hours' ? 12 : 60;
+      let angle = (360 / max) * value;
+
+      if (type === 'hours' && value > 12) {
+        angle -= 360; // round up angle to max 360 degrees
+      }
+
+      return {
+        height: isInner ? '26%' : '40%',
+        transform: `rotateZ(${angle}deg)`,
+      };
+    };
+
     return (
       <div
-        {...other}
-        style={this.getAngleStyle()}
+        style={getAngleStyle()}
         className={clsx(classes.pointer, {
           [classes.animateTransform]: this.state.toAnimateTransform,
         })}
+        {...other}
       >
         <div
           className={clsx(classes.thumb, {
