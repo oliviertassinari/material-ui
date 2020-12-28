@@ -49,6 +49,10 @@ const iOS =
 <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} />;
 ```
 
+### SwipeableBleeding
+
+{{"demo": "pages/components/drawers/SwipeableBleedingDrawer.js", "iframe": true}}
+
 ### Keep mounted
 
 To ensure a temporary drawer is not unmounted, specify the `ModalProps` prop like:
@@ -68,6 +72,7 @@ More details in the [Modal performance section](/components/modal/#performance).
 
 The `Hidden` responsive helper component allows showing different types of drawer depending on the screen width.
 A `temporary` drawer is shown for small screens while a `permanent` drawer is shown for wider screens.
+
 
 {{"demo": "pages/components/drawers/ResponsiveDrawer.js", "iframe": true}}
 
