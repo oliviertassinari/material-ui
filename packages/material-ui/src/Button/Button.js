@@ -10,13 +10,7 @@ import capitalize from '../utils/capitalize';
 import buttonClasses, { getButtonUtilityClass } from './buttonClasses';
 
 const overridesResolver = (props, styles) => {
-  const {
-    color = 'primary',
-    disableElevation = false,
-    fullWidth = false,
-    size = 'medium',
-    variant = 'text',
-  } = props;
+  const { color, disableElevation, fullWidth, size, variant } = props.styleProps;
 
   return deepmerge(styles.root || {}, {
     ...styles[variant],
@@ -210,6 +204,9 @@ const ButtonRoot = experimentalStyled(
       }),
     ...(styleProps.disableElevation && {
       boxShadow: 'none',
+      '@media (hover: none)': {
+        boxShadow: 'none',
+      },
     }),
   },
   '&:active': {

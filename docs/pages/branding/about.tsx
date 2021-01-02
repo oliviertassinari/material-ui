@@ -11,12 +11,13 @@ import Avatar from '@material-ui/core/Avatar';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { experimentalStyled as styled } from '@material-ui/core/styles';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import Page from 'docs/src/modules/branding/Page';
+import BrandingRoot from 'docs/src/modules/branding/BrandingRoot';
 import Quote from 'docs/src/modules/branding/Quote';
 import BulletItem from 'docs/src/modules/branding/BulletItem';
 import UnderlinedText from 'docs/src/modules/branding/UnderlinedText';
 import Persona from 'docs/src/modules/branding/Persona';
 import FeedbackIcon from 'docs/src/modules/branding/icons/Feedback';
+import BrandingBeginToday from 'docs/src/modules/branding/BrandingBeginToday';
 import ChangesIcon from 'docs/src/modules/branding/icons/Changes';
 import FinanceIcon from 'docs/src/modules/branding/icons/Finance';
 import HelpIcon from 'docs/src/modules/branding/icons/Help';
@@ -296,9 +297,17 @@ const DiscoverMoreCard = styled((props) => {
   },
 }));
 
-export default function About() {
+export default function Pagee() {
   return (
-    <Page>
+    <BrandingRoot>
+      <BrandingBeginToday />
+    </BrandingRoot>
+  );
+}
+function About() {
+  // export default function About() {
+  return (
+    <BrandingRoot>
       <AboutUsRoot>
         <Grid container className="MuiGrid-mission">
           <Grid
@@ -1031,70 +1040,8 @@ export default function About() {
             </Grid>
           </Grid>
         </Grid>
-
-        <Grid container className="MuiGrid-relative">
-          <Box
-            component="img"
-            src="/static/branding/block1-blue.svg"
-            alt="Decorative blocks"
-            sx={{
-              width: 293,
-              height: 120,
-              position: 'absolute',
-              right: '10%',
-              top: 'calc(100% - 80px)',
-              zIndex: 200,
-            }}
-          />
-          <Grid
-            container
-            className="MuiGrid-panelInverted MuiGrid-beginWithMUIToday MuiGrid-relative"
-            spacing={1}
-          >
-            <Box
-              component="img"
-              src="/static/branding/block5.png"
-              alt="Decorative blocks"
-              sx={{
-                height: '100%',
-                position: 'absolute',
-                left: {
-                  md: -260,
-                  lg: -160,
-                },
-                display: {
-                  xs: 'none',
-                  md: 'block',
-                },
-                bottom: 0,
-              }}
-            />
-            <Grid item xs={12}>
-              <Typography variant="h2" align="center" gutterBottom>
-                Begin with Material-UI today
-              </Typography>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Typography align="center" gutterBottom>
-                Start with Material-UI and discover the benefits
-              </Typography>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Grid container justifyContent="center">
-                <Button
-                  href="/getting-started/usage/"
-                  variant="contained"
-                  endIcon={<NavigateNextIcon />}
-                >
-                  Get started
-                </Button>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
+        <BrandingBeginToday />
       </AboutUsRoot>
-    </Page>
+    </BrandingRoot>
   );
 }
