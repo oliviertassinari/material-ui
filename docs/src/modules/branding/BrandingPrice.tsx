@@ -37,6 +37,35 @@ const styles = (theme) => ({
     borderBottom: '2px solid #001E3C',
   },
 });
+
+const benefits = [
+  {
+    image: '/static/branding/pricing-ssi/Path.svg',
+    description: 'Faster development process with pre-built elements.',
+  },
+  {
+    image: '/static/branding/pricing-ssi/icons8-web-design.svg',
+    description: 'Highly customisable components.',
+  },
+  {
+    image: '/static/branding/pricing-ssi/icons8-trust.svg',
+    description: 'Strong community numbering 1M developers.',
+  },
+  {
+    image: '/static/branding/pricing-ssi/Combined Shape.svg',
+    description: (
+      <React.Fragment>
+        {' '}
+        Structured support documentation to help you{' '}
+        <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block', lg: 'block' } }} />
+        <Link href="#" underline="always">
+          {' '}
+          Get started.{' '}
+        </Link>
+      </React.Fragment>
+    ),
+  },
+];
 function BrandingPrice(props) {
   const { classes } = props;
   return (
@@ -63,153 +92,42 @@ function BrandingPrice(props) {
           all the plans
         </Typography>
         <Grid container spacing={4}>
-          <Grid item xs={12} sm={6} md={6} lg={3} className={classes.item1}>
-            <div
-              style={{
-                width: '80px',
-                height: '80px',
-                margin: '0 auto 20px auto',
-                padding: '20px',
-                borderRadius: '100px',
-                boxSizing: 'border-box',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0px 2px 3px rgba(0, 30, 60, 0.08)',
-                background: '#007FFF',
-              }}
-            >
-              <img loading="lazy" src={'/static/branding/pricing-ssi/Path.svg'} alt="" />
-            </div>
-            <Typography
-              component="p"
-              sx={{
-                fontFamily: 'Inter',
-                fontStyle: 'normal',
-                fontWeight: 'normal',
-                fontSize: '18px',
-                lineHeight: '24px',
-                textAlign: 'center',
-                color: '#001E3C',
-                margin: '0 auto',
-              }}
-            >
-              Faster development process with pre-built elements.
-            </Typography>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={6} lg={3} className={classes.item2}>
-            <div
-              style={{
-                width: '80px',
-                height: '80px',
-                margin: '0 auto 20px auto',
-                padding: '20px',
-                borderRadius: '100px',
-                boxSizing: 'border-box',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0px 2px 3px rgba(0, 30, 60, 0.08)',
-                background: '#00B8EB',
-              }}
-            >
-              <img
-                loading="lazy"
-                src={'/static/branding/pricing-ssi/icons8-web-design.svg'}
-                alt=""
-              />
-            </div>
-            <Typography
-              component="p"
-              sx={{
-                fontFamily: 'Inter',
-                fontStyle: 'normal',
-                fontWeight: 'normal',
-                fontSize: '18px',
-                lineHeight: '24px',
-                textAlign: 'center',
-                color: '#001E3C',
-                margin: '0 auto',
-              }}
-            >
-              Highly customisable components.
-            </Typography>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={6} lg={3} className={classes.item3}>
-            <div
-              style={{
-                width: '80px',
-                height: '80px',
-                margin: '0 auto 20px auto',
-                padding: '20px',
-                borderRadius: '100px',
-                boxSizing: 'border-box',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0px 2px 3px rgba(0, 30, 60, 0.08)',
-                background: '#007FFF',
-              }}
-            >
-              <img loading="lazy" src={'/static/branding/pricing-ssi/icons8-trust.svg'} alt="" />
-            </div>
-            <Typography
-              component="p"
-              sx={{
-                fontFamily: 'Inter',
-                fontStyle: 'normal',
-                fontWeight: 'normal',
-                fontSize: '18px',
-                lineHeight: '24px',
-                textAlign: 'center',
-                color: '#001E3C',
-                margin: '0 auto',
-              }}
-            >
-              Strong community numbering 1m developers.
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={6} md={6} lg={3} className={classes.item4}>
-            <div
-              style={{
-                width: '80px',
-                height: '80px',
-                margin: '0 auto 20px auto',
-                padding: '20px',
-                borderRadius: '100px',
-                boxSizing: 'border-box',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0px 2px 3px rgba(0, 30, 60, 0.08)',
-                background: '#00B8EB',
-              }}
-            >
-              <img loading="lazy" src={'/static/branding/pricing-ssi/Combined Shape.svg'} alt="" />
-            </div>
-            <Typography
-              component="p"
-              sx={{
-                fontFamily: 'Inter',
-                fontStyle: 'normal',
-                fontWeight: 'normal',
-                fontSize: '18px',
-                lineHeight: '24px',
-                textAlign: 'center',
-                color: '#001E3C',
-                margin: '0 auto',
-              }}
-            >
-              Structured support documentation to help you{' '}
-              <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block', lg: 'block' } }} />
-              <Link href="#" underline="always" color="#001E3C" className={classes.link}>
-                {' '}
-                Get started.{' '}
-              </Link>
-            </Typography>
-          </Grid>
+          {benefits.map((benefit) => (
+            <Grid item xs={12} sm={6} md={6} lg={3}>
+              <div
+                style={{
+                  width: '80px',
+                  height: '80px',
+                  margin: '0 auto 20px auto',
+                  padding: '20px',
+                  borderRadius: '100px',
+                  boxSizing: 'border-box',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0px 2px 3px rgba(0, 30, 60, 0.08)',
+                  background: '#007FFF',
+                }}
+              >
+                <img loading="lazy" src={benefit.image} alt="" />
+              </div>
+              <Typography
+                component="p"
+                sx={{
+                  fontFamily: 'Inter',
+                  fontStyle: 'normal',
+                  fontWeight: 'normal',
+                  fontSize: '18px',
+                  lineHeight: '24px',
+                  textAlign: 'center',
+                  color: '#001E3C',
+                  margin: '0 auto',
+                }}
+              >
+                {benefit.description}
+              </Typography>
+            </Grid>
+          ))}
         </Grid>
       </Container>
     </Box>
