@@ -1,10 +1,10 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import { withStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import PropTypes from 'prop-types';
 import Link from '@material-ui/core/Link';
 
 const styles = (theme) => ({
