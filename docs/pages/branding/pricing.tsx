@@ -48,11 +48,7 @@ function Benefits() {
         <Typography
           variant="h3"
           component="div"
-          sx={{
-            textAlign: 'center',
-            fontSize: '28px',
-            margin: '80px auto 48px',
-          }}
+          sx={{ textAlign: 'center', fontSize: '28px', margin: '80px auto 48px' }}
         >
           Benefits included with{' '}
           <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block', lg: 'block' } }} />
@@ -79,12 +75,7 @@ function Benefits() {
               >
                 <img loading="lazy" src={benefit.image} alt="" />
               </Avatar>
-              <Typography
-                component="p"
-                sx={{
-                  textAlign: 'center',
-                }}
-              >
+              <Typography component="p" sx={{ textAlign: 'center' }}>
                 {benefit.description}
               </Typography>
             </Grid>
