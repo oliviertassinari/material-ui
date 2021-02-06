@@ -1,19 +1,10 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 import Avatar from '@material-ui/core/Avatar';
-
-const styles = (theme) => ({
-  link: {
-    textDecoration: 'none',
-    borderBottom: '2px solid #001E3C',
-  },
-});
 
 const benefits = [
   {
@@ -51,8 +42,7 @@ const benefits = [
     order: { xs: 4 },
   },
 ];
-function BrandingPrice(props) {
-  const { classes } = props;
+function BrandingPrice() {
   return (
     <Box>
       <Container>
@@ -106,8 +96,5 @@ function BrandingPrice(props) {
     </Box>
   );
 }
-BrandingPrice.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
-export default withStyles(styles)(BrandingPrice);
+export default BrandingPrice;
