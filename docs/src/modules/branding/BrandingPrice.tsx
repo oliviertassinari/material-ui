@@ -9,30 +9,6 @@ import Link from '@material-ui/core/Link';
 import Avatar from '@material-ui/core/Avatar';
 
 const styles = (theme) => ({
-  item1: {
-    order: 1,
-    [theme.breakpoints.down('md')]: {
-      order: 2,
-    },
-  },
-  item2: {
-    order: 2,
-    [theme.breakpoints.down('md')]: {
-      order: 1,
-    },
-  },
-  item3: {
-    order: 3,
-    [theme.breakpoints.down('md')]: {
-      order: 3,
-    },
-  },
-  item4: {
-    order: 4,
-    [theme.breakpoints.down('md')]: {
-      order: 4,
-    },
-  },
   link: {
     textDecoration: 'none',
     borderBottom: '2px solid #001E3C',
@@ -44,16 +20,19 @@ const benefits = [
     image: '/static/branding/pricing-ssi/Path.svg',
     color: undefined,
     description: 'Faster development process with pre-built elements.',
+    order: { xs: 1, sm: 2, lg: 1 }
   },
   {
     image: '/static/branding/pricing-ssi/icons8-web-design.svg',
     color: 'info',
     description: 'Highly customisable components.',
+    order: { xs: 2, sm: 1, lg: 2 }
   },
   {
     image: '/static/branding/pricing-ssi/icons8-trust.svg',
     color: undefined,
     description: 'Strong community numbering 1M developers.',
+    order: { xs: 3 }
   },
   {
     image: '/static/branding/pricing-ssi/Combined Shape.svg',
@@ -69,6 +48,7 @@ const benefits = [
         </Link>
       </React.Fragment>
     ),
+    order: { xs: 4 }
   },
 ];
 function BrandingPrice(props) {
@@ -106,7 +86,7 @@ function BrandingPrice(props) {
               sm={6}
               md={6}
               lg={3}
-              sx={{ alignItems: 'center' }}
+              sx={{ alignItems: 'center', order: benefit.order }}
             >
               <Avatar
                 sx={{
