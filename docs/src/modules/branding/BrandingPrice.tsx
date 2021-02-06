@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
+import Avatar from '@material-ui/core/Avatar';
 
 const styles = (theme) => ({
   item1: {
@@ -41,18 +42,22 @@ const styles = (theme) => ({
 const benefits = [
   {
     image: '/static/branding/pricing-ssi/Path.svg',
+    color: undefined,
     description: 'Faster development process with pre-built elements.',
   },
   {
     image: '/static/branding/pricing-ssi/icons8-web-design.svg',
+    color: 'info',
     description: 'Highly customisable components.',
   },
   {
     image: '/static/branding/pricing-ssi/icons8-trust.svg',
+    color: undefined,
     description: 'Strong community numbering 1M developers.',
   },
   {
     image: '/static/branding/pricing-ssi/Combined Shape.svg',
+    color: 'info',
     description: (
       <React.Fragment>
         {' '}
@@ -93,24 +98,26 @@ function BrandingPrice(props) {
         </Typography>
         <Grid container spacing={4}>
           {benefits.map((benefit) => (
-            <Grid item xs={12} sm={6} md={6} lg={3}>
-              <div
-                style={{
-                  width: '80px',
-                  height: '80px',
-                  margin: '0 auto 20px auto',
-                  padding: '20px',
-                  borderRadius: '100px',
-                  boxSizing: 'border-box',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0px 2px 3px rgba(0, 30, 60, 0.08)',
-                  background: '#007FFF',
+            <Grid
+              item
+              container
+              direction="column"
+              xs={12}
+              sm={6}
+              md={6}
+              lg={3}
+              sx={{ alignItems: 'center' }}
+            >
+              <Avatar
+                sx={{
+                  mb: 3,
+                  bgcolor: benefit.color === 'info' ? 'vividBlue' : 'primary.main',
+                  width: 80,
+                  height: 80,
                 }}
               >
                 <img loading="lazy" src={benefit.image} alt="" />
-              </div>
+              </Avatar>
               <Typography
                 component="p"
                 sx={{
