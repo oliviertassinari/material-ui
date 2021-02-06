@@ -95,7 +95,7 @@ function Benefits() {
   );
 }
 
-export default function Page() {
+export default function Pricing() {
   return (
     <BrandingRoot>
       <Benefits />
