@@ -20,19 +20,19 @@ const benefits = [
     image: '/static/branding/pricing-ssi/Path.svg',
     color: undefined,
     description: 'Faster development process with pre-built elements.',
-    order: { xs: 1, sm: 2, lg: 1 }
+    order: { xs: 1, sm: 2, lg: 1 },
   },
   {
     image: '/static/branding/pricing-ssi/icons8-web-design.svg',
     color: 'info',
     description: 'Highly customisable components.',
-    order: { xs: 2, sm: 1, lg: 2 }
+    order: { xs: 2, sm: 1, lg: 2 },
   },
   {
     image: '/static/branding/pricing-ssi/icons8-trust.svg',
     color: undefined,
     description: 'Strong community numbering 1M developers.',
-    order: { xs: 3 }
+    order: { xs: 3 },
   },
   {
     image: '/static/branding/pricing-ssi/Combined Shape.svg',
@@ -48,7 +48,7 @@ const benefits = [
         </Link>
       </React.Fragment>
     ),
-    order: { xs: 4 }
+    order: { xs: 4 },
   },
 ];
 function BrandingPrice(props) {
@@ -60,15 +60,8 @@ function BrandingPrice(props) {
           variant="h3"
           component="div"
           sx={{
-            color: '#001E3C',
-            fontFamily: 'Inter',
-            fontStyle: 'normal',
-            fontWeight: 'bold',
             textAlign: 'center',
-            lineHeight: '1.111',
             fontSize: '28px',
-            letterSpacing: '-1px',
-            maxWidth: '570px',
             margin: '80px auto 48px',
           }}
         >
@@ -90,7 +83,7 @@ function BrandingPrice(props) {
             >
               <Avatar
                 sx={{
-                  mb: 3,
+                  mb: 2,
                   bgcolor: benefit.color === 'info' ? 'vividBlue' : 'primary.main',
                   width: 80,
                   height: 80,
@@ -101,14 +94,7 @@ function BrandingPrice(props) {
               <Typography
                 component="p"
                 sx={{
-                  fontFamily: 'Inter',
-                  fontStyle: 'normal',
-                  fontWeight: 'normal',
-                  fontSize: '18px',
-                  lineHeight: '24px',
                   textAlign: 'center',
-                  color: '#001E3C',
-                  margin: '0 auto',
                 }}
               >
                 {benefit.description}
