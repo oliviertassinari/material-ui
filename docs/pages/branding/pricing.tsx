@@ -34,7 +34,7 @@ const benefits = [
         {' '}
         Structured support documentation to help you{' '}
         <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block', lg: 'block' } }} />
-        <Link href="#"> Get started. </Link>
+        <Link href="/getting-started/usage/"> Get started.</Link>
       </React.Fragment>
     ),
     order: { xs: 4 },
