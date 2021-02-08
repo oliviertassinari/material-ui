@@ -33,7 +33,7 @@ const benefits = [
       <React.Fragment>
         {' '}
         Structured support documentation to help you{' '}
-        <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block', lg: 'block' } }} />
+        <Box component="span" sx={{ display: { xs: 'none', sm: 'none', md: 'block', lg: 'block' } }} />
         <Link href="/getting-started/usage/"> Get started.</Link>
       </React.Fragment>
     ),
