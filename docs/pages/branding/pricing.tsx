@@ -44,13 +44,8 @@ const benefits = [
 function Benefits() {
   return (
     <Container>
-      <Typography
-        variant="h3"
-        component="div"
-        sx={{ textAlign: 'center', mt: 8, mb: 6 }}
-      >
-        Benefits included with{' '}
-        <Box sx={{ display: { xs: 'none', md: 'block' } }} />
+      <Typography variant="h3" component="div" sx={{ textAlign: 'center', mt: 8, mb: 6 }}>
+        Benefits included with <Box sx={{ display: { xs: 'none', md: 'block' } }} />
         all the plans
       </Typography>
       <Grid container spacing={4}>
