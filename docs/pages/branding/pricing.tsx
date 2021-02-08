@@ -64,6 +64,7 @@ function Benefits() {
               sm={6}
               lg={3}
               sx={{ alignItems: 'center', order: benefit.order }}
+              key={benefit.image}
             >
               <Avatar
                 sx={{
