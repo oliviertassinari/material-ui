@@ -33,7 +33,7 @@ const benefits = [
       <React.Fragment>
         {' '}
         Structured support documentation to help you{' '}
-        <Box component="span" sx={{ display: { xs: 'none', sm: 'none', md: 'block', lg: 'block' } }} />
+        <Box component="span" sx={{ display: { xs: 'none', md: 'block' } }} />
         <Link href="/getting-started/usage/"> Get started.</Link>
       </React.Fragment>
     ),
@@ -50,7 +50,7 @@ function Benefits() {
         sx={{ textAlign: 'center', mt: 8, mb: 6 }}
       >
         Benefits included with{' '}
-        <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block', lg: 'block' } }} />
+        <Box sx={{ display: { xs: 'none', md: 'block' } }} />
         all the plans
       </Typography>
       <Grid container spacing={4}>
