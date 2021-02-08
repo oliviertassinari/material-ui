@@ -43,47 +43,45 @@ const benefits = [
 
 function Benefits() {
   return (
-    <Box>
-      <Container>
-        <Typography
-          variant="h3"
-          component="div"
-          sx={{ textAlign: 'center', fontSize: '28px', margin: '80px auto 48px' }}
-        >
-          Benefits included with{' '}
-          <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block', lg: 'block' } }} />
-          all the plans
-        </Typography>
-        <Grid container spacing={4}>
-          {benefits.map((benefit) => (
-            <Grid
-              item
-              container
-              direction="column"
-              xs={12}
-              sm={6}
-              lg={3}
-              sx={{ alignItems: 'center', order: benefit.order }}
-              key={benefit.image}
+    <Container>
+      <Typography
+        variant="h3"
+        component="div"
+        sx={{ textAlign: 'center', fontSize: '28px', margin: '80px auto 48px' }}
+      >
+        Benefits included with{' '}
+        <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block', lg: 'block' } }} />
+        all the plans
+      </Typography>
+      <Grid container spacing={4}>
+        {benefits.map((benefit) => (
+          <Grid
+            item
+            container
+            direction="column"
+            xs={12}
+            sm={6}
+            lg={3}
+            sx={{ alignItems: 'center', order: benefit.order }}
+            key={benefit.image}
+          >
+            <Avatar
+              sx={{
+                mb: 2,
+                bgcolor: benefit.color === 'info' ? 'vividBlue' : 'primary.main',
+                width: 80,
+                height: 80,
+              }}
             >
-              <Avatar
-                sx={{
-                  mb: 2,
-                  bgcolor: benefit.color === 'info' ? 'vividBlue' : 'primary.main',
-                  width: 80,
-                  height: 80,
-                }}
-              >
-                <img loading="lazy" src={benefit.image} alt="" />
-              </Avatar>
-              <Typography component="p" sx={{ textAlign: 'center' }}>
-                {benefit.description}
-              </Typography>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </Box>
+              <img loading="lazy" src={benefit.image} alt="" />
+            </Avatar>
+            <Typography component="p" sx={{ textAlign: 'center' }}>
+              {benefit.description}
+            </Typography>
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
   );
 }
 
