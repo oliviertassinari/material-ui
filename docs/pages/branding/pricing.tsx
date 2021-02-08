@@ -47,7 +47,7 @@ function Benefits() {
       <Typography
         variant="h3"
         component="div"
-        sx={{ textAlign: 'center', margin: '80px auto 48px' }}
+        sx={{ textAlign: 'center', mt: 8, mb: 6 }}
       >
         Benefits included with{' '}
         <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block', lg: 'block' } }} />
