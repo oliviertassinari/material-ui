@@ -78,7 +78,7 @@ function isNodeMatchingSelectorFocusable(node) {
   return true;
 }
 
-export function defaultGetTabbable(root) {
+export function unstable_getTabbable(root) {
   const regularTabNodes = [];
   const orderedTabNodes = [];
 
@@ -118,7 +118,7 @@ function Unstable_TrapFocus(props) {
     disableEnforceFocus = false,
     disableRestoreFocus = false,
     getDoc,
-    getTabbable = defaultGetTabbable,
+    getTabbable = unstable_getTabbable,
     isEnabled,
     open,
   } = props;
