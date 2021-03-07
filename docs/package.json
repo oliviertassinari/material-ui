@@ -127,6 +127,7 @@
     "@types/recharts": "^1.8.14",
     "babel-plugin-unwrap-createstyles": "5.0.0-alpha.24",
     "cross-fetch": "^3.0.5",
-    "gm": "^1.23.0"
+    "gm": "^1.23.0",
+    "goober": "^2.0.33"
   }
 }
