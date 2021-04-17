@@ -8,6 +8,7 @@ import { StyledComponentProps } from './styles';
  * Adjusts valid props based on the type of `component`.
  */
 export interface OverridableComponent<M extends OverridableTypeMap> {
+  (props: DefaultComponentProps<M>): JSX.Element;
   <C extends React.ElementType>(
     props: {
       /**
@@ -17,7 +18,6 @@ export interface OverridableComponent<M extends OverridableTypeMap> {
       component: C;
     } & OverrideProps<M, C>
   ): JSX.Element;
-  (props: DefaultComponentProps<M>): JSX.Element;
 }
 
 /**
