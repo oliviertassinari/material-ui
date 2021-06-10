@@ -2,9 +2,7 @@ import * as React from 'react';
 import { experimentalStyled as styled } from '@material-ui/core/styles';
 import MuiButton from '@material-ui/core/Button';
 
-const ButtonRoot = styled(MuiButton, {
-  shouldForwardProp: (prop) => prop !== 'size',
-})(({ theme, size }) => ({
+const ButtonRoot = styled(MuiButton)(({ theme, size }) => ({
   borderRadius: 0,
   fontWeight: theme.typography.fontWeightMedium,
   fontFamily: theme.typography.h1.fontFamily,
