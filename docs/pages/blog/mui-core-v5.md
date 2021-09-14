@@ -545,20 +545,6 @@ npm install @mui/icons-material @mui/lab
 yarn add @mui/icons-material @mui/lab
 ```
 
-### Change of the React & TypeScript supported versions
-
-- The minimum supported version of **React** was increased from v16.8.0 to v17.0.0.
-- The minimum supported version of **TypeScript** was increased from v3.2 to v3.5.
-
-  > We try to align with types released from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) (i.e. packages published on npm under the `@types` namespace).
-  > We will not change the minimum supported version in a major version of MUI.
-  > However, we generally recommend to not use a TypeScript version older than the [lowest supported version of DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped#older-versions-of-typescript-33-and-earlier)
-
-You would also need to upgrade the following packages to `latest` version if you have them as dependencies to your project.
-
-- `react-scripts`
-- `@types/react`
-- `@types/react-dom`
 
 ### Change on the supported platforms
 
