@@ -498,7 +498,7 @@ The following components are now available in the lab:
 
 We put a lot of work in order to make the migration from v4 to v5 as easier as possible. If you are starting your upgrade, these are the three things you should look into:
 
-- ⚓ We have introduced a new release line: v4.x.x-deprecations.x. This release line is kept in sync with the latest version of v4 and includes actionable deprecations to ease the migration to v5.
+- ⚓ We have introduced actionable deprecations in v4. You can upgrade to v4.12.0 and start preparing your codebase to be compatible with v5.
 - ⚒️ We have prepared a [codemod](/guides/migration-v4/#preset-safe) that does most of the transformations you will need for the migration. If you are not familiar what a codemod is, check out [Effective Refactoring with Codemods by Edd Yerburgh](https://www.youtube.com/watch?v=H9qtLutnT_g&ab_channel=Pusher).
 - 📄 Lasty, we have prepared a step by step [guide](/guides/migration-v4/) about how you can upgrade to v5, using the codemod above. This guide is the one place where you can find all information required for upgrading to v5.
 
