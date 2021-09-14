@@ -521,7 +521,7 @@ However, if you still wish to use the `makeStyles` API, you can:
 - add `@mui/styles` as a dependency and change the imports of the `makeStyles`/`withStyles` utilities
 - use [`tss-react`](https://github.com/garronej/tss-react) - it has API is similar to JSS makeStyles but works with emotion
 
-You can find more information for this on the [Migrate `makeStyles` to emotion](/guides/migration-v4/#migrate-makestyles-to-emotion) section of the migration guide.
+You can find more information for this on the [Migrate from JSS](/guides/migration-v4/#migrate-from-jss) section of the migration guide.
 
 ### Installation
 
