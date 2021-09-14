@@ -507,7 +507,7 @@ In the following sections, we will cover some high-level changes required for a 
 ### Change of the package names
 
 In order to support the new branding and the long term direction we have, we made a change in the terminology used in the project.
-To support this, we needed to change the names of the packages that we provide. For more details on this check the [GitHub discussion](https://github.com/mui-org/material-ui/discussions/27803).
+To support this, we needed to change the names of the packages that we provide. For more details on this check the [the migration guide](/guides/migration-v4/#update-mui-version).
 
 ### Change of the styling engine
 
