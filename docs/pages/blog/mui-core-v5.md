@@ -512,7 +512,7 @@ To support this, we needed to change the names of the packages that we provide. 
 ### Change of the styling engine
 
 The change of the styling engine, allowed us to unlock the improvement of the DX for the customization of the components, and the performance of the dynamic styles.
-We replaced [JSS](https://cssinjs.org/?v=v10.7.1) with [emotion](https://emotion.sh/docs/introduction) as a default styled engine.
+We replaced [JSS](https://cssinjs.org/) with [emotion](https://emotion.sh/) as a default styled engine.
 If you preffer [styled-components](https://styled-components.com/), see the next version of how you can use it instead of emotion.
 
 We recommend migration your `makeStyles` customization by using the new customization APIs: `styled` or the `sx` prop.
