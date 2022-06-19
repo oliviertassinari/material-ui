@@ -66,7 +66,7 @@ const NotchedOutlineLegend = styled('legend')(({ ownerState, theme }) => ({
  */
 export default function NotchedOutline(props) {
   const { children, classes, className, label, notched, ...other } = props;
-  const withLabel = label != null && label !== '';
+  const withLabel = label != null;
   const ownerState = {
     ...props,
     notched,
