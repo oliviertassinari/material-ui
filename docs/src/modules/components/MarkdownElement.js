@@ -41,9 +41,11 @@ const Root = styled('div')(
       fontWeight: 400,
       letterSpacing: '0.01071em',
       WebkitFontSmoothing: 'subpixel-antialiased',
+    },
+    '& pre > code': {
       // Reset for Safari
       // https://github.com/necolas/normalize.css/blob/master/normalize.css#L102
-      fontSize: '1em',
+      fontSize: 'inherit',
     },
     // inline code block
     '& :not(pre) > code': {
@@ -342,6 +344,7 @@ const Root = styled('div')(
     '& .MuiCode-root': {
       direction: 'ltr /*! @noflip */',
       position: 'relative',
+      fontSize: 10, // Font size reset to fix a bug with Safari 16.0
       '&:hover': {
         '& .MuiCode-copy': {
           display: 'block',
