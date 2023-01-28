@@ -170,7 +170,6 @@ describe('useMediaQuery', () => {
             defaultMatches: true,
             noSsr: true,
           });
-
           return (
             <RenderCounter ref={getRenderCountRef}>
               <span data-testid="matches">{`${matches}`}</span>
