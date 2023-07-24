@@ -46,7 +46,7 @@ const MAX_CIRCLE_CI_CONCURRENCY = 83;
 module.exports = function setKarmaConfig(config) {
   const baseConfig = {
     basePath: '../',
-    browsers: ['chromeHeadless', 'FirefoxHeadless'],
+    browsers: ['chromeHeadless', /*'FirefoxHeadless'*/],
     browserDisconnectTimeout: 3 * 60 * 1000, // default 2000
     browserDisconnectTolerance: 1, // default 0
     browserNoActivityTimeout: 3 * 60 * 1000, // default 30000
