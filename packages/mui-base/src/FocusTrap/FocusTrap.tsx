@@ -212,7 +212,7 @@ function FocusTrap(props: FocusTrapProps): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
-  const contain = React.useCallback((nativeEvent: FocusEvent | null) => {
+  const contain = React.useCallback((nativeEvent: FocusEvent | null | false) => {
     const rootElement = rootRef.current;
     const doc = ownerDocument(rootRef.current);
 
@@ -225,10 +225,13 @@ function FocusTrap(props: FocusTrapProps): JSX.Element {
     if (
       !doc.hasFocus() ||
       !isEnabled() ||
-      disableEnforceFocus ||
       ignoreNextEnforceFocus.current
     ) {
       ignoreNextEnforceFocus.current = false;
+      return;
+    }
+
+    if (disableEnforceFocus && nativeEvent !== false) {
       return;
     }
 
@@ -347,6 +350,8 @@ function FocusTrap(props: FocusTrapProps): JSX.Element {
       nodeToRestore.current = event.relatedTarget;
     }
     activated.current = true;
+
+    contain(false);
   };
 
   return (
