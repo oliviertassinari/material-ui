@@ -100,7 +100,7 @@ const printMeasure = (name, stats, baseline) => {
 async function runMeasures(browser, testCaseName, testCase, baseline) {
   const samples = [];
 
-  for (let i = 0; i < 15; i += 1) {
+  for (let i = 0; i < 20; i += 1) {
     const url = `http://localhost:${PORT}/?${testCase}`;
     const page = await browser.openPage(url);
 
