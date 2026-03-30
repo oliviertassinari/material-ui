@@ -95,9 +95,8 @@ We're looking for someone with both strong front-end and back-end skills. More i
 
 ## Benefits and compensation
 
-Competitive compensation depending on the profile and location.
-We are ready to pay top market rates for a person who can clearly exceed the role's expectations.
-You can find the other perks & benefits on the [careers](https://mui.com/careers/#perks-and-benefits) page.
+We offer competitive compensation commensurate with your experience level and location, and are prepared to pay top market rates for someone who can clearly exceed the role's expectations.
+You can find the other perks and benefits on the [careers](https://mui.com/careers/#perks-and-benefits) page.
 
 ## How to apply
 

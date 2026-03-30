@@ -12,8 +12,9 @@
 ## The company
 
 MUI's story began in 2014 with Material UI, the most successful React implementation of Google's Material Design.
-Today, Material UI stands as one of the most popular open-source libraries on GitHub and has paved the way for the fully-fledged startup known as MUI (founded in 2019), which now boasts an ever-expanding ecosystem of React UI products.
-We're a company of 40 people as of 2025, and we're growing steadily.
+Today, Base UI and Material UI stands as one of the most popular open-source libraries on GitHub and has paved the way for the fully-fledged startup known as MUI (founded in 2019), which now boasts an ever-expanding ecosystem of React UI products.
+
+We're a company of 40+ people as of 2026, and we're growing steadily.
 
 ## The products
 
@@ -105,9 +106,8 @@ We're looking for someone with strong core JavaScript skills. More important tha
 
 ## Benefits and compensation
 
-Competitive compensation depending on the profile and location.
-We are ready to pay top market rates for a person who can clearly exceed the role's expectations.
-You can find the other perks & benefits on the [careers](https://mui.com/careers/#perks-and-benefits) page.
+We offer competitive compensation commensurate with your experience level and location, and are prepared to pay top market rates for someone who can clearly exceed the role's expectations.
+You can find the other perks and benefits on the [careers](https://mui.com/careers/#perks-and-benefits) page.
 
 ## How to apply
 
